@@ -7,7 +7,7 @@
 <script>
 import { ref } from 'vue';
 
-const bannerPath = ref('');
+const bannerPath = ref('../assets/WebBanner_PC.jpg');
 
 const windowSize = window.innerWidth;
 
