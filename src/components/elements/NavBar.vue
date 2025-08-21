@@ -15,12 +15,15 @@
 
 </script>
 
-<style>
+<style scoped>
     nav {
         background-color: aqua;
     }
     li {
+        display: flex;
         text-align: center;
+        color: white;
+        font-weight: bold;
         justify-content: center;
         list-style: none;
     }
