@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <nav class="d-sm-none">
+    <nav class="d-sm-none d-lg-block">
         <ul>
             <li class="col-3">Profile</li>
             <li class="col-3">Journal</li>
