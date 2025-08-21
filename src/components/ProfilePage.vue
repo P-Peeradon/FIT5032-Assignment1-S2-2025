@@ -4,8 +4,10 @@ import NavBar from './elements/NavBar.vue';
 </script>
 
 <template>
-    <SiteBanner />
-    <NavBar />
+    <header>
+         <SiteBanner />
+        <NavBar />
+    </header>
 </template>
 
 <style>
