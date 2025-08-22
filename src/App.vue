@@ -1,10 +1,11 @@
 <script setup>
 import HomePage from './components/HomePage.vue';
-
+import ProfilePage from './components/ProfilePage.vue';
 </script>
 
 <template>
-    <HomePage />
+    <!-- <HomePage /> -->
+    <ProfilePage />
 </template>
 
 <style scoped>

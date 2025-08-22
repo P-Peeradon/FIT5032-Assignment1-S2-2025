@@ -1,13 +1,30 @@
 <script setup>
-import SiteBanner from './elements/SiteBanner.vue';
-import NavBar from './elements/NavBar.vue';
+import WebHeader from './elements/WebHeader.vue';
+import UserProfile from './elements/UserProfile.vue';
+import { ref } from 'vue';
+
+const currentUser = ref({
+    username: 'abcd',
+    nickname: 'guy',
+    bio: 'stop your mouth',
+    archetype: 'IDK',
+    journal: [],
+    readJournal: [],
+    goals: []
+});
+
+const errorMessage = ref('');
+
+const handleInvalidUser = (message) => {
+    errorMessage.value = message;
+};
+
 </script>
 
 <template>
-    <header>
-         <SiteBanner />
-        <NavBar />
-    </header>
+    <WebHeader />
+    <UserProfile :user="currentUser" @invalid-user-data="handleInvalidUser" />
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 </template>
 
 <style>

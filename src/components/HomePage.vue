@@ -1,13 +1,9 @@
 <script setup>
-import SiteBanner from './elements/SiteBanner.vue';
-import NavBar from './elements/NavBar.vue';
+import WebHeader from './elements/WebHeader.vue';
 </script>
 
 <template>
-    <header>
-         <SiteBanner />
-        <NavBar />
-    </header>
+    <WebHeader />
 </template>
 
 
