@@ -9,7 +9,7 @@ const currentUser = ref({
     bio: 'stop your mouth',
     archetype: 'IDK',
     journal: [],
-    readJournal: [],
+    readArticle: [],
     goals: []
 });
 

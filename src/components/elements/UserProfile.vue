@@ -1,15 +1,23 @@
 <template>
     <main>
-        <div class="row">
-            <h1 class="mt-5">User Profile</h1>
-            <q class="mt-2">{{ user.bio }}</q>
+        <div class="row profile_header">
+            <h1 class="mt-3">User Profile</h1>
         </div>
         <div class="row">
-            <div class="col-9 mt-5 profile">
-                <p>Nickname: {{ user.nickname }}</p>
-                <p>Archetype: {{ user.archetype }}</p>
-                <p>Journal written: {{ user.journal.length }}</p>
-                <p>Journal written: {{ user.readArticle.length }}</p>
+            <div class="col-1"></div>
+            <div class="col-8">
+                <p><span>{{ user.username }}</span></p>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-8 profile">
+                <p><span>Nickname:</span> {{ user.nickname }}</p>
+                <q>{{ user.bio }}</q>
+                <p><span>Archetype:</span> {{ user.archetype }}</p>
+                <p><span>Journal written:</span> {{ user.journal.length }}</p>
+                <p><span>Article read:</span> {{ user.readArticle.length }}</p>
                 <p>Goals: </p>
                 <ol v-for="goal in goals" :key="goal">
                     <li>{{ goal }}</li>
@@ -50,5 +58,16 @@ watch(() => props.user, (newValue) => {
 <style scoped>
 main {
     background-color: mediumspringgreen;
+}
+h1 {
+    color: blue;
+    font-weight: bold;
+}
+.profile_header {
+    margin-left: 22px;
+}
+.profile {
+    display: flex;
+    flex-direction: column;
 }
 </style>
