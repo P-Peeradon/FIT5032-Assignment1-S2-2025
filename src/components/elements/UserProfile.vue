@@ -1,5 +1,5 @@
 <template>
-    <main v-if="isValidUser">
+    <main>
         <div class="row">
             <h1 class="mt-5">User Profile</h1>
             <q class="mt-2">{{ user.bio }}</q>
