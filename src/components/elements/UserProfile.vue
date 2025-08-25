@@ -24,7 +24,7 @@
                 </ol>
             </div>
             <div class="col-3">
-                <img src="" alt="profile_picture" />
+                <img :src="user.profile" alt="profile_picture" />
             </div>
         </div>
     </main>
