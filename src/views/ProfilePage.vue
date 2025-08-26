@@ -1,6 +1,6 @@
 <script setup>
-import WebHeader from './elements/WebHeader.vue';
-import UserProfile from './elements/UserProfile.vue';
+import WebHeader from '../components/elements/WebHeader.vue';
+import UserProfile from '../components/elements/UserProfile.vue';
 import { ref } from 'vue';
 
 const currentUser = ref({
