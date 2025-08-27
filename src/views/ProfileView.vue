@@ -8,7 +8,7 @@ const currentUser = ref({
     pronoun: 'He/Him',
     bio: 'Stop your mouth', // String
     career: 'International student', // String
-    image: '',
+    image: new URL('../assets/profile-avatar.png', import.meta.url).href,
     journals: [], // Array(Journal)
     readArticles: [], // Array(Article)
     bookmarks: [], // Array(Article)

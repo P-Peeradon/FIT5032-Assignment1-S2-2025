@@ -16,9 +16,9 @@ const route = useRoute();
 const title = ref(route.params.title);
 
 const articles = [
-    {title: 'ABCDEFG', cover: '', author: 'Kaiba Seito', thumbnail: '../assets/mental-health-article-thumbnail.jpg', content: 'lorem'},
-    {title: 'Atk Jknnd', cover: '', author: 'Yugi Muto', thumbnail: '../assets/mental-health-article-thumbnail.jpg', content: 'lorem'},
-    {title: 'Khansaholic', cover: '', author: 'Jounouchi Katsuha', thumbnail: '../assets/mental-health-article-thumbnail.jpg', content: 'lorem'}
+    {title: 'ABCDEFG', cover: '', author: 'Kaiba Seito', thumbnail: new URL('../assets/mental-health-article-thumbnail.jpg', import.meta.url).href, content: 'lorem'},
+    {title: 'Atk Jknnd', cover: '', author: 'Yugi Muto', thumbnail: new URL('../assets/mental-health-article-thumbnail.jpg', import.meta.url).href, content: 'lorem'},
+    {title: 'Khansaholic', cover: '', author: 'Jounouchi Katsuha', thumbnail: new URL('../assets/mental-health-article-thumbnail.jpg', import.meta.url).href, content: 'lorem'}
 ]
 
 // Logic to fetch article by title.
