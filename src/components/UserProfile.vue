@@ -37,7 +37,7 @@
                     <!-- else show three and show more if clicked (three by three)-->
                     <!-- for mobile, show in column -->
                     
-                    <button v-if="user.bookmark.length > 3" class="blue_button">Show More</button>
+                    <button v-if="user.bookmarks.length > 3" class="blue_button">Show More</button>
                 </div>
 
                 <div class="mt-3">
