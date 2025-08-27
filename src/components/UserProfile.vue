@@ -6,7 +6,7 @@
                 
                 <div class="identity">
                     <div>
-                        <img v-if="imageExist()" :src="user.image" alt="profile images" class="profile_image" />
+                        <img v-if="imageExist()" :src="props.user.image" alt="profile images" class="profile_image" />
                         <img v-else src="../assets/profile-avatar.png" alt="profile images" class="profile_image" />
                     </div>
                     <q class="bio">{{ user.bio }}</q>

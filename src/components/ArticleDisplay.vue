@@ -1,13 +1,15 @@
 <template>
-    <main>
+    <div class="container">
+        <h1 class="mt-2">Youth Mental Health Article</h1>
         <article>
-            <h2>{{ article.title }}</h2>
+            <h2 class="mt-4">{{ props.article.title }}</h2>
             <section>
-                <img :src="article.thumbnail" :alt="article.title" />
-                <p>{{ article.content }}</p>
+                <img v-if="thumbnailExist()" :src="props.article.thumbnail" :alt="article.title" />
+                <img v-else src="../assets/mental-health-article-thumbnail.jpg" :alt="article.title" />
+                <p>{{ props.article.content }}</p>
             </section>
         </article>
-    </main>
+    </div>
 </template>
 
 <script setup>
@@ -19,6 +21,10 @@ const props = defineProps({
         required: true
     }
 });
+
+const thumbnailExist = () => {
+    return props.article.thumbnail !== ''; 
+}
 
 </script>
 

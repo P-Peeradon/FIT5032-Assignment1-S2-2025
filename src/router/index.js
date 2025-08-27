@@ -30,6 +30,7 @@ const routes = [
   {
     path: '/education/article/:title',
     name: 'Article',
+    props: true,
     component: ArticleView
   },
   {
