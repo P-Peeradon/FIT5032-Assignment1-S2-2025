@@ -1,11 +1,10 @@
 <script setup>
-    
+
 </script>
+
 <template>
-  <p>Journal</p>
+    <div class="container"></div>
 </template>
-
-
 
 <style>
 
