@@ -7,9 +7,11 @@ const currentUser = ref({
     username: 'abcd',
     nickname: 'guy',
     bio: 'stop your mouth',
+    images: '',
     archetype: 'IDK',
     journal: [],
     readArticle: [],
+    bookmark: [],
     goals: []
 });
 
@@ -22,9 +24,7 @@ const handleInvalidUser = (message) => {
 </script>
 
 <template>
-    <WebHeader />
-    <UserProfile :user="currentUser" @invalid-user-data="handleInvalidUser" />
-    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+    <UserProfile :user="currentUser"  />
 </template>
 
 <style>

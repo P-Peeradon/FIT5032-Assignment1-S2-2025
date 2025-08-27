@@ -1,5 +1,5 @@
 <script setup>
-import WebHeader from '../components/elements/WebHeader.vue';
+import WebHeader from '../components/WebHeader.vue';
 </script>
 
 <template>

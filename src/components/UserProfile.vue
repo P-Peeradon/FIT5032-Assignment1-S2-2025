@@ -1,73 +1,52 @@
 <template>
-    <main>
-        <div class="row profile_header">
-            <h1 class="mt-3">User Profile</h1>
+    <div class="container d-flex lg-flex-row flex-column">
+        <h1>User Profile</h1>
+        <div class="d-flex flex-column">
+            <img v-if="user.image" :src="user.image" alt="profile images" class="profile_images" />
+            <img v-else src="../assets/Profile_avatar_placeholder_large.png" alt="profile images" class="profile_images" />
+            <q class="bio">{{ user.bio }}</q>
+            <p>{{ user.nickname }} ({{ user.pronoun }})</p>
+            <p><span class="category">Career:</span> {{ user.career }}</p>
+            <ol v-for="goal in user.goals" :key="goal">
+                <li>{{ user.goal }}</li>
+            </ol>
         </div>
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-8">
-                <p><span>{{ user.username }}</span></p>
+        <div class="d-flex flex-column">
+            <div class="statistics">
+                <ul>
+                    <li><span>Journal Written:</span> {{ user.journal.length }}</li>
+                    <li><span>Article Read:</span> {{ user.readArticle.length }}</li>
+                    <li><span>Community joined:</span> {{ user.community.length }}</li>
+                </ul>
             </div>
-            
-        </div>
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-8 profile">
-                <p><span>Nickname:</span> {{ user.nickname }}</p>
-                <q>{{ user.bio }}</q>
-                <p><span>Archetype:</span> {{ user.archetype }}</p>
-                <p><span>Journal written:</span> {{ user.journal.length }}</p>
-                <p><span>Article read:</span> {{ user.readArticle.length }}</p>
-                <p>Goals: </p>
-                <ol v-for="goal in goals" :key="goal">
-                    <li>{{ goal }}</li>
-                </ol>
-            </div>
-            <div class="col-3">
-                <img :src="user.profile" alt="profile_picture" />
+            <div class="bookmark">
+                <!-- if less than three, show all -->
+                <!-- else show three and show more if clicked (three by three)-->
+                <ArticleThumbnail />
             </div>
         </div>
-    </main>
+    </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits, ref, watch } from 'vue';
+import { defineProps } from 'vue';
 
 const props = defineProps({
     user: {
         type: Object,
-        require: true
-    }
-});
-
-const emit = defineEmits(['invalid-user-data'])
-
-const isValidUser = ref(true);
-
-watch(() => props.user, (newValue) => {
-    if (newValue.bio && newValue.nickname && newValue.username) {
-        isValidUser.value = true;
-    } else {
-        isValidUser.value = false;
-        emit('invalid-user-data', 'incorrect user data format');
+        required: true
     }
 })
+
+const user = { ...props.user }
+
+
 
 </script>
 
 <style scoped>
-main {
-    background-color: mediumspringgreen;
-}
-h1 {
-    color: blue;
-    font-weight: bold;
-}
-.profile_header {
-    margin-left: 22px;
-}
-.profile {
-    display: flex;
-    flex-direction: column;
-}
+    .container {
+        width: 200px;
+        height: 200px;
+    }
 </style>
