@@ -13,7 +13,7 @@ const currentUser = ref({
     readArticles: [], // Array(Article)
     bookmarks: [], // Array(Article)
     communities: [], // Array(Community)
-    goals: ['Get HD in FIT5032', 'Write Google Maps Review', 'Enjoy life at Monash University']
+    goals: ['Get HD in FIT5032', 'Write Google Maps Review', 'Enjoy life at Monash University', 'Get offer for second master degree at University of Melbourne']
 });
 </script>
 
