@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import JournalView from '../views/JournalView.vue'
+import EducationView from '../views/EducationView.vue'
+import CommunityView from '../views/CommunityView.vue'
 
 const routes = [
   {
@@ -22,12 +24,12 @@ const routes = [
   {
     path: '/education',
     name: 'Education',
-    component: ProfileView
+    component: EducationView
   },
   {
     path: '/community',
     name: 'Community',
-    component: ProfileView
+    component: CommunityView
   }
 ]
 
