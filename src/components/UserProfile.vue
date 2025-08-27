@@ -25,13 +25,13 @@
                 <h2>User Engage</h2>
                 <div class="statistics">
                     <ul class="mt-3">
-                        <li><span class="category">Journal Written:</span> {{ user.journal.length }}</li>
-                        <li><span class="category">Article Read:</span> {{ user.readArticle.length }}</li>
+                        <li><span class="category">Journal Written:</span> {{ user.journals.length }}</li>
+                        <li><span class="category">Article Read:</span> {{ user.readArticles.length }}</li>
                         <li><span class="category">Community joined:</span> {{ user.communities.length }}</li>
                     </ul>
                 </div>
 
-                <div class="mt-3 bookmark">
+                <div class="mt-3">
                     <h2>My Bookmark</h2>
                     <!-- if less than three, show all -->
                     <!-- else show three and show more if clicked (three by three)-->

@@ -10,8 +10,8 @@ const currentUser = ref({
     career: 'International student', // String
     image: '',
     journals: [], // Array(Journal)
-    readArticle: [], // Array(Article)
-    bookmark: [], // Array(Article)
+    readArticles: [], // Array(Article)
+    bookmarks: [], // Array(Article)
     communities: [], // Array(Community)
     goals: ['Get HD in FIT5032', 'Write Google Maps Review', 'Enjoy life at Monash University']
 });
