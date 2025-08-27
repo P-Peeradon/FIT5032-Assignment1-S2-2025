@@ -2,10 +2,17 @@
   <div class="row">
     <nav class="d-none d-md-block">
         <ul class="large_screen">
-            <li class="col-3">Profile</li>
-            <li class="col-3">Journal</li>
-            <li class="col-3">Education</li>
-            <li class="col-3">Community</li>
+            <li class="col-3">
+                <router-link to="/profile" class="nav-link" active-class="active" aria-current="page">Profile</router-link>
+            </li>
+            <li class="col-3">
+                <router-link to="/journal" class="nav-link" active-class="active" aria-current="page">Journal</router-link></li>
+            <li class="col-3">
+                <router-link to="/education" class="nav-link" active-class="active" aria-current="page">Education</router-link>
+            </li>
+            <li class="col-3">
+                <router-link to="/community" class="nav-link" active-class="active" aria-current="page">Community</router-link>
+            </li>
         </ul>
     </nav>
     <nav class="d-md-none">

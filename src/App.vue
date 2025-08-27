@@ -1,11 +1,10 @@
 <script setup>
-import HomePage from './views/HomePage.vue';
-import ProfilePage from './views/ProfilePage.vue';
+  import WebHeader from './components/WebHeader.vue';
 </script>
 
 <template>
-    <!-- <HomePage /> -->
-    <ProfilePage />
+    <WebHeader />
+    <RouterView />
 </template>
 
 <style scoped>

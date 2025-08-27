@@ -6,8 +6,6 @@ import WebHeader from '../components/elements/WebHeader.vue';
     <WebHeader />
 </template>
 
-
-
 <style>
 
 </style>
