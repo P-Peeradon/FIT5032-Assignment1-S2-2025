@@ -1,7 +1,7 @@
 <template>
     <main>
         <article>
-            <h2>{{ article }}</h2>
+            <h2>{{ article.title }}</h2>
             <section>
                 <img :src="article.thumbnail" :alt="article.title" />
                 <p>{{ article.content }}</p>
@@ -11,8 +11,14 @@
 </template>
 
 <script setup>
-// Include logic to fetch article with that title.
+import { defineProps } from 'vue';
 
+const props = defineProps({
+    article: {
+        type: Object,
+        required: true
+    }
+});
 
 </script>
 

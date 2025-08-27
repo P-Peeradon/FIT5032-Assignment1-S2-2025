@@ -23,6 +23,7 @@ header {
 
 main.view {
   background-color: aquamarine;
+  min-height: 80vh;
 }
 
 h1 {
@@ -37,10 +38,6 @@ h2 {
   text-align: center;
   font-weight: bold;
   font-size: 26px;
-}
-
-h2.article-title {
-  color: tomato;
 }
 
 q {

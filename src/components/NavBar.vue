@@ -17,7 +17,7 @@
     </nav>
     <nav class="d-md-none">
         <div class="col-2 hamburger">
-            <img src="../../assets/hamburger-icon.png" @click="toggleMenu()" alt="menu" />
+            <img src="../assets/hamburger-icon.png" @click="toggleMenu()" alt="menu" />
         </div>
         <div class="row">
             <ul class="mobile_screen" v-if="mobileMenu">
@@ -57,6 +57,9 @@ const toggleMenu = () => {
     .hamburger {
         justify-self: right;
         align-items: center;
+    }
+    .hamburger:hover {
+        cursor: pointer;
     }
     ul.large_screen {
         display: flex;
