@@ -39,14 +39,22 @@ h2 {
   font-size: 26px;
 }
 
+h2.article-title {
+  color: tomato;
+}
+
 q {
   font-style: oblique;
   font-size: 12px;
-
 }
 
 p {
   font-size: 16px;
+}
+
+p.author {
+  font-size: 14px;
+  font-style: oblique;
 }
 
 cite {

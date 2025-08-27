@@ -11,6 +11,8 @@
 </template>
 
 <script setup>
+// Include logic to fetch article with that title.
+
 
 </script>
 
