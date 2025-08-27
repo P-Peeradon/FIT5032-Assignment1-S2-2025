@@ -5,10 +5,12 @@ import WriteJournalForm from '@/forms/WriteJournalForm.vue';
 <template>
     <div class="container d-flex flex-column">
         <h1 class="mt-2">Journaling</h1>
-        <div class="mt-4 d-flex flex-column flex-lg-row">
-            <div class="col-lg-4">
+        <div class="d-flex flex-column flex-lg-row">
+            <div class="mt-4 col-lg-4">
                 <h2>5 Benefits of Writing Journal</h2>
-                <img src="../src/assets/Writing_journal.jpg" alt="journaling"/>
+                <div class="image-center mt-2 mb-2">
+                    <img class="journaling" src="../assets/Writing_journal.jpg" alt="journaling"/>
+                </div>
                 <blockquote>
                     "Journaling offers numerous benefits for mental health, especially
                     stress reduction, emotional regulation and self-awareness.
@@ -44,14 +46,18 @@ import WriteJournalForm from '@/forms/WriteJournalForm.vue';
                         <span class="category">Relaxation</span>
                         <p>
                             After writing down your worries, you can still read your journals anytime and understand that feelings.
+                            You will feel secure but realise of what happened with you.
                         </p>
                     </li>
                 </ol>
+                <p><span class="category">Cite:</span>
                 <cite>
-                    Sutton, J. (2018, May 14). 5 Benefits of Journaling for Mental Health. Positive Psychology. https://positivepsychology.com/benefits-of-journaling/
+                    Sutton, J. (2018, May 14). 5 Benefits of Journaling for Mental Health. Positive Psychology. [https://positivepsychology.com/benefits-of-journaling/]
                 </cite>
+                </p>
+                
             </div>
-            <div class="col-lg-8">
+            <div class="mt-4 col-lg-8">
                 <WriteJournalForm />
             </div>
         </div>
@@ -68,5 +74,12 @@ import WriteJournalForm from '@/forms/WriteJournalForm.vue';
         text-align: center;
         color: brown;
     }
-    
+    img.journaling {
+        width: 70%;
+        height: auto;
+        margin: auto;
+    }
+    .image-center {
+        text-align: center;
+    }
 </style>

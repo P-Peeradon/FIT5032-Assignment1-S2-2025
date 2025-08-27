@@ -49,6 +49,11 @@ p {
   font-size: 16px;
 }
 
+cite {
+  color: brown;
+  font-weight: 300;
+}
+
 span.category {
   font-weight: bold;
   color: rgb(16, 52, 166);

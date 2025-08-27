@@ -10,8 +10,13 @@
         </div>
 
         <label for="content" class="form-label"><span class="category">Your story</span></label>
-        <textarea class="form-control" id="content" row="3" v-model="journalForm.content" ></textarea>
+        <textarea class="form-control" id="content" row="10" v-model="journalForm.content" ></textarea>
     </form>
+    <div class="journal-form">
+        <button class="blue_button">Write Journal</button>
+        <button class="blue_button" @click="clearForm()">Clear</button>
+    </div>
+    
 </template>
 
 <script setup>
@@ -23,9 +28,17 @@ const journalForm = reactive({
     timestamp: Date()
 });
 
+const clearForm = () => {
+    journalForm.moods = [];
+    journalForm.content = '';
+    journalForm.timestamp = Date();
+}
+
 const writeJournal = () => {
     validateMood(true);
     validateContent(true);
+
+    clearForm()
 }
 
 const errors = {
@@ -58,6 +71,20 @@ const validateContent = (blur) => {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+textarea {
+    height: 150px;
+}
+
+.journal-form {
+    width: auto;
+    margin: 10px 0;
+    padding: 0 20px 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 0 20px;
 }
 
 @media (min-width: 768px) {
