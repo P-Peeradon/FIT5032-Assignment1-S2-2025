@@ -21,10 +21,18 @@
         </div>
         <div class="row">
             <ul class="mobile_screen" v-if="mobileMenu">
-                <li>Profile</li>
-                <li>Journal</li>
-                <li>Education</li>
-                <li>Community</li>
+                <li>
+                    <router-link to="/profile" class="nav-link" active-class="active" aria-current="page">Profile</router-link>
+                </li>
+                <li >
+                    <router-link to="/journal" class="nav-link" active-class="active" aria-current="page">Journal</router-link>
+                </li>
+                <li>
+                    <router-link to="/education" class="nav-link" active-class="active" aria-current="page">Education</router-link>
+                </li>
+                <li>
+                    <router-link to="/community" class="nav-link" active-class="active" aria-current="page">Community</router-link>
+                </li>
             </ul>
         </div>
     </nav>

@@ -4,6 +4,7 @@ import ProfileView from '../views/ProfileView.vue'
 import JournalView from '../views/JournalView.vue'
 import EducationView from '../views/EducationView.vue'
 import CommunityView from '../views/CommunityView.vue'
+import ArticleView from '../views/ArticleView.vue'
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/education',
     name: 'Education',
     component: EducationView
+  },
+  {
+    path: '/education/article/:title',
+    name: 'Article',
+    component: ArticleView
   },
   {
     path: '/community',
