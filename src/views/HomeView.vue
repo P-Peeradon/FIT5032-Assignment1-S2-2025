@@ -1,9 +1,9 @@
 <script setup>
-import WebHeader from '../components/WebHeader.vue';
+
 </script>
 
 <template>
-    <WebHeader />
+    <p>wait</p>
 </template>
 
 <style>
