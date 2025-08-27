@@ -1,5 +1,5 @@
 <template>
-    <div class="container d-flex flex-column">
+    <div class="container d-flex flex-column mt-5">
         <h1>User Profile</h1>
         <div class="d-flex flex-row gx-5">
             <div class="d-flex flex-column mt-4 col-md-4 col-12">
