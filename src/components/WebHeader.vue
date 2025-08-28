@@ -11,6 +11,11 @@ import SiteBanner from './SiteBanner.vue';
 
 </script>
 
-<style>
+<style scoped>
+header {
+    display: flex;
+
+    flex-direction: column;
+}
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="chillax-nav">
     <nav class="d-none d-md-block">
         <ul class="large_screen">
             <li class="col-3">
@@ -51,12 +51,23 @@ const toggleMenu = () => {
 </script>
 
 <style scoped>
+    .chillax-nav {
+        width: 100vw;
+        height: auto;
+    }
     nav {
         background-color: blue;
     }
     .hamburger {
         justify-self: right;
+        width: 50px;
+        height: 50px;
         align-items: center;
+        
+    }
+    .hamburger img {
+            width: 40px;
+            height: 50px;
     }
     .hamburger:hover {
         cursor: pointer;

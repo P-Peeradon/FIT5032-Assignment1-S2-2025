@@ -59,7 +59,7 @@ const props = defineProps({
 });
 
 const imageExist = () => {
-    return props.user.image !== '';
+    return props.user.image && props.user.image !== '';
 }
 
 

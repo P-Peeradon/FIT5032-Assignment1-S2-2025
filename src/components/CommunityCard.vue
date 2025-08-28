@@ -3,7 +3,7 @@
         <div class="commuCard">
             <img v-if="logoExist()" :src="props.community.logo" :alt="props.community.name" />
             <img v-else src="../assets/community-logo.jpg" :alt="props.community.name"/>
-            <h2>{{ props.community.name.toUppercase() }}</h2>
+            <h2>{{ props.community.name }}</h2>
         </div>
     </router-link>
 </template>
@@ -25,13 +25,16 @@ const logoExist = () => {
 
 <style scoped>
 .commucard {
-    width: 250px;
-    height: 320px;
+    width: 220px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     box-shadow: 0px 5px 40px rgb(192, 192, 192);
+    justify-content: center;
 }
 img {
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
 }
 </style>

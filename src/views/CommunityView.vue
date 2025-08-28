@@ -1,21 +1,38 @@
 <template>
     <div class="container d-flex flex-column">
         <h1>Community</h1>
-        <div class="d-flex flex-column flex-lg-row">
+        <div class="d-flex flex-column flex-lg-row gy-2">
             <main class="col-md-9 col-lg-8">
                 <h2>Select your preferred community.</h2>
                 <div class="club-catalog">
                     <div v-for="club in clubs" :key="club.name" :value="club">
-                        
+                        <CommunityCard :community="club" />
                     </div>
                 </div>
             </main>
-            <aside class="col-md-3 col-lg-4"></aside>
+            <aside class="col-md-3 col-lg-4">
+                <h2>Why youth need joining clubs?</h2>
+                <blockquote>
+                    "Club is not only place for gathering. It is our sense of belonging, ambition and emotion."
+                </blockquote>
+                <p>
+                    Youth need clubs to gain a sense of belonging and purpose, 
+                    develop crucial social and emotional skills through positive 
+                    peer and adult relationships, and have a safe, supportive space for fun, 
+                    learning, and self-discovery away from pressures at home and school. 
+                    Clubs offer diverse experiences, foster self-confidence and resilience, 
+                    and can provide a vital support system, particularly for vulnerable young people.
+                    (Eriksen & Seland, 2020)
+                </p>
+                <cite>Eriksen, I. M., & Seland, I. (2020). Conceptualizing Well-being in Youth: the Potential of Youth Clubs. YOUNG, 29(2), 110330882093757. [https://doi.org/10.1177/1103308820937571]</cite>
+            </aside>
         </div>
     </div>
 </template>
 
 <script setup>
+import CommunityCard from '../components/CommunityCard.vue';
+
 
 const clubs = [
     {

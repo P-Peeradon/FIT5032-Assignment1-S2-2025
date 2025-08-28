@@ -17,7 +17,7 @@ const title = ref(route.params.title);
 
 const articles = [
     {title: 'ABCDEFG', cover: '', author: 'Kaiba Seito', thumbnail: new URL('../assets/mental-health-article-thumbnail.jpg', import.meta.url).href, content: 'lorem'},
-    {title: 'Atk Jknnd', cover: '', author: 'Yugi Muto', thumbnail: new URL('../assets/mental-health-article-thumbnail.jpg', import.meta.url).href, content: 'lorem'},
+    {title: 'Atk Jknnd', cover: new URL('../assets/zen-cover.png', import.meta.url).href, author: 'Yugi Muto', thumbnail: new URL('../assets/mental-health-article-thumbnail.jpg', import.meta.url).href, content: 'lorem'},
     {title: 'Khansaholic', cover: '', author: 'Jounouchi Katsuha', thumbnail: new URL('../assets/mental-health-article-thumbnail.jpg', import.meta.url).href, content: 'lorem'}
 ]
 

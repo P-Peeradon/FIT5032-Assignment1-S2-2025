@@ -3,17 +3,20 @@
 </script>
 
 <template>
-  <header>
-    <WebHeader />
-  </header>
+  <div class="d-flex flex-column">
+    <header>
+      <WebHeader />
+    </header>
     <main class="view">
       <RouterView />
     </main>
+  </div>
+ 
 </template>
 
 <style>
 header {
-  line-height: 1.5;
+  line-height: 2;
 }
 
 .logo {
@@ -23,7 +26,8 @@ header {
 
 main.view {
   background-color: aquamarine;
-  min-height: 80vh;
+  min-width: 95vw;
+  min-height: 100vh;
 }
 
 h1 {
