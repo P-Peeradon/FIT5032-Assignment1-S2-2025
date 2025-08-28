@@ -2,7 +2,7 @@
     <router-link :to="{ name: 'Club', params: {name: props.community.name}}" class="nav-link" active-class="active" aria-current="page">
         <div class="commuCard">
             <img v-if="logoExist()" :src="props.community.logo" :alt="props.community.name" />
-            <img v-else src="props.community.logo" :alt="props.community.name"/>
+            <img v-else src="../assets/community-logo.jpg" :alt="props.community.name"/>
             <h2>{{ props.community.name.toUppercase() }}</h2>
         </div>
     </router-link>
@@ -19,7 +19,7 @@ const props = defineProps({
 });
 
 const logoExist = () => {
-    return props.community.logo != null && props.community.logo !== '' 
+    return props.community.logo && props.community.logo !== '';
 }
 </script>
 

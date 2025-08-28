@@ -4,6 +4,11 @@
         <div class="d-flex flex-column flex-lg-row">
             <main class="col-md-9 col-lg-8">
                 <h2>Select your preferred community.</h2>
+                <div class="club-catalog">
+                    <div v-for="club in clubs" :key="club.name" :value="club">
+                        
+                    </div>
+                </div>
             </main>
             <aside class="col-md-3 col-lg-4"></aside>
         </div>
@@ -12,7 +17,7 @@
 
 <script setup>
 
-const communities = [
+const clubs = [
     {
         name: 'society A', 
         abbrev: '', 
@@ -39,6 +44,7 @@ const communities = [
     {
         name: 'society D', 
         abbrev: '', 
+        logo: new URL('../assets/logo-for-auckland-vector-31288838.webp', import.meta.url).href,
         owner: 'Akaba Reiji', 
         location: 'Auckland', 
         licensedIn: 'New Zealand', 
@@ -63,6 +69,30 @@ const communities = [
 ];
 </script>
 
-<style>
+<style scoped>
+@media screen and (max-width: 768px) {
+    .club-catalog  {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .club-catalog  {
+    display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 10px;
+    }
+}
+
+@media screen and (min-width: 993px) {
+    .club-catalog  {
+    display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 20px;
+    }
+}
 
 </style>
