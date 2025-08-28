@@ -38,6 +38,12 @@ const routes = [
     name: 'Community',
     component: CommunityView
   }
+  {
+    path: '/community/:socialName',
+    name: 'Social',
+    props: true,
+    component: SocialView
+  }
 ]
 
 const router = createRouter({
