@@ -6,7 +6,7 @@
                 <h2>Select your preferred clubs.</h2>
                 <div class="club-catalog">
                     <div v-for="club in clubs" :key="club.name" :value="club">
-                        <CommunityCard :club="club" />
+                        <ClubCard :club="club" />
                     </div>
                 </div>
             </main>
@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import CommunityCard from '../components/ClubCard.vue';
+import ClubCard from '../components/ClubCard.vue';
 
 const clubs = [
     {

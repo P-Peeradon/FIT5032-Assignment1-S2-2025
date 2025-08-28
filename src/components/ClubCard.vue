@@ -1,9 +1,9 @@
 <template>
-    <router-link :to="{ name: 'Club', params: {name: props.community.name}}" class="nav-link" active-class="active" aria-current="page">
+    <router-link :to="{ name: 'Club', params: {name: props.club.name}}" class="nav-link" active-class="active" aria-current="page">
         <div class="commuCard">
-            <img v-if="logoExist()" :src="props.community.logo" :alt="props.community.name" />
-            <img v-else src="../assets/community-logo.jpg" :alt="props.community.name"/>
-            <h2>{{ props.community.name }} <span v-if="props.community.abbrev">({{ props.community.abbrev }})</span></h2>
+            <img v-if="logoExist()" :src="props.club.logo" :alt="props.club.name" />
+            <img v-else src="../assets/community-logo.jpg" :alt="props.club.name"/>
+            <h2>{{ props.community.name }} <span v-if="props.club.abbrev">({{ props.club.abbrev }})</span></h2>
         </div>
     </router-link>
 </template>
@@ -12,14 +12,14 @@
 import { defineProps } from 'vue';
 
 const props = defineProps({
-    community: {
+    club: {
         type: Object,
         required: true
     }
 });
 
 const logoExist = () => {
-    return props.community.logo && props.community.logo !== '';
+    return props.club.logo && props.club.logo !== '';
 }
 </script>
 
