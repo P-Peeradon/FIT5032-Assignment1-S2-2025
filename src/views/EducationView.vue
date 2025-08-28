@@ -12,8 +12,9 @@ const articles = [
 </script>
 
 <template>
-    <div class="container">
-        <div class="d-flex">
+    <div class="container d-flex flex-column">
+        <h1 class="mt-2">Mental Education for Youth</h1>
+        <div class="d-flex mt-4">
             <main class="col-lg-9">
                 <h2>Let's explore article here.</h2>
                 <div class="article-catalogue">
