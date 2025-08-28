@@ -38,7 +38,7 @@ const routes = [
     path: '/community',
     name: 'Community',
     component: CommunityView
-  }
+  },
   {
     path: '/community/:name',
     name: 'Club',

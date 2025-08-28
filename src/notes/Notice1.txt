@@ -1,0 +1,10 @@
+I write this note to declare the major website structure alternation and their justification.
+
+1. For JournalView: 
+    Hold on the personality test implementation as it takes some periods to gather the questions and evaluation.
+    (MBTI and Enneagram)
+2. For CommunityView:
+    Demolish the mutual discussion board, as in terms of mental health, we need safe space.
+    Adding the mutual discussion board increases risk of trespassing, including posting harmful contents or circle jerking.
+    But, the discussion board for each community still available as they are controlled by their owners.
+    (As a social worker, I want to grant access to my communities to provide social spaces for youths.)
