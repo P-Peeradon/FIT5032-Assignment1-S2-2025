@@ -33,7 +33,6 @@
 <script setup>
 import CommunityCard from '../components/CommunityCard.vue';
 
-
 const clubs = [
     {
         name: 'society A', 
@@ -41,13 +40,18 @@ const clubs = [
         owner: 'Kaiba Noah', 
         location: 'Melbourne', 
         licensedIn: 'Australia', 
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a ornare dolor, vitae interdum eros. Morbi id dolor ut elit lacinia ultrices sed id neque. Nulla gravida nulla nec velit lobortis, ac aliquet quam gravida. Morbi molestie gravida eros non tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam suscipit volutpat pellentesque. Mauris non purus a nulla fermentum convallis. Nunc sed laoreet magna. Etiam commodo leo vitae feugiat cursus. Quisque elit sapien, convallis in justo at, suscipit iaculis augue. Nulla facilisi. Cras aliquam hendrerit mattis. Vivamus vitae pretium turpis, sit amet elementum purus. Morbi lorem ante, viverra at finibus a, ornare nec sem. Suspendisse libero nunc, facilisis quis interdum et, iaculis quis metus.'},
+        motto: 'Motto A',
+        aims: [],
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a ornare dolor, vitae interdum eros. Morbi id dolor ut elit lacinia ultrices sed id neque. Nulla gravida nulla nec velit lobortis, ac aliquet quam gravida. Morbi molestie gravida eros non tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam suscipit volutpat pellentesque. Mauris non purus a nulla fermentum convallis. Nunc sed laoreet magna. Etiam commodo leo vitae feugiat cursus. Quisque elit sapien, convallis in justo at, suscipit iaculis augue. Nulla facilisi. Cras aliquam hendrerit mattis. Vivamus vitae pretium turpis, sit amet elementum purus. Morbi lorem ante, viverra at finibus a, ornare nec sem. Suspendisse libero nunc, facilisis quis interdum et, iaculis quis metus.'
+    },
     {
         name: 'society B', 
         abbrev: 'BH', 
         owner: 'Hakuba Saguru', 
         location: 'Sydney', 
         licensedIn: 'Australia', 
+        motto: 'Motto B',
+        aims: [],
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a ornare dolor, vitae interdum eros. Morbi id dolor ut elit lacinia ultrices sed id neque. Nulla gravida nulla nec velit lobortis, ac aliquet quam gravida. Morbi molestie gravida eros non tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam suscipit volutpat pellentesque. Mauris non purus a nulla fermentum convallis. Nunc sed laoreet magna. Etiam commodo leo vitae feugiat cursus. Quisque elit sapien, convallis in justo at, suscipit iaculis augue. Nulla facilisi. Cras aliquam hendrerit mattis. Vivamus vitae pretium turpis, sit amet elementum purus. Morbi lorem ante, viverra at finibus a, ornare nec sem. Suspendisse libero nunc, facilisis quis interdum et, iaculis quis metus.'
     },
     {
@@ -56,6 +60,8 @@ const clubs = [
         owner: 'Hakuba Saguru', 
         location: 'Melbourne', 
         licensedIn: 'Australia', 
+        motto: 'Motto C',
+        aims: [],
         description: ''
     },
     {
@@ -65,6 +71,8 @@ const clubs = [
         owner: 'Akaba Reiji', 
         location: 'Auckland', 
         licensedIn: 'New Zealand', 
+        motto: 'Motto D',
+        aims: [],
         description: ''
     },
     {
@@ -72,7 +80,9 @@ const clubs = [
         abbrev: '', 
         owner: 'Sambejima Hokutou', 
         location: 'Adelaide', 
-        licensedIn: 'Australia', 
+        licensedIn: 'Australia',
+        motto: 'Motto E', 
+        aims: [],
         description: ''
     },
     {
@@ -81,6 +91,8 @@ const clubs = [
         owner: 'Kudo Yusaku', 
         location: 'Singapore', 
         licensedIn: 'Singapore', 
+        motto: 'Motto F',
+        aims: [],
         description: ''
     } 
 ];

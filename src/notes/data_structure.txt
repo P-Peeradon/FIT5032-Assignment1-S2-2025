@@ -1,4 +1,8 @@
 Article:
-{title: 'Atk Jknnd', cover: new URL('../assets/zen-cover.png', import.meta.url).href, author: 'Yugi Muto', thumbnail: new URL('../assets/mental-health-article-thumbnail.jpg', import.meta.url).href, content: 'lorem'}
+title[String] = title of the article
+cover[URL] = URL of the cover image
+thumbnail[URL] = URL of the thumbnail image
+content[String] = Content in the article
+author[String] = Name of the author who writes the article.
 
 Club:

@@ -3,7 +3,7 @@
         <div class="commuCard">
             <img v-if="logoExist()" :src="props.community.logo" :alt="props.community.name" />
             <img v-else src="../assets/community-logo.jpg" :alt="props.community.name"/>
-            <h2>{{ props.community.name }}</h2>
+            <h2>{{ props.community.name }} <span v-if="props.community.abbrev">({{ props.community.abbrev }})</span></h2>
         </div>
     </router-link>
 </template>
@@ -36,5 +36,8 @@ const logoExist = () => {
 img {
     width: 220px;
     height: 220px;
+}
+h2 {
+    font-size: 20px;
 }
 </style>
