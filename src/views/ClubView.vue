@@ -1,11 +1,13 @@
 <template>
-    <h1>Club</h1>
+    <div class="container">
+        <h1>Club and Society</h1>
+    </div>
 </template>
 
 <script setup>
 
 </script>
 
-<style>
+<style scoped>
 
 </style>

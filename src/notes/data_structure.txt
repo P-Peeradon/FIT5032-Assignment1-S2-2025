@@ -1,0 +1,4 @@
+Article:
+{title: 'Atk Jknnd', cover: new URL('../assets/zen-cover.png', import.meta.url).href, author: 'Yugi Muto', thumbnail: new URL('../assets/mental-health-article-thumbnail.jpg', import.meta.url).href, content: 'lorem'}
+
+Club:
