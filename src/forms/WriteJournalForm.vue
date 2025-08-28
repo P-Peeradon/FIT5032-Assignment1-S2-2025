@@ -137,15 +137,17 @@ input {
     .feelings {
         display: grid;
         grid-template-columns: repeat(2, 1fr); 
-        grid-template-rows: repeat(4, 1fr); 
+        grid-template-rows: repeat(4, 1fr);
+        padding: 5px; 
     }
 }
 
 @media screen and (min-width: 1200px) {
     .feelings {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); 
-        grid-template-rows: repeat(4, 1fr); 
+        grid-template-columns: repeat(4, 1fr); 
+        grid-template-rows: repeat(2, 1fr); 
+        padding: 10px;
     }
 }
 </style>
