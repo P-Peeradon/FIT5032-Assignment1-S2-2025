@@ -63,6 +63,16 @@ cite {
   font-weight: 300;
 }
 
+blockquote {
+        font-size: 20px;
+        font-family: cursive;
+        font-style: italic;
+        margin: 20px 0;
+        padding: 0 10px;
+        text-align: center;
+        color: brown;
+    }
+
 span.category {
   font-weight: bold;
   color: rgb(16, 52, 166);

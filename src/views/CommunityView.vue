@@ -1,8 +1,8 @@
 <template>
     <div class="container d-flex flex-column">
         <h1>Community</h1>
-        <div class="d-flex flex-column flex-lg-row gy-2">
-            <main class="col-md-9 col-lg-8">
+        <div class="d-flex flex-column flex-md-row gy-2">
+            <main class="col-md-9 col-xl-8">
                 <h2>Select your preferred community.</h2>
                 <div class="club-catalog">
                     <div v-for="club in clubs" :key="club.name" :value="club">
@@ -10,12 +10,12 @@
                     </div>
                 </div>
             </main>
-            <aside class="col-md-3 col-lg-4">
+            <aside class="col-md-3 col-xl-4">
                 <h2>Why youth need joining clubs?</h2>
-                <blockquote>
+                <blockquote class="mt-2 mb-2">
                     "Club is not only place for gathering. It is our sense of belonging, ambition and emotion."
                 </blockquote>
-                <p>
+                <p class="mt-3">
                     Youth need clubs to gain a sense of belonging and purpose, 
                     develop crucial social and emotional skills through positive 
                     peer and adult relationships, and have a safe, supportive space for fun, 

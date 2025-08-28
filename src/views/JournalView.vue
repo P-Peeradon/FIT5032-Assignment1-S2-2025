@@ -65,15 +65,7 @@ import WriteJournalForm from '@/forms/WriteJournalForm.vue';
 </template>
 
 <style scoped>
-    blockquote {
-        font-size: 20px;
-        font-family: cursive;
-        font-style: italic;
-        margin: 20px 0;
-        padding: 0 10px;
-        text-align: center;
-        color: brown;
-    }
+    
     img.journaling {
         width: 70%;
         height: auto;

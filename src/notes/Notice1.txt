@@ -17,3 +17,5 @@ I write this note to declare the major website structure alternation and their j
     After authorisation system is implemented, I will allow the profile editing.
 5. For HomeView:
     There is nothing implemented yet. In the future, I will provide the different views (unauthorised vs authorised)
+6. Databases:
+    All data are hardcoded in each views for displaying, unless Firebase is implemented. In this case, all hardcoded data are deleted IMMEDIATELY to prevent unauthorised code accessing.

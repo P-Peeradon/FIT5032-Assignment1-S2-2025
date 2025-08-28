@@ -33,7 +33,7 @@ const articles = [
 .article-catalogue {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between cards */
+    gap: 20px; /* Space between cards */
     margin: 10px;
 } 
 
@@ -41,7 +41,7 @@ const articles = [
     .article-catalogue {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Creates three equal-width columns */
-    gap: 10px; /* Space between cards */
+    gap: 20px; /* Space between cards */
     margin: 10px;
     } 
 }

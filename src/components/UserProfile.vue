@@ -36,10 +36,12 @@
                     <!-- if less than three, show all -->
                     <!-- else show three and show more if clicked (three by three)-->
                     <!-- for mobile, show in column -->
-                    
-                    <button v-if="user.bookmarks.length > 3" class="blue_button">Show More</button>
-                </div>
-
+                    <div class="my-bookmark">
+                        <div v-for="article in user.bookmarks" :key="article.title">
+                            <BookmarkCard :article="article" />
+                        </div>
+                    </div> 
+                </div>    
                 <div class="mt-3">
                     <h2>My Community</h2>
                 </div>
@@ -50,6 +52,7 @@
 
 <script setup>
 import { defineProps } from 'vue';
+import BookmarkCard from './BookmarkCard.vue';
 
 const props = defineProps({
     user: {
@@ -89,5 +92,11 @@ const imageExist = () => {
     }
     ol li {
         margin-left: 5px;
+    }
+    .my-bookmark {
+        display: grid;
+        grid-template: repeat(3, 1fr);
+        margin: 15px 10px;
+        gap: 10px;
     }
 </style>
