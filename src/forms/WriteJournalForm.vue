@@ -4,8 +4,29 @@
         <span class="category">Your Feeling</span>
         <div class="feelings" @blur="validateMood(true)" @input="validateMood(false)">
 
-            <input type="checkbox" value="" v-model="journalForm.moods" />
-            <label class="form-check-label" for=""></label>
+            <input type="checkbox" value="Anger" v-model="journalForm.moods" />
+            <label class="form-check-label" for="Anger">Anger</label>
+
+            <input type="checkbox" value="Anticipation" v-model="journalForm.moods" />
+            <label class="form-check-label" for="Anticipation">Anticipation</label>
+
+            <input type="checkbox" value="Joy" v-model="journalForm.moods" />
+            <label class="form-check-label" for="Joy">Joy</label>
+
+            <input type="checkbox" value="Trust" v-model="journalForm.moods" />
+            <label class="form-check-label" for="Trust">Trust</label>
+
+            <input type="checkbox" value="Fear" v-model="journalForm.moods" />
+            <label class="form-check-label" for="Fear">Fear</label>
+
+            <input type="checkbox" value="Surprise" v-model="journalForm.moods" />
+            <label class="form-check-label" for="Surprise">Surprise</label>
+
+            <input type="checkbox" value="Sad" v-model="journalForm.moods" />
+            <label class="form-check-label" for="Sad">Sad</label>
+
+            <input type="checkbox" value="Disgust" v-model="journalForm.moods" />
+            <label class="form-check-label" for="Disgust">Disgust</label>
                
         </div>
 
@@ -16,7 +37,7 @@
         <button class="blue_button">Write Journal</button>
         <button class="blue_button" @click="clearForm()">Clear</button>
     </div>
-    
+    <p>{{ journalForm.moods }}</p>
 </template>
 
 <script setup>
