@@ -5,6 +5,7 @@ import JournalView from '../views/JournalView.vue'
 import EducationView from '../views/EducationView.vue'
 import CommunityView from '../views/CommunityView.vue'
 import ArticleView from '../views/ArticleView.vue'
+import ClubView from '../views/ClubView.vue'
 
 const routes = [
   {
@@ -39,10 +40,10 @@ const routes = [
     component: CommunityView
   }
   {
-    path: '/community/:socialName',
-    name: 'Social',
+    path: '/community/:name',
+    name: 'Club',
     props: true,
-    component: SocialView
+    component: ClubView
   }
 ]
 

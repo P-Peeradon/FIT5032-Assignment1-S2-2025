@@ -1,11 +1,9 @@
 <template>
-  <p>Community</p>
+  <h1>Community</h1>
 </template>
 
-<script>
-export default {
+<script setup>
 
-}
 </script>
 
 <style>
