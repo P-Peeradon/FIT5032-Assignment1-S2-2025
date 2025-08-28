@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import CommunityCard from '../components/CommunityCard.vue';
+import CommunityCard from '../components/ClubCard.vue';
 
 const clubs = [
     {
