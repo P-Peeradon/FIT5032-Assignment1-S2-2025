@@ -3,7 +3,7 @@
         <div class="commuCard">
             <img v-if="logoExist()" :src="props.club.logo" :alt="props.club.name" />
             <img v-else src="../assets/community-logo.jpg" :alt="props.club.name"/>
-            <h2>{{ props.community.name }} <span v-if="props.club.abbrev">({{ props.club.abbrev }})</span></h2>
+            <h2>{{ props.club.name }} <span v-if="props.club.abbrev">({{ props.club.abbrev }})</span></h2>
         </div>
     </router-link>
 </template>
@@ -38,6 +38,6 @@ img {
     height: 220px;
 }
 h2 {
-    font-size: 20px;
+    font-size: 18px;
 }
 </style>

@@ -7,11 +7,16 @@ const props = defineProps({
         required: true
     }
 });
+
+const joinClub = () => {
+    //Wait for authorisation
+}
+
 </script>
 
 <template>
-    <div class="container">
-        <main>
+    <div class="container mt-4 d-flex flex-column flex-md-row">
+        <main class="col-md-9 col-xl-8">
             <h2>{{ props.club.name }}</h2>
             <q>{{ props.club.motto }}</q>
             <p>
@@ -23,15 +28,19 @@ const props = defineProps({
                 <li v-for="aim in club.aims" :key="aim">{{ aim }}</li>
             </ol>
         </main>
-        <aside>
+        <aside class="col-md-3 col-xl-4">
             <img :src="props.club.logo" :alt="props.club.name" />
-            <button>Join Now</button>
-            <p>You need to log in before joining.</p>
+            <button class="d-none" @click="joinClub()">Join Now</button>
+            <div class="card text-white bg-info mt-5">
+                <p>You need to log in before joining.</p>
+            </div>
         </aside> 
-        
     </div>
 </template>
 
-<style>
-
+<style scoped>
+img {
+    width: 200px;
+    height: 200px
+}
 </style>

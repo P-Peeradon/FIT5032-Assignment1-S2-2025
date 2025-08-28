@@ -72,8 +72,8 @@ const clubs = [
         location: 'Auckland', 
         licensedIn: 'New Zealand', 
         motto: 'Motto D',
-        aims: [],
-        description: ''
+        aims: ['Support University of Auckland in IT research and collaboration.'],
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam blandit ex non blandit. Sed venenatis volutpat libero, eget varius lorem fermentum nec. Cras vulputate dolor quis lectus euismod auctor. Etiam pulvinar egestas tincidunt. Proin non lorem sagittis, porta nibh at, rutrum nibh. Quisque sit amet eleifend mi, lacinia aliquam mi. Sed dictum felis ac nisl dapibus efficitur. Etiam finibus molestie justo sit amet scelerisque. Maecenas a eros eu ante aliquam tempor id id elit. Nulla venenatis magna nibh, a.'
     },
     {
         name: 'society E', 
