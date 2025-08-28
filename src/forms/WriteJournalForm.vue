@@ -2,32 +2,47 @@
     <form @submit.prevent="writeJournal()">
         <h2>What's on your mind</h2>
         <span class="category">Your Feeling</span>
-        <div class="feelings" @blur="validateMood(true)" @input="validateMood(false)">
+        <div class="feelings g-4" @blur="validateMood(true)" @input="validateMood(false)">
 
-            <input type="checkbox" value="Anger" v-model="journalForm.moods" />
-            <label class="form-check-label" for="Anger">Anger</label>
-
-            <input type="checkbox" value="Anticipation" v-model="journalForm.moods" />
+            <div>
+                <input type="checkbox" value="Anger" v-model="journalForm.moods" />
+                <label class="form-check-label" for="Anger">Anger</label>
+            </div>
+            
+            <div>
+                <input type="checkbox" value="Anticipation" v-model="journalForm.moods" />
             <label class="form-check-label" for="Anticipation">Anticipation</label>
-
-            <input type="checkbox" value="Joy" v-model="journalForm.moods" />
+            </div>
+            
+            <div>
+                <input type="checkbox" value="Joy" v-model="journalForm.moods" />
             <label class="form-check-label" for="Joy">Joy</label>
-
-            <input type="checkbox" value="Trust" v-model="journalForm.moods" />
-            <label class="form-check-label" for="Trust">Trust</label>
-
-            <input type="checkbox" value="Fear" v-model="journalForm.moods" />
-            <label class="form-check-label" for="Fear">Fear</label>
-
-            <input type="checkbox" value="Surprise" v-model="journalForm.moods" />
+            </div>
+            
+            <div>
+                <input type="checkbox" value="Trust" v-model="journalForm.moods" />
+                <label class="form-check-label" for="Trust">Trust</label>
+            </div>
+           
+            <div>
+                <input type="checkbox" value="Fear" v-model="journalForm.moods" />
+                <label class="form-check-label" for="Fear">Fear</label>
+            </div>
+            
+            <div>
+                <input type="checkbox" value="Surprise" v-model="journalForm.moods" />
             <label class="form-check-label" for="Surprise">Surprise</label>
+            </div>
 
-            <input type="checkbox" value="Sad" v-model="journalForm.moods" />
+            <div>
+                <input type="checkbox" value="Sad" v-model="journalForm.moods" />
             <label class="form-check-label" for="Sad">Sad</label>
-
-            <input type="checkbox" value="Disgust" v-model="journalForm.moods" />
-            <label class="form-check-label" for="Disgust">Disgust</label>
-               
+            </div>
+            
+            <div>
+                <input type="checkbox" value="Disgust" v-model="journalForm.moods" />
+                <label class="form-check-label" for="Disgust">Disgust</label>
+            </div>
         </div>
 
         <label for="content" class="form-label"><span class="category">Your story</span></label>
@@ -37,7 +52,6 @@
         <button class="blue_button">Write Journal</button>
         <button class="blue_button" @click="clearForm()">Clear</button>
     </div>
-    <p>{{ journalForm.moods }}</p>
 </template>
 
 <script setup>
@@ -88,11 +102,14 @@ const validateContent = (blur) => {
 </script>
 
 <style scoped>
-.feeling {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+@media screen and (max-width: 768px) {
+    .feelings {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
 }
+
 
 textarea {
     height: 150px;
@@ -108,16 +125,24 @@ textarea {
     gap: 0 20px;
 }
 
-@media (min-width: 768px) {
-    .feeling {
+.feeling label {
+    padding-left: 4px;
+}
+
+input {
+    margin-left: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .feelings {
         display: grid;
         grid-template-columns: repeat(2, 1fr); 
         grid-template-rows: repeat(4, 1fr); 
     }
 }
 
-@media (min-width: 1200px) {
-    .feeling {
+@media screen and (min-width: 1200px) {
+    .feelings {
         display: grid;
         grid-template-columns: repeat(2, 1fr); 
         grid-template-rows: repeat(4, 1fr); 
