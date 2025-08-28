@@ -2,7 +2,7 @@
 import { defineProps } from 'vue';
 
 const props = defineProps({
-    community: {
+    club: {
         type: Object,
         required: true
     }
@@ -11,10 +11,16 @@ const props = defineProps({
 
 <template>
     <div class="container">
-        <h1></h1>
-        <q>{{ props.community.motto }}</q>
-        
+        <h2>{{ props.club.name }}</h2>
+        <q>{{ props.club.motto }}</q>
+        <p>
+            {{ props.club.description }}
+        </p>
+
         <span class="category">Club Aims:</span>
+        <ol>
+            <li v-for="aim in club.aims" :key="aim">{{ aim }}</li>
+        </ol>
     </div>
 </template>
 
