@@ -6,6 +6,10 @@
     <img src="../assets/mental-health-awareness-with-meditation-background-free-vector.jpg" alt="mental health home">
 </template>
 
-<style>
+<style scoped>
+img {
+    width: 100vw;
+    height: auto;
+}
 
 </style>
