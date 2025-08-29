@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <p>wait</p>
+    <img src="../assets/mental-health-awareness-with-meditation-background-free-vector.jpg" alt="mental health home">
 </template>
 
 <style>
