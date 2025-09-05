@@ -6,6 +6,8 @@ import EducationView from '../views/EducationView.vue'
 import CommunityView from '../views/CommunityView.vue'
 import ArticleView from '../views/ArticleView.vue'
 import ClubView from '../views/ClubView.vue'
+import LoginView from '../views/LoginView.vue'
+import RegisterView from '../views/RegisterView.vue'
 
 const routes = [
   {
@@ -14,8 +16,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/profile',
+    path: '/profile/:username',
     name: 'Profile',
+    props: true,
     component: ProfileView
   },
   {
@@ -44,7 +47,17 @@ const routes = [
     name: 'Club',
     props: true,
     component: ClubView
-  }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginView
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: RegisterView
+  },
 ]
 
 const router = createRouter({

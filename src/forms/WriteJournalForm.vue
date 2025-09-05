@@ -50,7 +50,7 @@
     </form>
     <div class="journal-form">
         <button class="blue_button">Write Journal</button>
-        <button class="blue_button" @click="clearForm()">Clear</button>
+        <button class="gray_button" @click="clearForm()">Clear</button>
     </div>
 </template>
 

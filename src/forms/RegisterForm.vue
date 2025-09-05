@@ -1,13 +1,210 @@
-<template>
-  
-</template>
+<script setup>
+import { reactive, defineEmits } from 'vue';
 
-<script>
-export default {
+const emit = defineEmits(['register'])
 
+const registerForm = reactive({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    pronoun: '',
+    role: ''
+});
+
+const errors = reactive({
+    username: null,
+    email: null,
+    password: null,
+    confirmPassword: null,
+    pronoun: null,
+    role: null
+});
+
+const clearForm = () => {
+    registerForm = {
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        pronoun: '',
+        role: ''
+    }
 }
+
+const registerNewUser = () => {
+    validateName(true);
+    validateEmail(true);
+    validatePassword(true);
+    validateConfirmPassword(true);
+    validatePronoun(true);
+    validateRole(true);
+    if (!(errors.username || 
+        errors.email || 
+        errors.password ||
+        errors.confirmPassword ||
+        errors.pronoun ||
+        errors.role
+    )) {
+        // Push data to the database
+        // New user is registered.
+        clearForm()
+    }
+};
+
+const validatePronoun = (blur) => {
+    if (!registerForm.pronoun) {
+        if (blur) errors.pronoun = 'Please specify your pronoun.';
+    } else {
+        errors.pronoun = null;
+    }
+};
+
+const validateName = (blur) => {
+    const usernameMinLength = 5;
+
+    if (registerForm.username.length < usernameMinLength) {
+        if (blur) errors.username = 'Name must be at least 5 characters.';
+    } else {
+        errors.username = null;
+    }
+}
+
+const validateEmail = (blur) => {
+    const email = registerForm.email;
+    const isEmail =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!isEmail) {
+        if (blur) errors.email = 'Your email format is incorrect';
+    } else {
+        errors.email = null;
+    }
+}
+
+const validateConfirmPassword = (blur) => {
+    if (registerForm.password !== registerForm.confirmPassword) {
+        if (blur) errors.confirmPassword = 'Passwords do not match.'
+    } else {
+        errors.confirmPassword = null
+    }
+}
+
+const validatePassword = (blur) => {
+
+    const password = registerForm.password
+    const minLength = 12
+    const hasUppercase = /[A-Z]/.test(password)
+    const hasLowercase = /[a-z]/.test(password)
+    const hasNumber = /\d/.test(password)
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>"]/.test(password)
+
+    if (password.length < minLength) {
+        if (blur) errors.password = `Password must be at least ${minLength} characters.`
+    } else if (!hasUppercase) {
+        if (blur) errors.password = 'Password must contain at least one uppercase letter.'
+    } else if (!hasLowercase) {
+        if (blur) errors.password = 'Password must contain at least one lowercase letter.'
+    } else if (!hasNumber) {
+        if (blur) errors.password = 'Password must contain at least one number.'
+    } else if (!hasSpecialChar) {
+        if (blur) errors.password = 'Password must contain at least one special character.'
+    } else {
+        errors.password = null;
+    }
+
+};
+
+const validateRole = (blur) => {
+    if (!registerForm.role) {
+        if (blur) errors.role = 'Please specify your role.';
+    } else {
+        errors.role = null;
+    }
+};
+
 </script>
 
-<style>
+<template>
+    <form>
+        <label for="username" class="form-label">Username</label>
+        <input 
+            id="username" 
+            @blur="() => validateName(true)"
+            @input="() => validateName(false)" 
+            type="text" 
+            class="form-control" 
+            v-model="registerForm.username"
+            required 
+        />
+
+        <label for="email" class="form-label">Email</label>
+        <input 
+            id="email"
+            @blur="() => validateEmail(true)"
+            @input="() => validateEmail(false)" 
+            type="email" 
+            class="form-control" 
+            v-model="registerForm.email" 
+            required 
+        />
+
+        <label for="password" class="form-label">Password</label>
+        <input 
+            id="password"
+            @blur="() => validatePassword(true)"
+            @input="() => validatePassword(false)"
+            type="password" 
+            class="form-control" 
+            v-model="registerForm.password"  
+            required 
+        />
+
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input 
+            id="confirmPassword"
+            @blur="() => validateConfirmPassword(true)"
+            @input="() => validateConfirmPassword(false)"
+            type="password" 
+            class="form-control" 
+            v-model="registerForm.confirmPassword" 
+            required 
+        />
+
+        <label for="pronoun" class="form-label">Pronoun</label><br />
+        <select
+            id="pronoun"
+            @blur="() => validatePronoun(true)"
+            @input="() => validatePronoun(false)"
+            class="form-control"
+            v-model="registerForm.pronoun"
+        >
+            <option value="He/Him">He/Him</option>
+            <option value="She/Her">She/Her</option>
+            <option value="He/Them">He/Them</option>
+            <option value="She/Them">She/Them</option>
+            <option value="They/Them">They/Them</option>
+        </select>
+
+        <label for="role" class="form-label">Role</label><br />
+        <select
+            id="role"
+            @blur="() => validateRole(true)"
+            @input="() => validateRole(false)"
+            class="form-control"
+            v-model="registerForm.role"
+        >
+            <option value="user">User</option>
+            <option value="practitioner">Practitioner</option>
+            <option value="social worker">Social Worker</option>
+        </select>
+    
+        <div class="text-center">
+            <button type="submit" class="blue_button" @click="registerNewUser">Register</button>
+            <button type="submit" class="gray_button">To Login</button>
+        </div>
+    </form>
+</template>
+
+<style scoped>
 
 </style>
