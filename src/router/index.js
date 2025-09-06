@@ -8,6 +8,8 @@ import ArticleView from '../views/ArticleView.vue'
 import ClubView from '../views/ClubView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
+import MeditationView from '../views/MeditationView.vue'
+
 
 const routes = [
   {
@@ -58,6 +60,11 @@ const routes = [
     name: 'Register',
     component: RegisterView
   },
+  {
+    path: '/meditation',
+    name: 'Meditation',
+    component: MeditationView
+  }
 ]
 
 const router = createRouter({

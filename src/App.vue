@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column bg">
     <header>
       <WebHeader />
     </header>
@@ -19,13 +19,16 @@ header {
   line-height: 2;
 }
 
+.bg {
+  background-color: aquamarine;
+}
+
 .logo {
   display: block;
   margin: 0 auto 2rem;
 }
 
 main.view {
-  background-color: aquamarine;
   min-width: 95vw;
   min-height: 100vh;
 }

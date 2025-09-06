@@ -6,17 +6,6 @@ content[String]* = Content in the article
 author[String]* = Name of the author who writes the article.
 
 Club:
-{
-        name: 'society D', 
-        abbrev: '', 
-        logo: new URL('../assets/logo-for-auckland-vector-31288838.webp', import.meta.url).href,
-        owner: 'Akaba Reiji', 
-        location: 'Auckland', 
-        licensedIn: 'New Zealand', 
-        motto: 'Motto D',
-        aims: [],
-        description: ''
-    }
 
 name[String]** = name of the club
 abbrev[String] = abbrevation of the club name
@@ -27,3 +16,9 @@ licensedIn[String]* = Country which the club is licensed in.
 aims[Array[String]] = Aims of the club
 motto[String] = Motto of the club
 description[String] = Description of the club
+
+Video:
+title[String]** = title of video
+owner[String] = Owner of video
+source[URL] =
+type[string] = type of video "video/extension"

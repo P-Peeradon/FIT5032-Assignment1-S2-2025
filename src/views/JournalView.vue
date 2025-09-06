@@ -57,8 +57,13 @@ import WriteJournalForm from '@/forms/WriteJournalForm.vue';
                 </p>
                 
             </div>
-            <div class="mt-4 col-lg-8">
+            <div class="mt-4 col-lg-8 mb-4">
                 <WriteJournalForm />
+                <div class="image-center mt-3">
+                    <router-link to="/meditation" class="nav-link" active-class="active" aria-current="page">
+                        <button class="gray_button">Want to be mindful? Do meditation.</button>
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>
