@@ -1,14 +1,5 @@
 <script setup>
 
-const videos = [
-    {
-        title: "Relaxing music Relieves stress, Anxiety and Depression",
-        owner: "Relaxing Calming Music",
-        videoID: "I3OJUwILelU?si=WwVltdjs4vxC8o15",
-        type: "video/mp4"
-    }
-]
-
 </script>
 
 <template>
@@ -33,12 +24,7 @@ const videos = [
                 <cite>Mayo Clinic. (2023, December 14). Meditation: A simple, fast way to reduce stress. Mayo Clinic. [https://www.mayoclinic.org/tests-procedures/meditation/in-depth/meditation/art-20045858]</cite>
             </section>
             <section class="col-6">
-                <div v-for="vid in videos" :key="vid.title">
-                    <div>
-                        <youtube :video-id="vid.videoID"></youtube>
-                        <p>{{ vid.owner }}</p>
-                    </div>
-                </div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/I3OJUwILelU?si=yTpBhOpod9qxlw1d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </section>
         </div>
         
