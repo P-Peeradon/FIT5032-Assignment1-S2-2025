@@ -6,7 +6,6 @@ content[String]* = Content in the article
 author[String]* = Name of the author who writes the article.
 
 Club:
-
 name[String]** = name of the club
 abbrev[String] = abbrevation of the club name
 logo[URL] = URL of the club logo
@@ -16,6 +15,7 @@ licensedIn[String]* = Country which the club is licensed in.
 aims[Array[String]] = Aims of the club
 motto[String] = Motto of the club
 description[String] = Description of the club
+posts[Array[Post]] = All posts in that clubs
 
 Video:
 title[String]** = title of video

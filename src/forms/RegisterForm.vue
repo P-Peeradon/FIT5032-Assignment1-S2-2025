@@ -46,8 +46,8 @@ const registerNewUser = () => {
         errors.pronoun ||
         errors.role
     )) {
-        // Push data to the database
         // New user is registered.
+        emit('register', registerForm);
         clearForm()
     }
 };

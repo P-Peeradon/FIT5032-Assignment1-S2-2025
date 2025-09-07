@@ -9,6 +9,7 @@ import ClubView from '../views/ClubView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import MeditationView from '../views/MeditationView.vue'
+import DiscussionView from '../views/DiscussionView.vue'
 
 
 const routes = [
@@ -64,6 +65,12 @@ const routes = [
     path: '/meditation',
     name: 'Meditation',
     component: MeditationView
+  },
+  {
+    path: '/discussion/:name',
+    name: 'Discussion',
+    props: true,
+    component: DiscussionView
   }
 ]
 
