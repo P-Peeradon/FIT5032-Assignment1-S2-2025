@@ -34,7 +34,7 @@ const toggleEventsRoom = () => {
         </header>
         <main>
             <DiscussionBoard v-if="render.value === 'Forum'" :club="" />
-            <EventBoard />
+            <EventBoard v-if="render.value === 'Events'" :club="" />
         </main>
     </div>
 </template>
