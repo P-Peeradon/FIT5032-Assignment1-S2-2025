@@ -10,7 +10,7 @@ import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import MeditationView from '../views/MeditationView.vue'
 import DiscussionView from '../views/DiscussionView.vue'
-
+import EmotionView from '../views/EmotionView.vue'
 
 const routes = [
   {
@@ -71,6 +71,11 @@ const routes = [
     name: 'Discussion',
     props: true,
     component: DiscussionView
+  },
+  {
+    path: '/emotion',
+    name: 'Emotion',
+    component: EmotionView
   }
 ]
 

@@ -55,6 +55,13 @@ import WriteJournalForm from '@/forms/WriteJournalForm.vue';
                     Sutton, J. (2018, May 14). 5 Benefits of Journaling for Mental Health. Positive Psychology. [https://positivepsychology.com/benefits-of-journaling/]
                 </cite>
                 </p>
+
+                <br />
+                <div class="image-center mt-3">
+                    <router-link to="/emotion" class="nav-link" active-class="active" aria-current="page">
+                        <button class="gray_button">Want to inspect your emotion? Go ahead and see your journal.</button>
+                    </router-link>
+                </div>
                 
             </div>
             <div class="mt-4 col-lg-8 mb-4">
