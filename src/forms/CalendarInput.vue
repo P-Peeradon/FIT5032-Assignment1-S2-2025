@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue';
 
+const today = ref(new Date());
+
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
 const selectedDate = ref(null);
