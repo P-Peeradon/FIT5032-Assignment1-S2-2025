@@ -10,9 +10,8 @@ const props = defineProps({
 
 const currentPost = ref(null);
 
-const displayComment = () => {
-    // Get post.topic and post.owner
-    // Fetch Post object which 
+const displayComment = (post) => {
+    currentPost.value = post
 }
 </script>
 
@@ -20,9 +19,11 @@ const displayComment = () => {
     <div class="container">
         <aside class="col-3">
             <input type="text" placeholder="Search" />
-            <div @click="displayComment()" v-for="post in club.posts" :key="post">
-                <h2>{{ post.topic }}</h2>
-                <p>{{ post.owner }} {{ post.timestamp }}</p>
+            <div class="list_post" v-for="post in club.posts" :key="post">
+                <div  @click="displayComment(post)">
+                    <h2>{{ post.topic }}</h2>
+                    <p>{{ post.owner }} {{ post.timestamp }}</p>
+                </div>
             </div>
         </aside>
         <main class="col-9">
