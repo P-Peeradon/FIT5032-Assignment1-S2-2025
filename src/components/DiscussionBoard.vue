@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue';
+import { ref, defineProps } from 'vue';
 
 const props = defineProps({
     club: {
@@ -7,6 +7,13 @@ const props = defineProps({
         required: true
     }
 });
+
+const currentPost = ref(null);
+
+const displayComment = () => {
+    // Get post.topic and post.owner
+    // Fetch Post object which 
+}
 </script>
 
 <template>
@@ -19,11 +26,16 @@ const props = defineProps({
             </div>
         </aside>
         <main class="col-9">
-            <h2>{{ post.topic }}</h2>
-            <q>{{ post.owner }}</q>
-            <p>{{ post.content }}</p>
-            <div v-for="comment in post.comments" :key="comment">
-                <p>{{ comment }}</p>
+            <div v-if="currentPost">
+                <h2>{{ post.topic }}</h2>
+                <q>{{ post.owner }}</q>
+                <p>{{ post.content }}</p>
+                <div v-for="comment in post.comments" :key="comment">
+                    <p>{{ comment }}</p>
+                </div>
+            </div>
+            <div v-else>
+
             </div>
         </main>
     </div>

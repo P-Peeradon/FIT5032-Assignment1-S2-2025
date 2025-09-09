@@ -16,9 +16,24 @@ aims[Array[String]] = Aims of the club
 motto[String] = Motto of the club
 description[String] = Description of the club
 posts[Array[Post]] = All posts in that clubs
+events[Array[Event]] = All events in that clubs
 
-Video:
-title[String]** = title of video
-owner[String] = Owner of video
-source[URL] =
-type[string] = type of video "video/extension"
+Post:
+user[User] = people who posted that post
+topic[String] = topic of that post
+timestamp[DateTime] = record DateTime the post was posted
+content[String] = content in that post
+comments[Array[Comment]] = comment related to that post
+
+Comment: 
+text[String] = content in that comment
+owner[User] = Person who post that comment
+timestamp[DateTime] = record DateTime the comment was posted
+** Comment object cannot stand alone! **
+
+Event: 
+title[String] = title of that event
+host[String] = name of people who host the event
+timestamp[Date] = time when the event was create
+eventDate[DateTime] = Date and Time when the event will held.
+** Event object cannot stand alone! **
