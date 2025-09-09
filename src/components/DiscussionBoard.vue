@@ -11,14 +11,16 @@ const props = defineProps({
 const currentPost = ref(null);
 
 const displayComment = (post) => {
-    currentPost.value = post
+    currentPost.value = post;
 }
+
+const query = ref('');
 </script>
 
 <template>
     <div class="container">
         <aside class="col-3">
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search" v-model="query" />
             <div class="list_post" v-for="post in club.posts" :key="post">
                 <div  @click="displayComment(post)">
                     <h2>{{ post.topic }}</h2>
@@ -35,13 +37,10 @@ const displayComment = (post) => {
                     <p>{{ comment }}</p>
                 </div>
             </div>
-            <div v-else>
-
-            </div>
         </main>
     </div>
 </template>
 
-<style>
+<style scoped>
 
 </style>

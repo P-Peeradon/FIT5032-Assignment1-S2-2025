@@ -19,7 +19,7 @@ const props = defineProps({
             <!-- Display the community events dynamically-->
             <div v-for="event in club.events" :key="event.title"></div>
         </main>
-        <!-- As social worker, I want to add new event so that the club member can join. -->
+        <!-- As social worker who own this club, I want to add new event so that the club member can join. -->
     </div>
 </template>
 
