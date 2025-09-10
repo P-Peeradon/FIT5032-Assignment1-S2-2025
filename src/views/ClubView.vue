@@ -21,7 +21,7 @@ const route = useRoute();
 const name = ref(route.params.name);
 const club = ref(null);
 
-// Logic to fetch article by title.
+// Logic to fetch club by name.
 // No clubs with the same title.
 const fetchClubData = async () => {
 
