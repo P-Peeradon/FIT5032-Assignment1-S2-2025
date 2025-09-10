@@ -1,13 +1,33 @@
 <script setup>
+import { onMounted, ref } from 'vue';
 import ArticleCard from '../components/ArticleCard.vue';
+import { collection, getDocs, query } from 'firebase/firestore';
+import db from '../firebase/init';
 
 // As a mental health specialist, I want to write article, which composes of many sections,
 // so that youth can read them to understand one's mental health condition.
-const articles = [
-    {title: 'ABCDEFG', cover: '', author: 'Kaiba Seito', thumbnail: '../assets/mental-health-article-thumbnail.jpg', content: 'lorem'},
-    {title: 'Atk Jknnd', cover: '', author: 'Yugi Muto', thumbnail: '../assets/mental-health-article-thumbnail.jpg', content: 'lorem'},
-    {title: 'Khansaholic', cover: '', author: 'Jounouchi Katsuha', thumbnail: '../assets/mental-health-article-thumbnail.jpg', content: 'lorem'}
-]
+const articles = ref([]);
+
+const fetchArticles = async () => {
+    try {
+
+        const educationQuery = query(collection(db, 'articles'));
+        const educationQuerySnapshot = await getDocs(educationQuery);
+        const articleArray = [];
+        educationQuerySnapshot.forEach((doc) => {
+            articleArray.push({ ...doc.data()})
+        });
+
+        articles.value = articleArray;
+    
+    } catch (err) {
+        console.error('Error fetching articles:', err);
+    }
+}
+
+onMounted(() => {
+    fetchArticles()
+});
 
 </script>
 

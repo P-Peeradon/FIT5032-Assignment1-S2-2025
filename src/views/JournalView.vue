@@ -121,7 +121,6 @@ onMounted(() =>
 </template>
 
 <style scoped>
-    
     img.journaling {
         width: 70%;
         height: auto;
