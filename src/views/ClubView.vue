@@ -3,7 +3,7 @@
         <h1>Club and Society</h1>
         <div class="d-flex flex-row">
             <main>
-                <ClubDisplay :club="currentClub"/>
+                <ClubDisplay :club="club"/>
             </main>
             <aside></aside>
         </div>
