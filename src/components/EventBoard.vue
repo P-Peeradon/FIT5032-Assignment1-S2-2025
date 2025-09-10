@@ -1,6 +1,7 @@
 <script setup>
 import CalendarInput from '../forms/CalendarInput.vue';
 import { defineProps } from 'vue';
+import EventCard from './EventCard.vue';
 
 const props = defineProps({
     club: {
@@ -11,13 +12,15 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="container">
+    <div class="container flex-column flex-xl-row">
         <aside class="col-4 col-xl-3">
             <CalendarInput />
         </aside>
         <main class="col-8 col-xl-9">
             <!-- Display the community events dynamically-->
-            <div v-for="event in club.events" :key="event.title"></div>
+            <div v-for="event in club.events" :key="event.title">
+                <EventCard @click="" :event="event" />
+            </div>
         </main>
         <!-- As social worker who own this club, I want to add new event so that the club member can join. -->
     </div>

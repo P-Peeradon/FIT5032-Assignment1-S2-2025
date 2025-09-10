@@ -23,7 +23,7 @@ const fetchUserData = async () => {
 
 const recordJournal = async (journal) => {
     const userJournal = { ...journal };
-    const userFK = doc(db, 'users', user.value.email)
+    const userFK = doc(db, 'users', user.value.email);
 
     try {
         //Collect journal into user doc.

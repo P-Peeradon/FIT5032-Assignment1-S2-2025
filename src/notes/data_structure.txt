@@ -34,8 +34,9 @@ timestamp[DateTime] = record DateTime the comment was posted
 Event: 
 title[String] = title of that event
 host[String] = name of people who host the event
-timestamp[Date] = time when the event was create
+timestamp[Date] = time when the event was created
 eventDate[DateTime] = Date and Time when the event will held.
+location[String] = Where the event held?
 ** Event object cannot stand alone! **
 
 
