@@ -9,6 +9,7 @@ const clubName = ref(route.params.name);
 
 // Find club with the specific name.
 
+
 const render = ref('Forum');
 
 const toggleForum = () => {
