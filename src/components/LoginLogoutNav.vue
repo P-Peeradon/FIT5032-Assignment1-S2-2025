@@ -1,8 +1,8 @@
 <template>
     <nav>
         <div v-if="authorised">
-            <p>Welcome, {{ username }}</p>
-            <button class="btn-danger">Logout</button>
+            <p>Welcome, {{ currentUser }}</p>
+            <button @click="logout()" class="btn-danger">Logout</button>
         </div>
         <div v-else>
             <router-link to="/register" class="nav-link" active-class="active" aria-current="page">
@@ -16,6 +16,35 @@
 </template>
 
 <script setup>
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const auth = getAuth();
+const authorised = ref(false);
+const currentUser = ref(null); // Username of who is using the app.
+
+const logout = async () => {
+
+    try {
+        await signOut(auth);
+    } catch (err) {
+        alert('Error signing out:', err);
+    } finally {
+        router.push("/");
+    }
+    
+};
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        authorised.value = true;
+        currentUser.value = user.username;
+    } else {
+        authorised.value = false;
+    }
+})
 
 </script>
 
