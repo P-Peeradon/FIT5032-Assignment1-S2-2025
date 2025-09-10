@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getAuth } from 'firebase/auth'
 import HomeView from '../views/HomeView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import JournalView from '../views/JournalView.vue'
@@ -12,6 +13,8 @@ import MeditationView from '../views/MeditationView.vue'
 import DiscussionView from '../views/DiscussionView.vue'
 import EmotionView from '../views/EmotionView.vue'
 
+const auth = getAuth();
+
 const routes = [
   {
     path: '/',
@@ -19,37 +22,42 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/profile/:username',
+    path: '/profile',
     name: 'Profile',
-    props: true,
-    component: ProfileView
+    component: ProfileView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/journal',
     name: 'Journal',
-    component: JournalView
+    component: JournalView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/education',
     name: 'Education',
-    component: EducationView
+    component: EducationView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/education/article/:title',
     name: 'Article',
     props: true,
-    component: ArticleView
+    component: ArticleView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/community',
     name: 'Community',
-    component: CommunityView
+    component: CommunityView,
+    meta: { requiresAuth: true }
   },
   {
-    path: '/community/:name',
+    path: '/community/club/:name',
     name: 'Club',
     props: true,
-    component: ClubView
+    component: ClubView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/login',
@@ -62,26 +70,42 @@ const routes = [
     component: RegisterView
   },
   {
-    path: '/meditation',
+    path: '/journal/meditation',
     name: 'Meditation',
-    component: MeditationView
+    component: MeditationView,
+    meta: { requiresAuth: true }
   },
   {
-    path: '/discussion/:name',
+    path: '/community/club/discussion/:name',
     name: 'Discussion',
     props: true,
-    component: DiscussionView
+    component: DiscussionView,
+    meta: { requiresAuth: true }
   },
   {
-    path: '/emotion',
+    path: '/journal/emotion',
     name: 'Emotion',
-    component: EmotionView
+    component: EmotionView,
+    meta: { requiresAuth: true }
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+});
+
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const user = auth.currentUser; // Get the current authenticated user 
+
+  if (requiresAuth && !user) {
+    next({ name: 'Login'});
+  } else if (user && (to.name === 'Login' || to.name === 'Register')) {
+    next({ name: "Home"});
+  } else {
+    next();
+  }
 })
 
-export default router
+export default router;
