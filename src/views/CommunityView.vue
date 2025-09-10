@@ -31,71 +31,37 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import ClubCard from '../components/ClubCard.vue';
+import db from '../firebase/init';
+import { collection, getDocs, query } from 'firebase/firestore';
 
-const clubs = [
-    {
-        name: 'society A', 
-        abbrev: '', 
-        owner: 'Kaiba Noah', 
-        location: 'Melbourne', 
-        licensedIn: 'Australia', 
-        motto: 'Motto A',
-        aims: [],
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a ornare dolor, vitae interdum eros. Morbi id dolor ut elit lacinia ultrices sed id neque. Nulla gravida nulla nec velit lobortis, ac aliquet quam gravida. Morbi molestie gravida eros non tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam suscipit volutpat pellentesque. Mauris non purus a nulla fermentum convallis. Nunc sed laoreet magna. Etiam commodo leo vitae feugiat cursus. Quisque elit sapien, convallis in justo at, suscipit iaculis augue. Nulla facilisi. Cras aliquam hendrerit mattis. Vivamus vitae pretium turpis, sit amet elementum purus. Morbi lorem ante, viverra at finibus a, ornare nec sem. Suspendisse libero nunc, facilisis quis interdum et, iaculis quis metus.'
-    },
-    {
-        name: 'society B', 
-        abbrev: 'BH', 
-        owner: 'Hakuba Saguru', 
-        location: 'Sydney', 
-        licensedIn: 'Australia', 
-        motto: 'Motto B',
-        aims: [],
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a ornare dolor, vitae interdum eros. Morbi id dolor ut elit lacinia ultrices sed id neque. Nulla gravida nulla nec velit lobortis, ac aliquet quam gravida. Morbi molestie gravida eros non tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam suscipit volutpat pellentesque. Mauris non purus a nulla fermentum convallis. Nunc sed laoreet magna. Etiam commodo leo vitae feugiat cursus. Quisque elit sapien, convallis in justo at, suscipit iaculis augue. Nulla facilisi. Cras aliquam hendrerit mattis. Vivamus vitae pretium turpis, sit amet elementum purus. Morbi lorem ante, viverra at finibus a, ornare nec sem. Suspendisse libero nunc, facilisis quis interdum et, iaculis quis metus.'
-    },
-    {
-        name: 'society C', 
-        abbrev: 'CHD', 
-        owner: 'Hakuba Saguru', 
-        location: 'Melbourne', 
-        licensedIn: 'Australia', 
-        motto: 'Motto C',
-        aims: [],
-        description: ''
-    },
-    {
-        name: 'society D', 
-        abbrev: '', 
-        logo: new URL('../assets/logo-for-auckland-vector-31288838.webp', import.meta.url).href,
-        owner: 'Akaba Reiji', 
-        location: 'Auckland', 
-        licensedIn: 'New Zealand', 
-        motto: 'Motto D',
-        aims: ['Support University of Auckland in IT research and collaboration.'],
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam blandit ex non blandit. Sed venenatis volutpat libero, eget varius lorem fermentum nec. Cras vulputate dolor quis lectus euismod auctor. Etiam pulvinar egestas tincidunt. Proin non lorem sagittis, porta nibh at, rutrum nibh. Quisque sit amet eleifend mi, lacinia aliquam mi. Sed dictum felis ac nisl dapibus efficitur. Etiam finibus molestie justo sit amet scelerisque. Maecenas a eros eu ante aliquam tempor id id elit. Nulla venenatis magna nibh, a.'
-    },
-    {
-        name: 'society E', 
-        abbrev: '', 
-        owner: 'Sambejima Hokutou', 
-        location: 'Adelaide', 
-        licensedIn: 'Australia',
-        motto: 'Motto E', 
-        aims: [],
-        description: ''
-    },
-    {
-        name: 'society F', 
-        abbrev: 'FIT', 
-        owner: 'Kudo Yusaku', 
-        location: 'Singapore', 
-        licensedIn: 'Singapore', 
-        motto: 'Motto F',
-        aims: [],
-        description: ''
-    } 
-];
+const clubs = ref([]);
+
+// Algorithm to fetch all clubs.
+const fetchClubs = async () => {
+    
+    try {
+
+        const clubQuery = query(collection(db, 'clubs'));
+        const clubQuerySnapshot = await getDocs(clubQuery);
+        const clubsArray = [];
+
+        clubQuerySnapshot.forEach((doc) => {
+            clubsArray.push({ ...doc.data() });
+        });
+
+        clubs.value = clubsArray;
+
+    } catch (err) {
+        console.error('Error fetching clubs:', err);
+    }
+    
+};
+
+onMounted(() => {
+    fetchClubs()
+});
 </script>
 
 <style scoped>

@@ -39,7 +39,7 @@ const recordJournal = async (journal) => {
     }
 }
 
-onMounted(
+onMounted(() =>
     // Fetch user data.
     fetchUserData()
 );
