@@ -5,7 +5,7 @@ import EventBoard from '../components/EventBoard.vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const name = ref(route.params.name);
+const clubName = ref(route.params.name);
 
 // Find club with the specific name.
 

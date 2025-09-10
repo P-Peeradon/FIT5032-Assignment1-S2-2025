@@ -3,7 +3,7 @@ import { reactive, defineEmits } from 'vue';
 
 const emit = defineEmits(['register'])
 
-const registerForm = reactive({
+const registerFormData = reactive({
     username: '',
     email: '',
     password: '',
@@ -22,7 +22,7 @@ const errors = reactive({
 });
 
 const clearForm = () => {
-    registerForm = {
+    registerFormData.value = {
         username: '',
         email: '',
         password: '',
@@ -47,13 +47,13 @@ const registerNewUser = () => {
         errors.role
     )) {
         // New user is registered.
-        emit('register', registerForm);
+        emit('register', registerFormData);
         clearForm()
     }
 };
 
 const validatePronoun = (blur) => {
-    if (!registerForm.pronoun) {
+    if (!registerFormData.pronoun) {
         if (blur) errors.pronoun = 'Please specify your pronoun.';
     } else {
         errors.pronoun = null;
@@ -63,7 +63,7 @@ const validatePronoun = (blur) => {
 const validateName = (blur) => {
     const usernameMinLength = 5;
 
-    if (registerForm.username.length < usernameMinLength) {
+    if (registerFormData.username.length < usernameMinLength) {
         if (blur) errors.username = 'Name must be at least 5 characters.';
     } else {
         errors.username = null;
@@ -71,7 +71,7 @@ const validateName = (blur) => {
 }
 
 const validateEmail = (blur) => {
-    const email = registerForm.email;
+    const email = registerFormData.email;
     const isEmail =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     if (!isEmail) {
@@ -82,7 +82,7 @@ const validateEmail = (blur) => {
 }
 
 const validateConfirmPassword = (blur) => {
-    if (registerForm.password !== registerForm.confirmPassword) {
+    if (registerFormData.password !== registerFormData.confirmPassword) {
         if (blur) errors.confirmPassword = 'Passwords do not match.'
     } else {
         errors.confirmPassword = null
@@ -91,7 +91,7 @@ const validateConfirmPassword = (blur) => {
 
 const validatePassword = (blur) => {
 
-    const password = registerForm.password
+    const password = registerFormData.password
     const minLength = 12
     const hasUppercase = /[A-Z]/.test(password)
     const hasLowercase = /[a-z]/.test(password)
@@ -115,7 +115,7 @@ const validatePassword = (blur) => {
 };
 
 const validateRole = (blur) => {
-    if (!registerForm.role) {
+    if (!registerFormData.role) {
         if (blur) errors.role = 'Please specify your role.';
     } else {
         errors.role = null;
@@ -133,7 +133,7 @@ const validateRole = (blur) => {
             @input="() => validateName(false)" 
             type="text" 
             class="form-control" 
-            v-model="registerForm.username"
+            v-model="registerFormData.username"
             required 
         />
 
@@ -144,7 +144,7 @@ const validateRole = (blur) => {
             @input="() => validateEmail(false)" 
             type="email" 
             class="form-control" 
-            v-model="registerForm.email" 
+            v-model="registerFormData.email" 
             required 
         />
 
@@ -155,7 +155,7 @@ const validateRole = (blur) => {
             @input="() => validatePassword(false)"
             type="password" 
             class="form-control" 
-            v-model="registerForm.password"  
+            v-model="registerFormData.password"  
             required 
         />
 
@@ -166,7 +166,7 @@ const validateRole = (blur) => {
             @input="() => validateConfirmPassword(false)"
             type="password" 
             class="form-control" 
-            v-model="registerForm.confirmPassword" 
+            v-model="registerFormData.confirmPassword" 
             required 
         />
 
@@ -176,7 +176,7 @@ const validateRole = (blur) => {
             @blur="() => validatePronoun(true)"
             @input="() => validatePronoun(false)"
             class="form-control"
-            v-model="registerForm.pronoun"
+            v-model="registerFormData.pronoun"
         >
             <option value="He/Him">He/Him</option>
             <option value="She/Her">She/Her</option>
@@ -191,7 +191,7 @@ const validateRole = (blur) => {
             @blur="() => validateRole(true)"
             @input="() => validateRole(false)"
             class="form-control"
-            v-model="registerForm.role"
+            v-model="registerFormData.role"
         >
             <option value="user">User</option>
             <option value="practitioner">Practitioner</option>
