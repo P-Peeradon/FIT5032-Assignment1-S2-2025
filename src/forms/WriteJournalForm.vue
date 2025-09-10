@@ -56,17 +56,18 @@
 
 <script setup>
 import { reactive } from 'vue';
+import { defineEmits } from 'vue';
 
 const journalForm = reactive({
     moods: [],
     content: '',
-    timestamp: Date()
+    timestamp: new Date()
 });
 
 const clearForm = () => {
     journalForm.moods = [];
     journalForm.content = '';
-    journalForm.timestamp = Date();
+    journalForm.timestamp = new Date();
 }
 
 const writeJournal = () => {

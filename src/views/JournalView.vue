@@ -1,5 +1,30 @@
 <script setup>
-import WriteJournalForm from '@/forms/WriteJournalForm.vue';
+import WriteJournalForm from '../forms/WriteJournalForm.vue';
+import { getAuth } from 'firebase/auth';
+import { onMounted } from 'vue';
+import db from '../firebase/init';
+import { addDoc, query, collection, getDoc } from 'firebase/firestore';
+
+const auth = getAuth();
+const currentUser = auth.currentUser;
+
+const fetchUserData = async () => {
+    try {
+        const profileQuery = query(collection(db, 'users', where('email', '===', currentUser.email)));
+        const profileQuerySnapshot = await getDoc(profileQuery);
+        const myUser = { ...profileQuerySnapshot.data() };
+
+        user.value = myUser;
+    } catch (err) {
+        console.log('Error fetching user:', err)
+    }
+}
+
+onMounted(
+    // Fetch user data.
+    fetchUserData()
+)
+
 </script>
 
 <template>
