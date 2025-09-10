@@ -83,7 +83,7 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/journal/emotion',
+    path: '/profile/emotion',
     name: 'Emotion',
     component: EmotionView,
     meta: { requiresAuth: true }

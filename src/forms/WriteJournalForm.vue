@@ -58,6 +58,8 @@
 import { reactive } from 'vue';
 import { defineEmits } from 'vue';
 
+const emit = defineEmits(['jot-down'])
+
 const journalForm = reactive({
     moods: [],
     content: '',
@@ -74,13 +76,17 @@ const writeJournal = () => {
     validateMood(true);
     validateContent(true);
 
-    clearForm()
+    if (!errors.moods && !errors.content) {
+        emit("jot-down", journalForm)
+        clearForm();
+    }
+        
 }
 
-const errors = {
+const errors = reactive({
     moods: null,
     content: null
-}
+});
 
 const validateMood = (blur) => {
     if (journalForm.moods.length == 0) {

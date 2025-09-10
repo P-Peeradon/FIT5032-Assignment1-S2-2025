@@ -1,18 +1,19 @@
 <script setup>
 import WriteJournalForm from '../forms/WriteJournalForm.vue';
 import { getAuth } from 'firebase/auth';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import db from '../firebase/init';
-import { addDoc, query, collection, getDoc } from 'firebase/firestore';
+import { addDoc, query, collection, getDoc, where, updateDoc, arrayUnion, doc } from 'firebase/firestore';
 
 const auth = getAuth();
 const currentUser = auth.currentUser;
+const user = ref(null);
 
 const fetchUserData = async () => {
     try {
-        const profileQuery = query(collection(db, 'users', where('email', '===', currentUser.email)));
-        const profileQuerySnapshot = await getDoc(profileQuery);
-        const myUser = { ...profileQuerySnapshot.data() };
+        const userQuery = query(collection(db, 'users', where('email', '==', currentUser.email)));
+        const userQuerySnapshot = await getDoc(userQuery);
+        const myUser = { ...userQuerySnapshot.data() };
 
         user.value = myUser;
     } catch (err) {
@@ -20,10 +21,28 @@ const fetchUserData = async () => {
     }
 }
 
+const recordJournal = async (journal) => {
+    const userJournal = { ...journal };
+    const userFK = doc(db, 'users', user.value.email)
+
+    try {
+        //Collect journal into user doc.
+        await updateDoc(userFK, {journal: arrayUnion(userJournal)});
+
+        //Add the journal to the db.
+        await addDoc(collection(db, 'journal', {
+            userJournal,
+            username: user.value.username
+        }));
+    } catch (err) {
+        console.log('Error in adding journal:', err);
+    }
+}
+
 onMounted(
     // Fetch user data.
     fetchUserData()
-)
+);
 
 </script>
 
@@ -83,16 +102,16 @@ onMounted(
 
                 <br />
                 <div class="image-center mt-3">
-                    <router-link to="/emotion" class="nav-link" active-class="active" aria-current="page">
+                    <router-link to="/profile/emotion" class="nav-link" active-class="active" aria-current="page">
                         <button class="gray_button">Want to inspect your emotion? Go ahead and see your journal.</button>
                     </router-link>
                 </div>
                 
             </div>
             <div class="mt-4 col-lg-8 mb-4">
-                <WriteJournalForm />
+                <WriteJournalForm @jot-down="recordJournal(journalForm)" />
                 <div class="image-center mt-3">
-                    <router-link to="/meditation" class="nav-link" active-class="active" aria-current="page">
+                    <router-link to="/journal/meditation" class="nav-link" active-class="active" aria-current="page">
                         <button class="gray_button">Want to be mindful? Do meditation.</button>
                     </router-link>
                 </div>
