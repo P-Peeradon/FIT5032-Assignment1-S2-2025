@@ -4,17 +4,17 @@ import { reactive, defineEmits } from 'vue';
 const emit = defineEmits(['sendLoginCredential']);
 
 const formData =  reactive({
-    username: "",
+    email: "",
     password: ""
 });
 
 const errors = reactive({
-    userName: null,
+    email: null,
     password: null
 });
 
-const usernameExist = () => {
-    return formData.username !== "";
+const emailExist = () => {
+    return formData.email !== "";
 }
 
 const passwordExist = () => {
@@ -22,12 +22,12 @@ const passwordExist = () => {
 }
 
 const clearLoginForm = () => {
-    formData.username = "";
+    formData.email = "";
     formData.password = "";
 }
 
 const validateLogin = () => {
-    if (!usernameExist()) {
+    if (!emailExist()) {
         errors.username = "Username is empty"
     } if (!passwordExist()) {
         errors.username = "Password is empty"
@@ -41,8 +41,8 @@ const validateLogin = () => {
 
 <template>
     <form @submit.prevent="validateLogin()">
-        <label for="username" >Username</label>
-        <input type="text" v-model="formData.userName"/>
+        <label for="email" >Email</label>
+        <input type="email" v-model="formData.email"/>
 
         <label for="password" >Password</label>
         <input type="password" v-model="formData.password"/>

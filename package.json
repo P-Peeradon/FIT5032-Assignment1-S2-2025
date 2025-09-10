@@ -15,7 +15,10 @@
     "lint": "run-s lint:*"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
     "bootstrap": "^5.3.7",
+    "firebase": "^12.2.1",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1",
     "vue-youtube-embed": "^2.2.2"

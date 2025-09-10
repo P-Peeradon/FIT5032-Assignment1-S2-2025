@@ -37,3 +37,21 @@ host[String] = name of people who host the event
 timestamp[Date] = time when the event was create
 eventDate[DateTime] = Date and Time when the event will held.
 ** Event object cannot stand alone! **
+
+
+User: 
+username[String]
+email[String]
+nickname[String]
+password[String] = Password of the user, hashed by using bcrypt algorithm, 11 salt rounds.
+pronoun[String] = Which words user love to be called.
+bio[String] = Bio of the user.
+career[String] = Career of the user.
+role[String] = role of the user in the application.
+image[URL] = Link to image profile. (In reality, fetch from DB)
+journals[Array[Journal]] = Journal that this user writes.
+readArticles[Array[Article]] = Articles that the user have read.
+Bookmarks[Array[Article]] = Articles that the user have read.
+clubs[Array[Club]] = club that this user joins.
+goals[Array[String]] = Goals of this user.
+** User Data is confidential.
