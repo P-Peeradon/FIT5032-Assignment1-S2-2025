@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { ref, defineProps } from 'vue';
+import { getAuth, signOut } from 'firebase/auth';
+import { defineProps } from 'vue';
 import { useRouter } from 'vue-router';
 
 const props = defineProps({
