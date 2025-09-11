@@ -74,7 +74,7 @@ blockquote {
         padding: 0 10px;
         text-align: center;
         color: brown;
-    }
+}
 
 span.category {
   font-weight: bold;
@@ -114,6 +114,7 @@ button.red_button {
   font-weight: bold;
   border: none;
   border-radius: 8px;
+  height: 40px;
   box-shadow: 10px 4px 20px 10px rgba(192, 192, 192, 0.7);
 }
 
