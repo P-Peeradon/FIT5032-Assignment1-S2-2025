@@ -1,17 +1,15 @@
 <template>
-    <nav>
-        <div v-if="authorised">
-            <p>Welcome, {{ currentUser }}</p>
+    <nav v-if="authorised" class="d-flex flex-row">
+            <p>Welcome, {{ currentUser.username }}</p>
             <button @click="logout()" class="red_button">Logout</button>
-        </div>
-        <div v-else class="d-flex flex-row">
-            <router-link to="/register" class="nav-link px-2" active-class="active" aria-current="page">
-                <button class="gray_button">Register</button>
-            </router-link>
-            <router-link to="/login" class="nav-link px-2" active-class="active" aria-current="page">
-                <button class="blue_button">Login</button>
-            </router-link>
-        </div>
+    </nav>
+    <nav v-else class="d-flex flex-row">
+        <router-link to="/register" class="nav-link px-2" active-class="active" aria-current="page">
+            <button class="gray_button">Register</button>
+        </router-link>
+        <router-link to="/login" class="nav-link px-2" active-class="active" aria-current="page">
+            <button class="blue_button">Login</button>
+        </router-link>
     </nav>
 </template>
 
@@ -23,7 +21,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const auth = getAuth();
 const authorised = ref(false);
-const currentUser = ref(null); // Username of who is using the app.
+const currentUser = ref(auth.currentUser); // Username of who is using the app.
 
 const logout = async () => {
 
@@ -36,15 +34,6 @@ const logout = async () => {
     }
     
 };
-
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        authorised.value = true;
-        currentUser.value = user.username;
-    } else {
-        authorised.value = false;
-    }
-})
 
 </script>
 

@@ -43,6 +43,7 @@ const createNewUser = async (userData) => {
         });
     } catch (err) {
         alert('Error in creating new user.');
+        return;
     } finally {
         alert('Create user successfully');
     }
@@ -53,7 +54,6 @@ const registerNewUser = async (userData) => {
     //Direct the new user to homepage, authorised.
     const newUser = { ...userData };
     
-
     // Hash the password before store in Firestore.
     newUser.password = await hashPassword(newUser.password);
 
