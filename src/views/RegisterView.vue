@@ -5,7 +5,6 @@ import db from '../firebase/init.js';
 import { useRouter } from 'vue-router';
 import { addDoc, collection } from 'firebase/firestore';
 
-const saltRound = 11;
 const router = useRouter();
 const auth = getAuth();
 
@@ -40,7 +39,7 @@ const createNewUser = async (userData) => {
 const registerNewUser = async (userData) => {
     //Direct the new user to homepage, authorised.
     const newUser = { ...userData };
-    
+
     // After hashing finished, store the hashed password and email.
     try {
         await createUserWithEmailAndPassword(auth, newUser.email, newUser.password);
