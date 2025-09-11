@@ -15,12 +15,13 @@
 </template>
 
 <script setup>
-import { getAuth, signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const auth = getAuth();
 
-const authorised = auth.currentUser ? true : false;
+const authorised = ref(null);
 
 const router = useRouter();
 
@@ -41,6 +42,10 @@ const logout = async () => {
     }
     
 };
+
+onAuthStateChanged(auth, () => {
+    authorised.value = auth.currentUser ? auth.currentUser : null;
+});
 
 </script>
 

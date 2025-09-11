@@ -3,24 +3,24 @@ import UserProfile from '../components/UserProfile.vue';
 import { getAuth } from 'firebase/auth';
 import { onMounted, ref } from 'vue';
 import db from '../firebase/init';
-import { collection,where, query, getDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 
 const auth = getAuth()
 
 const currentUser = auth.currentUser;
 const user = ref(null);
 
-const fetchUserData = async () => {
+  const fetchUserData = async () => {
     try {
-        const profileQuery = query(collection(db, 'users', where('email', '===', currentUser.email)));
-        const profileQuerySnapshot = await getDoc(profileQuery);
-        const myUser = { ...profileQuerySnapshot.data() };
+        const userRef = doc(db, 'users', currentUser.uid);
+        const userSnapshot = await getDoc(userRef);
+        const myUser =  userSnapshot.data() ;
 
         user.value = myUser;
     } catch (err) {
         console.log('Error fetching user:', err)
     }
-}
+};
 
 onMounted(
     // Fetch user data.
@@ -29,7 +29,7 @@ onMounted(
 </script>
 
 <template>
-    <UserProfile :user="currentUser"  />
+    <UserProfile :user="user"  />
 </template>
 
 <style>

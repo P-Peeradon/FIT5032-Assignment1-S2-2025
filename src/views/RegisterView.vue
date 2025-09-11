@@ -3,17 +3,18 @@ import RegisterForm from '../forms/RegisterForm.vue';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 import db from '../firebase/init.js';
 import { useRouter } from 'vue-router';
-import { addDoc, collection } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 
 const router = useRouter();
 const auth = getAuth();
 
-const createNewUser = async (userData) => {
+const createNewUser = async (userData, uid) => {
     // This method handle adding new user to firestore database.
     const user = { ...userData };
+    const userDocRef = doc(db, "users", uid);
 
     try {
-        await addDoc(collection(db, 'users'), {
+        await setDoc(userDocRef, {
             username: user.username,
             email: user.email,
             nickname: '',
@@ -42,8 +43,8 @@ const registerNewUser = async (userData) => {
 
     // After hashing finished, store the hashed password and email.
     try {
-        await createUserWithEmailAndPassword(auth, newUser.email, newUser.password);
-        await createNewUser(newUser);
+        const tempUser = await createUserWithEmailAndPassword(auth, newUser.email, newUser.password);
+        await createNewUser(newUser, tempUser.uid);
     } catch (err) {
         alert(err.code);
         return;

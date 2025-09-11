@@ -3,16 +3,17 @@
   import db from './firebase/init';
   import { ref } from 'vue';
   import { getAuth, onAuthStateChanged } from 'firebase/auth';
-  import { query, collection, where, getDoc } from 'firebase/firestore';
+  import { doc, getDoc } from 'firebase/firestore';
 
   const auth = getAuth();
   const user = ref(null);
+  const currentUser = auth.currentUser
 
   const fetchUserData = async () => {
     try {
-        const userQuery = query(collection(db, 'users', where('email', '==', auth.currentUser.email)));
-        const userQuerySnapshot = await getDoc(userQuery);
-        const myUser = { ...userQuerySnapshot.data() };
+        const userRef = doc(db, 'users', currentUser.uid);
+        const userSnapshot = await getDoc(userRef);
+        const myUser =  userSnapshot.data() ;
 
         user.value = myUser;
     } catch (err) {
