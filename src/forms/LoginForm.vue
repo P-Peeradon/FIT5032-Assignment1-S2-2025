@@ -40,17 +40,48 @@ const validateLogin = () => {
 </script>
 
 <template>
-    <form @submit.prevent="validateLogin()">
-        <label for="email" >Email</label>
-        <input type="email" v-model="formData.email"/>
+    <div class="row mt-3">
+        <h1>Login to Chillax Corder</h1>
+    </div>
+    <form class=" container mt-4 d-flex flex-column" @submit.prevent="validateLogin">
+        <div class="row">
+            <div class="col-12">
+                <label class="form-label" for="email" >Email</label>
+                <input class="form-control" type="email" v-model="formData.email"/>
+                <p class="text-danger">{{ errors.email }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label class="form-label" for="password" >Password</label>
+                <input class="form-control" type="password" v-model="formData.password"/>
+                <p class="text-danger">{{ errors.password }}</p>
+            </div>
+        </div>
 
-        <label for="password" >Password</label>
-        <input type="password" v-model="formData.password"/>
+        <div class="mt-3 d-flex flex-row reg_menu">
+            <button class="blue_button" type="submit">Login</button>
+            <button class="gray_button">Forgot Password</button>
+        </div>
+        
+        
     </form>
-    <button>Login</button>
-    <button>Forgot Password</button>
+    
 </template>
 
 <style scoped>
-
+form {
+    width: 92%;
+    height: auto;
+    background: palegreen;
+    padding: 20px;
+    justify-content: center;
+}
+label, input {
+    width: 80%;
+}
+.reg_menu {
+    justify-content: center;
+    gap: 15px;
+}
 </style>

@@ -105,6 +105,18 @@ button.gray_button {
   box-shadow: 10px 4px 20px 10px rgba(192, 192, 192, 0.7);
 }
 
+button.red_button {
+  background-color: red;
+  font-size: 14px;
+  padding: 10px;
+  box-sizing: border-box;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 10px 4px 20px 10px rgba(192, 192, 192, 0.7);
+}
+
 @media (min-width: 1024px) {
   header {
     display: flex;

@@ -2,7 +2,7 @@
     <nav>
         <div v-if="authorised">
             <p>Welcome, {{ currentUser }}</p>
-            <button @click="logout()" class="btn-danger">Logout</button>
+            <button @click="logout()" class="red_button">Logout</button>
         </div>
         <div v-else class="d-flex flex-row">
             <router-link to="/register" class="nav-link px-2" active-class="active" aria-current="page">
