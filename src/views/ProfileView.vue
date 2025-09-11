@@ -5,7 +5,7 @@ import { onMounted, ref } from 'vue';
 import db from '../firebase/init';
 import { doc, getDoc } from 'firebase/firestore';
 
-const auth = getAuth()
+const auth = getAuth();
 
 const currentUser = auth.currentUser;
 const user = ref(null);

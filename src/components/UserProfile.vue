@@ -1,15 +1,16 @@
 <template>
-    <div class="container d-flex flex-column ">
+    <div class="container d-flex flex-column">
         <h1 class="mt-2">User Profile</h1>
         <div class="d-flex flex-row gx-5">
             <div class="d-flex flex-column mt-4 col-md-4 col-12">
                 
                 <div class="identity">
                     <div>
-                        <img v-if="imageExist()" :src="props.user.image" alt="profile images" class="profile_image" />
-                        <img v-else src="../assets/profile-avatar.png" alt="profile images" class="profile_image" />
+                        <img src="../assets/profile-avatar.png" alt="profile images" class="profile_image" />
                     </div>
+                    
                     <q class="bio">{{ user.bio }}</q>
+                    <p>@{{ user.username }}</p>
                     <p class="name">{{ user.nickname }} ({{ user.pronoun }})</p>
                 </div>
                 
@@ -20,14 +21,17 @@
                         {{ goal }}
                     </li>
                 </ol>
+
+                <button class="gray_button" @click="toggleEditProfile">Edit Profile</button>
             </div>
+
             <div class="d-flex flex-column mt-4 col-md-8 col-12">
                 <h2>User Engage</h2>
                 <div class="statistics">
                     <ul class="mt-3">
                         <li><span class="category">Journal Written:</span> {{ user.journals.length }}</li>
                         <li><span class="category">Article Read:</span> {{ user.readArticles.length }}</li>
-                        <li><span class="category">Community joined:</span> {{ user.communities.length }}</li>
+                        <li><span class="category">Clubs joined:</span> {{ user.clubs.length }}</li>
                     </ul>
                 </div>
 
@@ -47,12 +51,16 @@
                 </div>
             </div>
         </div>
+        <div v-if="editForm" class="edit_profile_form">
+            <EditProfileForm />
+        </div>
     </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 import BookmarkCard from './BookmarkCard.vue';
+import EditProfileForm from '../forms/EditProfileForm.vue';
 
 const props = defineProps({
     user: {
@@ -61,10 +69,15 @@ const props = defineProps({
     }
 });
 
-const imageExist = () => {
-    return props.user.image && props.user.image !== '';
+const editForm = ref(false);
+
+const toggleEditProfile = () => {
+    editForm.value = true;
 }
 
+const closeForm = () => {
+    editForm.value = false;
+}
 
 </script>
 
@@ -72,7 +85,8 @@ const imageExist = () => {
     .container {
         width: 100%;
         height: 100vh;
-        
+        position: relative;
+        z-index: 1;
     }
     .profile_image {
         width: 200px;
@@ -98,5 +112,9 @@ const imageExist = () => {
         grid-template: repeat(3, 1fr);
         margin: 15px 10px;
         gap: 10px;
+    }
+    .edit_profile_form {
+        position: absolute;
+        z-index: 2;
     }
 </style>
