@@ -1,7 +1,6 @@
 <script setup>
 import RegisterForm from '../forms/RegisterForm.vue';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
-import bcrypt from 'bcryptjs';
 import db from '../firebase/init.js';
 import { useRouter } from 'vue-router';
 import { addDoc, collection } from 'firebase/firestore';
@@ -9,17 +8,6 @@ import { addDoc, collection } from 'firebase/firestore';
 const saltRound = 11;
 const router = useRouter();
 const auth = getAuth();
-
-const hashPassword = (password) => {
-
-    // Generates a salt synchronously.
-    const salt = bcrypt.genSaltSync(saltRound);
-
-    // Hashes the provided password using the generated salt synchronously.
-    const hashedPassword = bcrypt.hashSync(password, salt);
-    return hashedPassword;
-
-}
 
 const createNewUser = async (userData) => {
     // This method handle adding new user to firestore database.
@@ -32,7 +20,6 @@ const createNewUser = async (userData) => {
             nickname: '',
             pronoun: user.pronoun,
             role: user.role,
-            password: user.password, // Hashed by bcrypt.
             bio: '',
             career: '',
             journals: [],
@@ -54,9 +41,6 @@ const registerNewUser = async (userData) => {
     //Direct the new user to homepage, authorised.
     const newUser = { ...userData };
     
-    // Hash the password before store in Firestore.
-    newUser.password = await hashPassword(newUser.password);
-
     // After hashing finished, store the hashed password and email.
     try {
         await createUserWithEmailAndPassword(auth, newUser.email, newUser.password);
