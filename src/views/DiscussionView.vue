@@ -139,7 +139,7 @@ const recordPost = async (postLetter) => {
         </header>
         <main>
             <DiscussionBoard @post="recordPost(postLetter)" @comment="recordComment(comment)" v-if="render.value === 'Forum'" :club="club" />
-            <EventBoard v-if="render.value === 'Events'" :club="club" />
+            <EventBoard v-if="render.value === 'Events'" :role="user.role" :club="club" />
         </main>
     </div>
 </template>
