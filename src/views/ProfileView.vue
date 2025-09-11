@@ -7,7 +7,6 @@ import { collection,where, query, getDoc } from 'firebase/firestore';
 
 const auth = getAuth()
 
-// This view is locked for authorised user.
 const currentUser = auth.currentUser;
 const user = ref(null);
 

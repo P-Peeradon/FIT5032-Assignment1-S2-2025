@@ -19,11 +19,14 @@
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import db from '../firebase/init';
+import { collection, query, where, getDoc } from 'firebase/firestore';
 
 const router = useRouter();
 const auth = getAuth();
 const authorised = ref(false);
 const currentUser = ref(null); // Username of who is using the app.
+const user = ref(null); // User object fetched from the database.
 
 const logout = async () => {
 
@@ -37,10 +40,23 @@ const logout = async () => {
     
 };
 
+const fetchUserData = async () => {
+    try {
+        const profileQuery = query(collection(db, 'users', where('email', '==', currentUser.value.email)));
+        const profileQuerySnapshot = await getDoc(profileQuery);
+        const myUser = { ...profileQuerySnapshot.data() };
+
+        user.value = myUser;
+    } catch (err) {
+        console.log('Error fetching user:', err)
+    }
+}
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUser.value = user;
         authorised.value = true;
+        fetchUserData();
     } else {
         currentUser.value = null;
         authorised.value = false;
