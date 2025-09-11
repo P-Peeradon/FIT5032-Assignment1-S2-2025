@@ -39,7 +39,6 @@ eventDate[DateTime] = Date and Time when the event will held.
 location[String] = Where the event held?
 ** Event object cannot stand alone! **
 
-
 User: 
 username[String]
 email[String]

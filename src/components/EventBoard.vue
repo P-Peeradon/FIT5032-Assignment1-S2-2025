@@ -1,6 +1,6 @@
 <script setup>
 import CalendarInput from '../forms/CalendarInput.vue';
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, defineEmits } from 'vue';
 import EventCard from './EventCard.vue';
 import HostEventForm from '../forms/HostEventForm.vue';
 import EventDescription from './EventDescription.vue';
@@ -16,13 +16,17 @@ const props = defineProps({
     }
 });
 
+const emit = defineEmits(['host-event']);
+
 const showEventDesc = ref(false);
 
 const toggleEventDesc = () => {
     showEventDesc.value != showEventDesc.value;
 }
 
-
+const hostEvent = (eventData) => {
+    emit('host-event', eventData);
+}
 
 const isSocialWorker = () => {
     return props.role === 'social worker';
@@ -42,7 +46,7 @@ const isSocialWorker = () => {
             </div>
         </main>
         <!-- As social worker who own this club, I want to add new event so that the club member can join. -->
-        <HostEventForm v-if="isSocialWorker()" />
+        <HostEventForm v-if="isSocialWorker()" @host-event="hostEvent(eventFormData)" />
     </div>
 
     <EventDescription v-if="showEventDesc" :event="interactingEvent" />

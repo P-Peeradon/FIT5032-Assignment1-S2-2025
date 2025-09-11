@@ -124,6 +124,37 @@ const recordPost = async (postLetter) => {
 
 } 
 
+const recordEvent = async (eventData) => {
+    const newEvent = { 
+        ...eventData, 
+        username: user.username,
+        timestamp: new Date()
+    };
+
+    const clubFK = doc(db, 'clubs', club.value.name);
+
+    try {
+
+        await updateDoc(clubFK, { events: arrayUnion(newEvent) });
+        await addDoc(collection(db, 'posts', {
+            ...newEvent,
+            clubName: club.name
+        }));
+
+    } catch (err) {
+
+        console.error('Error adding post:', err);
+
+    } finally {
+
+        console.log('Successfully post to the discussion board.');
+
+    }
+}
+
+const isSocialWorker = () => {
+    return user.role === 'social worker';
+}
 </script>
 
 <template>
@@ -135,11 +166,12 @@ const recordPost = async (postLetter) => {
             <div class="row">
                 <button @click="toggleForum()">Forum</button>
                 <button @click="toggleEventsRoom()">Events</button>
+                <button v-if="isSocialWorker()" @click="toggleCommitteeRoom()">For Committee</button>
             </div>
         </header>
         <main>
             <DiscussionBoard @post="recordPost(postLetter)" @comment="recordComment(comment)" v-if="render.value === 'Forum'" :club="club" />
-            <EventBoard v-if="render.value === 'Events'" :role="user.role" :club="club" />
+            <EventBoard v-if="render.value === 'Events'" :role="user.role" :club="club" @host-event="recordEvent(eventData)" />
         </main>
     </div>
 </template>
