@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-row">
         <nav v-if="authorised">
-            <p>Welcome, {{ currentUser.username }}</p>
+            <p>Welcome, {{ authUser.username }}</p>
             <button @click="logout()" class="red_button">Logout</button>
         </nav>
         <nav v-else>
@@ -17,16 +17,21 @@
 
 <script setup>
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { ref } from 'vue';
+import { ref, defineProps } from 'vue';
 import { useRouter } from 'vue-router';
-import db from '../firebase/init';
-import { collection, query, where, getDoc } from 'firebase/firestore';
+
+const props = defineProps({
+    authUser: {
+        type: Object,
+        required: false
+    }
+});
+
+const auth = getAuth()
+
+const authorised = auth.currentUser ? true : false;
 
 const router = useRouter();
-const auth = getAuth();
-const authorised = ref(false);
-const currentUser = ref(null); // Username of who is using the app.
-const user = ref(null); // User object fetched from the database.
 
 const logout = async () => {
 
@@ -39,30 +44,6 @@ const logout = async () => {
     }
     
 };
-
-const fetchUserData = async () => {
-    try {
-        const profileQuery = query(collection(db, 'users', where('email', '==', currentUser.value.email)));
-        const profileQuerySnapshot = await getDoc(profileQuery);
-        const myUser = { ...profileQuerySnapshot.data() };
-
-        user.value = myUser;
-    } catch (err) {
-        console.log('Error fetching user:', err)
-    }
-}
-
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        currentUser.value = user;
-        authorised.value = true;
-        fetchUserData();
-    } else {
-        currentUser.value = null;
-        authorised.value = false;
-    }
-});
-
 
 </script>
 

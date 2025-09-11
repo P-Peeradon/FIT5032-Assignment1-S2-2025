@@ -1,11 +1,37 @@
 <script setup>
   import WebHeader from './components/WebHeader.vue';
+  import db from './firebase/init';
+  import { ref } from 'vue';
+  import { getAuth, onAuthStateChanged } from 'firebase/auth';
+  import { query, collection, where, getDoc } from 'firebase/firestore';
+
+  const auth = getAuth();
+  const user = ref(null);
+
+  const fetchUserData = async () => {
+    try {
+        const userQuery = query(collection(db, 'users', where('email', '==', auth.currentUser.email)));
+        const userQuerySnapshot = await getDoc(userQuery);
+        const myUser = { ...userQuerySnapshot.data() };
+
+        user.value = myUser;
+    } catch (err) {
+        console.log('Error fetching user:', err)
+    }
+};
+
+  onAuthStateChanged(auth, () => {
+    if (auth.currentUser) {
+      fetchUserData()
+    } 
+  });
+
 </script>
 
 <template>
   <div class="d-flex flex-column bg">
     <header>
-      <WebHeader />
+      <WebHeader :authUser="user" />
     </header>
     <main class="view">
       <RouterView />
