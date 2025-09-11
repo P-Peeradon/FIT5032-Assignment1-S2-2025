@@ -66,7 +66,7 @@ const registerNewUser = async (userData) => {
         return;
     } finally {
         console.log('Registration processes complete');
-        router.push('/login');
+        router.push('/');
     }
 
 }
