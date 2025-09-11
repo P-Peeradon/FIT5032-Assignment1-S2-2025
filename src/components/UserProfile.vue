@@ -52,7 +52,7 @@
             </div>
         </div>
         <div v-if="editForm" class="edit_profile_form">
-            <EditProfileForm />
+            <EditProfileForm @close="closeForm" />
         </div>
     </div>
 </template>
