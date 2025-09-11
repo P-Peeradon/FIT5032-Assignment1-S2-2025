@@ -74,7 +74,7 @@ const registerNewUser = async (userData) => {
 </script>
 
 <template>
-    <RegisterForm @register="registerNewUser(userData)" />
+    <RegisterForm @register="registerNewUser" />
 </template>
 
 <style>

@@ -1,7 +1,10 @@
 <script setup>
 import { reactive, defineEmits } from 'vue';
+import { useRouter } from 'vue-router';
 
 const emit = defineEmits(['register'])
+
+const router = useRouter();
 
 const registerFormData = reactive({
     username: '',
@@ -39,16 +42,16 @@ const registerNewUser = () => {
     validateConfirmPassword(true);
     validatePronoun(true);
     validateRole(true);
-    if (!(errors.username || 
-        errors.email || 
-        errors.password ||
-        errors.confirmPassword ||
-        errors.pronoun ||
+    if (!(errors.username && 
+        errors.email && 
+        errors.password &&
+        errors.confirmPassword &&
+        errors.pronoun &&
         errors.role
     )) {
         // New user is registered.
         emit('register', registerFormData);
-        clearForm()
+        clearForm();
     }
 };
 
@@ -122,89 +125,128 @@ const validateRole = (blur) => {
     }
 };
 
+const toLogin = () => {
+    router.push('/login')
+}
 </script>
 
 <template>
-    <form>
-        <label for="username" class="form-label">Username</label>
-        <input 
-            id="username" 
-            @blur="() => validateName(true)"
-            @input="() => validateName(false)" 
-            type="text" 
-            class="form-control" 
-            v-model="registerFormData.username"
-            required 
-        />
-
-        <label for="email" class="form-label">Email</label>
-        <input 
-            id="email"
-            @blur="() => validateEmail(true)"
-            @input="() => validateEmail(false)" 
-            type="email" 
-            class="form-control" 
-            v-model="registerFormData.email" 
-            required 
-        />
-
-        <label for="password" class="form-label">Password</label>
-        <input 
-            id="password"
-            @blur="() => validatePassword(true)"
-            @input="() => validatePassword(false)"
-            type="password" 
-            class="form-control" 
-            v-model="registerFormData.password"  
-            required 
-        />
-
-        <label for="confirmPassword" class="form-label">Confirm Password</label>
-        <input 
-            id="confirmPassword"
-            @blur="() => validateConfirmPassword(true)"
-            @input="() => validateConfirmPassword(false)"
-            type="password" 
-            class="form-control" 
-            v-model="registerFormData.confirmPassword" 
-            required 
-        />
-
-        <label for="pronoun" class="form-label">Pronoun</label><br />
-        <select
-            id="pronoun"
-            @blur="() => validatePronoun(true)"
-            @input="() => validatePronoun(false)"
-            class="form-control"
-            v-model="registerFormData.pronoun"
-        >
-            <option value="He/Him">He/Him</option>
-            <option value="She/Her">She/Her</option>
-            <option value="He/Them">He/Them</option>
-            <option value="She/Them">She/Them</option>
-            <option value="They/Them">They/Them</option>
-        </select>
-
-        <label for="role" class="form-label">Role</label><br />
-        <select
-            id="role"
-            @blur="() => validateRole(true)"
-            @input="() => validateRole(false)"
-            class="form-control"
-            v-model="registerFormData.role"
-        >
-            <option value="user">User</option>
-            <option value="practitioner">Practitioner</option>
-            <option value="social worker">Social Worker</option>
-        </select>
+    <div class="row mt-3">
+        <h1>Register to Chillax Corner</h1>
+    </div>
+    <form class="container mt-5" @submit.prevent="registerNewUser">
+        <div class="row">
+            <div class="col-6">
+                <label for="username" class="form-label">Username</label>
+                <input 
+                    id="username" 
+                    @blur="() => validateName(true)"
+                    @input="() => validateName(false)" 
+                    type="text" 
+                    class="form-control" 
+                    v-model="registerFormData.username"
+                    required 
+                />
+                <p class="text-danger">{{ errors.username }}</p>
+            </div>
+            <div class="col-6">
+                <label for="email" class="form-label">Email</label>
+                <input 
+                    id="email"
+                    @blur="() => validateEmail(true)"
+                    @input="() => validateEmail(false)" 
+                    type="email" 
+                    class="form-control" 
+                    v-model="registerFormData.email" 
+                    required 
+                />
+                <p class="text-danger">{{ errors.email }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-6">
+                <label for="password" class="form-label">Password</label>
+                <input 
+                    id="password"
+                    @blur="() => validatePassword(true)"
+                    @input="() => validatePassword(false)"
+                    type="password" 
+                    class="form-control" 
+                    v-model="registerFormData.password"  
+                    required 
+                />
+                <p class="text-danger">{{ errors.password }}</p>
+            </div>
+            <div class="col-6">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input 
+                    id="confirmPassword"
+                    @blur="() => validateConfirmPassword(true)"
+                    @input="() => validateConfirmPassword(false)"
+                    type="password" 
+                    class="form-control" 
+                    v-model="registerFormData.confirmPassword" 
+                    required 
+                />
+                <p class="text-danger">{{ errors.confirmPassword }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-6">
+                <label for="pronoun" class="form-label">Pronoun</label><br />
+                <select
+                    id="pronoun"
+                    @blur="() => validatePronoun(true)"
+                    @input="() => validatePronoun(false)"
+                    class="form-select"
+                    v-model="registerFormData.pronoun"
+                >
+                    <option selected>Your Pronoun...</option>
+                    <option value="He/Him">He/Him</option>
+                    <option value="She/Her">She/Her</option>
+                    <option value="He/Them">He/Them</option>
+                    <option value="She/Them">She/Them</option>
+                    <option value="They/Them">They/Them</option>
+                </select>
+                <p class="text-danger">{{ errors.pronoun }}</p>
+            </div>
+            <div class="col-6">
+                <label for="role" class="form-label">Role</label><br />
+                <select
+                    id="role"
+                    @blur="() => validateRole(true)"
+                    @input="() => validateRole(false)"
+                    class="form-select"
+                    v-model="registerFormData.role"
+                >
+                    <option value="user">User</option>
+                    <option value="practitioner">Practitioner</option>
+                    <option value="social worker">Social Worker</option>
+                </select>
+                <p class="text-danger">{{ errors.role }}</p>
+            </div>
+        </div>        
     
-        <div class="text-center">
-            <button type="submit" class="blue_button" @click="registerNewUser">Register</button>
-            <button type="submit" class="gray_button">To Login</button>
+        <div class="mt-3 d-flex flex-row reg_menu">
+            <button type="submit" class="blue_button">Register</button>
+            <button class="gray_button" @click="toLogin">To Login</button>
         </div>
     </form>
 </template>
 
 <style scoped>
+form {
+    width: 92%;
+    height: auto;
+    background: palegreen;
+    padding: 20px;
+}
+.reg_menu {
+    justify-content: center;
+    gap: 15px;
+}
+
 
 </style>

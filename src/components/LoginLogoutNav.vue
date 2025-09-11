@@ -8,7 +8,7 @@
             <router-link to="/register" class="nav-link px-2" active-class="active" aria-current="page">
                 <button class="gray_button">Register</button>
             </router-link>
-            <router-link to="/register" class="nav-link px-2" active-class="active" aria-current="page">
+            <router-link to="/login" class="nav-link px-2" active-class="active" aria-current="page">
                 <button class="blue_button">Login</button>
             </router-link>
         </div>
