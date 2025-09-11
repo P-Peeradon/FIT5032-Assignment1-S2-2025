@@ -1,7 +1,6 @@
 <template>
     <div>
-        <img v-if="coverExist()" :src="article.cover" :alt="article.title" />
-        <img v-else src="../assets/news-article.png" :alt="article.title"/>
+        <img src="../assets/news-article.png" :alt="event.title"/>
         <p class="time"></p>
         <h2 class="event-title">{{ event.title.toUpper() }}</h2>
         <p class="host"><span>by</span> {{ event.host }}</p>
@@ -19,9 +18,7 @@ const props = defineProps({
     }
 });
 
-const coverExist = () => {
-    return props.event.cover !== ''; 
-}
+
 
 </script>
 

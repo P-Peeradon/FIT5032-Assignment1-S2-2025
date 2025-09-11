@@ -43,6 +43,7 @@ form.center {
 
 div.close {
     display: flex;
+    flex-direction: row;
     justify-content: end;
 }
 
