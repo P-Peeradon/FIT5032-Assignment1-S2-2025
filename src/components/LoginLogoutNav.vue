@@ -1,10 +1,9 @@
 <template>
-    <div class="d-flex flex-row">
-        <nav v-if="authorised">
-            <p>Welcome, {{ authUser.username }}</p>
-            <button @click="logout()" class="red_button">Logout</button>
+    <div class="userhandler">
+        <nav v-if="authorised" class="d-flex flex-row">
+            <button @click="logout" class="red_button">Logout</button>
         </nav>
-        <nav v-else>
+        <nav v-else class="d-flex flex-row">
             <router-link to="/register" class="nav-link px-2" active-class="active" aria-current="page">
                 <button class="gray_button">Register</button>
             </router-link>
@@ -17,15 +16,7 @@
 
 <script setup>
 import { getAuth, signOut } from 'firebase/auth';
-import { defineProps } from 'vue';
 import { useRouter } from 'vue-router';
-
-const props = defineProps({
-    authUser: {
-        type: Object,
-        required: false
-    }
-});
 
 const auth = getAuth();
 
@@ -54,13 +45,14 @@ const logout = async () => {
 </script>
 
 <style scoped>
-nav {
-    background: aquamarine;
+.userhandler {
+    background: aliceblue;
     display: flex;
-    flex-direction: row;
     justify-content: end;
     padding-right: 20px;
-    width: 100vw;
-    height: 60px;
+    width: 100%;
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 </style>

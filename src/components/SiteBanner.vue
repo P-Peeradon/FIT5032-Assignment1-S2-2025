@@ -1,7 +1,7 @@
 <template>
-  <div class="row">
+  <div class="row banner">
     <router-link to="/" class="nav-link" active-class="active" aria-current="page">
-      <img src="../assets/WebBanner.png" alt="Chillax Corner" class="banner" />
+      <img src="../assets/WebBanner.png" alt="Chillax Corner"  />
     </router-link>
   </div>
 </template>
@@ -11,8 +11,8 @@
 </script>
 
 <style scoped>
-.banner {
-  width: auto;
+.banner img {
+  width: 100%;
   height: auto;
 }
 

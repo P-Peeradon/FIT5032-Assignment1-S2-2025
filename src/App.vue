@@ -31,7 +31,7 @@
 <template>
   <div class="d-flex flex-column bg">
     <header>
-      <WebHeader :authUser="user" />
+      <WebHeader />
     </header>
     <main class="view">
       <RouterView />
@@ -55,7 +55,7 @@ header {
 }
 
 main.view {
-  min-width: 95vw;
+  min-width: 100vw;
   min-height: 100vh;
 }
 

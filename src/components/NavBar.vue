@@ -52,10 +52,8 @@ const toggleMenu = () => {
 
 <style scoped>
     .chillax-nav {
-        width: auto;
+        width: 100%;
         height: auto;
-    }
-    nav {
         background-color: blue;
     }
     .hamburger {
@@ -63,7 +61,6 @@ const toggleMenu = () => {
         width: 50px;
         height: 50px;
         align-items: center;
-        
     }
     .hamburger img {
             width: 40px;
