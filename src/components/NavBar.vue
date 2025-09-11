@@ -52,7 +52,7 @@ const toggleMenu = () => {
 
 <style scoped>
     .chillax-nav {
-        width: 98vw;
+        width: auto;
         height: auto;
     }
     nav {

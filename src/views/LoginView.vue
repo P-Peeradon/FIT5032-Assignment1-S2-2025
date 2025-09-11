@@ -9,13 +9,19 @@ const auth = getAuth();
 const authoriseUser = async (credential) => {
 
     try {
+
         await signInWithEmailAndPassword(auth, credential.email, credential.password);
+
     } catch (err) {
+
         console.error('Error in log in:', err);
         return;
+
     } finally {
+
         alert('Login Success');
         router.push('/');
+        
     }
     
 }

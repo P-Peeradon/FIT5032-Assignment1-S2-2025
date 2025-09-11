@@ -12,7 +12,7 @@
 
 <style scoped>
 .banner {
-  width: 99.5vw;
+  width: auto;
   height: auto;
 }
 

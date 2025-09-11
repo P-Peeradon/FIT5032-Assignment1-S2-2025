@@ -27,7 +27,7 @@ const props = defineProps({
     }
 });
 
-const auth = getAuth()
+const auth = getAuth();
 
 const authorised = auth.currentUser ? true : false;
 
@@ -36,11 +36,17 @@ const router = useRouter();
 const logout = async () => {
 
     try {
+
         await signOut(auth);
+
     } catch (err) {
+
         alert('Error signing out:', err);
+
     } finally {
+
         router.push("/");
+
     }
     
 };
