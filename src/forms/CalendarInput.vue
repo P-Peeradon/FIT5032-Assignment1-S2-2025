@@ -1,11 +1,16 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, defineEmits, watch } from 'vue';
 
 const today = ref(new Date());
 
+const emit = defineEmits(['input-date']);
+
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
-const selectedDate = ref(null);
+
+// You'll also need a way to track the start and end of the range
+const startDate = ref(null);
+const endDate = ref(null);
 
 const daysInMonth = computed(() => {
 
@@ -60,10 +65,39 @@ const prevMonth = () => {
 }
 
 const handleDayClick = (day) => {
-  if (!day.isPlaceholder) {
-    selectedDate.value = day;
+  // Assuming 'day' is a Date() object
+  if (!startDate.value || endDate.value) {
+    // If no start date or a range is already selected, start a new range
+    startDate.value = day;
+    endDate.value = null;
+  } else {
+    // A start date is set, so this click must be the end date
+    endDate.value = day;
+    
+    // Optional: Ensure the dates are in the correct order
+    if (startDate.value > endDate.value) {
+      [startDate.value, endDate.value] = [endDate.value, startDate.value];
+    }
+    // Now you have a complete range
   }
 };
+
+const isInRange = (day) => {
+  if (!startDate.value || !endDate.value) return false;
+  // Check if the current day is between the start and end dates
+  return day >= startDate.value && day <= endDate.value;
+};
+
+const isSameDay = (d1, d2) => {
+  if (!d1 || !d2) return false;
+  return d1.getFullYear() === d2.getFullYear() &&
+         d1.getMonth() === d2.getMonth() &&
+         d1.getDate() === d2.getDate();
+};
+
+watch(startDate, endDate, () => {
+    emit('input-date', startDate.value, endDate.value);
+})
 
 </script>
 
@@ -76,7 +110,13 @@ const handleDayClick = (day) => {
         </nav>
         <div class="calendar-grid">
         <div v-for="day in calendarDays" :key="day.id" 
-            :class="{'day': true, 'placeholder': day.isPlaceholder}"
+            :class="{
+                'day': true, 
+                'placeholder': day.isPlaceholder,
+                'in-range': isInRange(day), 
+                'start-date': isSameDay(day, startDate), 
+                'end-date': isSameDay(day, endDate)
+            }"
             @click="handleDayClick(day)">
             {{ day.day }}
         </div>
@@ -103,6 +143,9 @@ nav.calendar {
 }
 .placeholder {
   visibility: hidden;
+}
+.isInRange {
+    background-color: palegreen;
 }
 
 </style>

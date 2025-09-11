@@ -37,6 +37,7 @@ host[String] = name of people who host the event
 timestamp[Date] = time when the event was created
 eventDate[DateTime] = Date and Time when the event will held.
 location[String] = Where the event held?
+address[String] = address of the event location.
 ** Event object cannot stand alone! **
 
 User: 
