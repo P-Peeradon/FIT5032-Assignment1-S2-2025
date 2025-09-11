@@ -2,7 +2,7 @@
 import RegisterForm from '../forms/RegisterForm.vue';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 import bcrypt from 'bcryptjs';
-import db from '../firebase/init'
+import db from '../firebase/init.js';
 import { useRouter } from 'vue-router';
 import { addDoc, collection } from 'firebase/firestore';
 
@@ -42,7 +42,7 @@ const createNewUser = async (userData) => {
             goals: []
         });
     } catch (err) {
-        alert('Error in creating new user.');
+        console.error('Error in creating new user:', err);
         return;
     } finally {
         alert('Create user successfully');
