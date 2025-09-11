@@ -21,10 +21,12 @@
     }
 };
 
-  onAuthStateChanged(auth, () => {
-    if (auth.currentUser) {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
       fetchUserData()
-    } 
+    } else {
+      user.value = null;
+    }
   });
 
 </script>

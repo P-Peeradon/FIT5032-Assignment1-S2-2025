@@ -41,10 +41,9 @@ const registerNewUser = async (userData) => {
     //Direct the new user to homepage, authorised.
     const newUser = { ...userData };
 
-    // After hashing finished, store the hashed password and email.
     try {
-        const tempUser = await createUserWithEmailAndPassword(auth, newUser.email, newUser.password);
-        await createNewUser(newUser, tempUser.uid);
+        const userCredential = await createUserWithEmailAndPassword(auth, newUser.email, newUser.password);
+        await createNewUser(newUser, userCredential.user.uid);
     } catch (err) {
         alert(err.code);
         return;
