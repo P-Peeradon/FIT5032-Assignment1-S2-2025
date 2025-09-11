@@ -28,7 +28,7 @@ const fetchUserKey = async (credential) => {
 
 const authoriseUser = async (credential) => {
     const userCredential = { ...credential };
-    const userKey = await fetchUserKey(credential);
+    const userKey = await fetchUserKey(userCredential);
 
     if (userCredential.email !== userKey.email) {
         errorMsg.value = 'User email does not exist.';
