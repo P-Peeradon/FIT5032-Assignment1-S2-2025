@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import db from '../firebase/init'
 import LoginForm from '../forms/LoginForm.vue';
