@@ -4,11 +4,11 @@
             <p>Welcome, {{ currentUser }}</p>
             <button @click="logout()" class="btn-danger">Logout</button>
         </div>
-        <div v-else>
-            <router-link to="/register" class="nav-link" active-class="active" aria-current="page">
-                <button class="grey_button">Register</button>
+        <div v-else class="d-flex flex-row">
+            <router-link to="/register" class="nav-link px-2" active-class="active" aria-current="page">
+                <button class="gray_button">Register</button>
             </router-link>
-            <router-link to="/register" class="nav-link" active-class="active" aria-current="page">
+            <router-link to="/register" class="nav-link px-2" active-class="active" aria-current="page">
                 <button class="blue_button">Login</button>
             </router-link>
         </div>
@@ -56,6 +56,6 @@ nav {
     justify-content: end;
     padding-right: 20px;
     width: 100vw;
-    height: 250px;
+    height: 60px;
 }
 </style>
