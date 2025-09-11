@@ -5,9 +5,9 @@ import { getFirestore } from "firebase/firestore";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: "fit5032-peeradon-assignment1.firebaseapp.com",
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
   projectId: "fit5032-peeradon-assignment1",
-  storageBucket: "fit5032-peeradon-assignment1.firebasestorage.app",
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.env.VITE_MESSAGING_SENDER_ID,
   appId: import.meta.env.env.VITE_APP_ID,
   measurementId: import.meta.env.env.VITE_MEASUREMENT_ID
