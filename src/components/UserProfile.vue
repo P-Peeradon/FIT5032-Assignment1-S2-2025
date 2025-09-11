@@ -22,7 +22,7 @@
                     </li>
                 </ol>
 
-                <button class="gray_button" @click="toggleEditProfile">Edit Profile</button>
+                <button class="gray_button" @click="toggleEditProfile()">Edit Profile</button>
             </div>
 
             <div class="d-flex flex-column mt-4 col-md-8 col-12">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="editForm" class="edit_profile_form">
+        <div v-if="editForm">
             <EditProfileForm @close="closeForm" />
         </div>
     </div>
@@ -115,9 +115,5 @@ const closeForm = () => {
         grid-template: repeat(3, 1fr);
         margin: 15px 10px;
         gap: 10px;
-    }
-    .edit_profile_form {
-        position: absolute;
-        z-index: 2;
     }
 </style>

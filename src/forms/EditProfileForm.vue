@@ -125,5 +125,8 @@ const validatePronoun = (blur) => {
 </template>
 
 <style scoped>
-
+form.container {
+    position: absolute;
+    z-index: 2;
+}
 </style>
