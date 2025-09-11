@@ -11,6 +11,7 @@ const errorMsg = ref('');
 const router = useRouter();
 const auth = getAuth();
 
+// { email: "", password: "" }
 const fetchUserKey = async (credential) => {
     const userEmail = credential.email;
 
