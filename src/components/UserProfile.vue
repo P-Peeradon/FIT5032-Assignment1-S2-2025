@@ -1,5 +1,5 @@
 <template>
-    <div class="container d-flex flex-column">
+    <div class="container d-flex flex-column" :class="{darken: editForm}">
         <h1 class="mt-2">User Profile</h1>
         <div class="d-flex flex-row gx-5">
             <div class="d-flex flex-column mt-4 col-md-4 col-12">
@@ -87,6 +87,9 @@ const closeForm = () => {
         height: 100vh;
         position: relative;
         z-index: 1;
+    }
+    .darken {
+        filter: brightness(50%);
     }
     .profile_image {
         width: 200px;
