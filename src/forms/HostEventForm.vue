@@ -102,7 +102,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from 'vue';
+import { reactive, ref } from 'vue';
 
 const emit = defineEmits(['host-event']);
 
