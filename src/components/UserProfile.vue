@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="editForm">
+        <div>
             <EditProfileForm @close="closeForm" />
         </div>
     </div>

@@ -66,7 +66,7 @@ const validatePronoun = (blur) => {
             <h2>Edit Profile</h2>
         </div>
         <div class="row close">
-            <button @click="close()" class="btn-danger">X</button>
+            <button @click="close()" class="red_button">X</button>
         </div>
         <div>
             <label class="form-label"  for="username">Username</label>

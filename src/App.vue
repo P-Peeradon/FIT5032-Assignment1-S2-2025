@@ -7,7 +7,7 @@
 
   const auth = getAuth();
   const user = ref(null);
-  const currentUser = auth.currentUser
+  const currentUser = auth.currentUser;
 
   const fetchUserData = async () => {
     try {
