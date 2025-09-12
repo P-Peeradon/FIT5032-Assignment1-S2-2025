@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, defineEmits, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 const today = ref(new Date());
 

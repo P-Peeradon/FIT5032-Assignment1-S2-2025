@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, defineEmits, ref } from 'vue';
+import { reactive, ref } from 'vue';
 
 const emit = defineEmits(['edit-profile', 'close'])
 

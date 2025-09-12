@@ -62,7 +62,6 @@
 
 <script setup>
 import { reactive } from 'vue';
-import { defineEmits } from 'vue';
 
 const emit = defineEmits(['jot-down'])
 

@@ -32,7 +32,7 @@
     
 </template>
 
-<style>
+<style scoped>
 
 iframe {
     width: 75%;
