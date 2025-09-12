@@ -3,7 +3,7 @@
         <h2>{{ journal.topic }}</h2>
         <p>{{ journal.moods }}</p>
         <p>{{ journal.content }}</p>
-        <p>on</p>
+        <p>on {{ formatDate(journal.timestamp) }}</p>
     </div>
 </template>
 
@@ -19,7 +19,7 @@ const formatDate = (date) => {
 
     if (!(date instanceof Date) || isNaN(date.getTime())) {
         console.error("Invalid date provided. Expected a Date object.");
-        return null; 
+        return null;
     }
 
     const year = date.getFullYear();
