@@ -1,9 +1,14 @@
 <template>
-    <div></div>
+    <div>
+        <div v-for="journal in journals" :key="journal.topic">
+            <StickyJournal :journal="journal" />
+        </div>
+    </div>
 </template>
 
 <script setup>
 import { defineProps } from 'vue';
+import StickyJournal from './StickyJournal.vue';
 
 const props = defineProps({
     journals: {

@@ -6,12 +6,8 @@
                 <router-link to="/profile" class="nav-link" active-class="active" aria-current="page">Profile</router-link>
             </li>
             <li class="col-3">
-                <router-link to="/journal" class="nav-link" active-class="active" aria-current="page">Journal</router-link></li>
-                <ul :class="{ display: false }">
-                    <li class="submenu col-3">
-                        <router-link :to="{ name: 'MyJournal', params: {name: user.username}}" class="nav-link" active-class="active" aria-current="page">My Journal</router-link>
-                    </li>
-                </ul>
+                <router-link to="/journal" class="nav-link" active-class="active" aria-current="page">Journal</router-link>
+            </li>
             <li class="col-3">
                 <router-link to="/education" class="nav-link" active-class="active" aria-current="page">Education</router-link>
             </li>
@@ -45,43 +41,13 @@
 </template>
 
 <script setup>
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { onMounted, ref } from 'vue';
-import db from '../firebase/init';
-import { doc, getDoc } from 'firebase/firestore';
+import { ref } from 'vue';
 
 const mobileMenu = ref(false);
-
-const auth = getAuth();
-const uid = ref("")
-const user = ref(null);
 
 const toggleMenu = () => {
     mobileMenu.value = !mobileMenu.value
 };
-
-const fetchUserData = async (uid) => {
-    try {
-        const userRef = doc(db, 'users', uid);
-        const userSnapshot = await getDoc(userRef);
-        const myUser =  userSnapshot.data() ;
-
-        user.value = myUser;
-    } catch (err) {
-        console.error('Error fetching user:', err)
-    }
-};
-
-onMounted(() => {
-    fetchUserData(uid.value);
-});
-
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        uid.value = user.uid;
-        fetchUserData(uid.value);
-    } 
-})
 
 </script>
 
@@ -125,5 +91,8 @@ onAuthStateChanged(auth, (user) => {
         font-size: 24px;
         font-weight: bold;
         list-style: none;
+    }
+    li:hover {
+        
     }
 </style>
