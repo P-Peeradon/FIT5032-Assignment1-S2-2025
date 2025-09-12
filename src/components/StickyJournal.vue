@@ -5,7 +5,7 @@
             <li>{{ mood }}</li>
         </ul>
         <p>{{ journal.content }}</p>
-        <q>{{ formatDate(journal.timestamp) }}</q>
+        <q>{{ formatDate(new Date(journal.timestamp)) }}</q>
     </div>
 </template>
 
@@ -18,6 +18,11 @@ const props = defineProps({
 });
 
 const formatDate = (date) => {
+
+    if (!(date instanceof Date) || isNaN(date.getTime())) {
+        console.error("Invalid date provided. Expected a Date object.");
+        return null; 
+    }
 
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString(); // Months are 0-indexed
@@ -32,6 +37,7 @@ const formatDate = (date) => {
 div.note {
     width: 180px;
     height: 180px;
+    background: url("../assets/sticky_note.png");
 }
 
 </style>

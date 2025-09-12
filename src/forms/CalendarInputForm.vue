@@ -1,3 +1,25 @@
+<template>
+    <form>
+        <nav class="calendar">
+            <button class="blue_button" @click="prevMonth()">Prev</button>
+            <h2>{{ currentMonth + 1 }}/{{ currentYear }}</h2>
+            <button class="blue_button" @click="nextMonth()">Next</button>
+        </nav>
+        <div class="calendar-grid">
+            <div v-for="day in calendarDays" :key="day.id" 
+                :class="{
+                    'day': true, 
+                    'placeholder': day.isPlaceholder,
+                    'in-range': isInRange(day), 
+                }"
+                @click="handleDayClick(day)"
+            >
+                {{ day.day }}
+            </div>
+        </div>
+    </form>
+</template>
+
 <script setup>
 import { ref, computed, watch } from 'vue';
 
@@ -5,30 +27,24 @@ const today = ref(new Date());
 
 const emit = defineEmits(['input-date']);
 
-const currentMonth = ref(new Date().getMonth());
-const currentYear = ref(new Date().getFullYear());
+const currentMonth = ref(today.value.getMonth());
+const currentYear = ref(today.value.getFullYear());
 
 // You'll also need a way to track the start and end of the range
-const startDate = ref(Date(1970, 1, 1));
-const endDate = ref(today);
+const startDate = ref(null);
+const endDate = ref(today.value);
 
 const daysInMonth = computed(() => {
-
     return new Date(currentYear.value, currentMonth.value + 1, 0).getDate();
-
-});
+})
 
 const firstDayOfMonth = computed(() => {
-
     // getDay() get day of week "Monday","Tuesday" ...
     return new Date(currentYear.value, currentMonth.value, 1).getDay();
-
 });
 
 const calendarDays = computed(() => {
-
     const days = [];
-
     // Add placeholder days for the previous month
     for (let i = 0; i < firstDayOfMonth.value; i++) {
 
@@ -88,41 +104,11 @@ const isInRange = (day) => {
   return day >= startDate.value && day <= endDate.value;
 };
 
-const isSameDay = (d1, d2) => {
-  if (!d1 || !d2) return false;
-  return d1.getFullYear() === d2.getFullYear() &&
-         d1.getMonth() === d2.getMonth() &&
-         d1.getDate() === d2.getDate();
-};
-
 watch(startDate, endDate, () => {
     emit('input-date', startDate.value, endDate.value);
 })
 
 </script>
-
-<template>
-    <form>
-        <nav class="calendar">
-            <button class="blue_button" @click="prevMonth()">Prev</button>
-            <h2>{{ currentMonth + 1 }}/{{ currentYear }}</h2>
-            <button class="blue_button" @click="nextMonth()">Next</button>
-        </nav>
-        <div class="calendar-grid">
-        <div v-for="day in calendarDays" :key="day.id" 
-            :class="{
-                'day': true, 
-                'placeholder': day.isPlaceholder,
-                'in-range': isInRange(day), 
-                'start-date': isSameDay(day, startDate), 
-                'end-date': isSameDay(day, endDate)
-            }"
-            @click="handleDayClick(day)">
-            {{ day.day }}
-        </div>
-      </div>
-    </form>
-</template>
 
 <style scoped>
 nav.calendar {
@@ -147,5 +133,4 @@ nav.calendar {
 .isInRange {
     background-color: palegreen;
 }
-
 </style>

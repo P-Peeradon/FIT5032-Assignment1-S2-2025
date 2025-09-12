@@ -12,7 +12,7 @@
 
 <script setup>
 import UserJournal from '../components/UserJournal.vue';
-import CalendarInput from '../forms/CalendarInput.vue';
+import CalendarInput from '../forms/CalendarInputForm.vue';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import db from '../firebase/init';
 import { getDoc, doc, } from 'firebase/firestore';
