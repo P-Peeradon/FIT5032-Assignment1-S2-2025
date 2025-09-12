@@ -56,7 +56,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
 import BookmarkCard from './BookmarkCard.vue';
 
 

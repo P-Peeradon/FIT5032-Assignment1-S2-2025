@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
 import StickyJournal from './StickyJournal.vue';
 
 const props = defineProps({

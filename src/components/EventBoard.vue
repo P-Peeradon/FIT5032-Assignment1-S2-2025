@@ -1,6 +1,6 @@
 <script setup>
 import CalendarInput from '../forms/CalendarInput.vue';
-import { defineProps, ref, defineEmits } from 'vue';
+import { ref } from 'vue';
 import EventCard from './EventCard.vue';
 import HostEventForm from '../forms/HostEventForm.vue';
 import EventDescription from './EventDescription.vue';
