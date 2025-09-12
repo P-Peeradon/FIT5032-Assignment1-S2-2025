@@ -7,6 +7,11 @@
             </li>
             <li class="col-3">
                 <router-link to="/journal" class="nav-link" active-class="active" aria-current="page">Journal</router-link></li>
+                <ul :class="{ display: false }">
+                    <li class="submenu col-3">
+                        <router-link :to="{ name: 'Article', params: {title: article.title}}" class="nav-link" active-class="active" aria-current="page">My Journal</router-link>
+                    </li>
+                </ul>
             <li class="col-3">
                 <router-link to="/education" class="nav-link" active-class="active" aria-current="page">Education</router-link>
             </li>
@@ -68,6 +73,10 @@ const toggleMenu = () => {
     }
     .hamburger:hover {
         cursor: pointer;
+    }
+    .submenu {
+        position: absolute;
+        z-index: 2;
     }
     ul.large_screen {
         display: flex;

@@ -1,7 +1,13 @@
 <template>
-    <form @submit.prevent="writeJournal()">
+    <form @submit.prevent="writeJournal">
         <h2>What's on your mind</h2>
-        <span class="category">Your Feeling</span>
+
+        <div>
+            <label for="topic"><span class="category">Topic</span></label>
+            <input type="text" />
+        </div>
+        
+        <span class="category mt-1">Your Feeling</span>
         <div class="feelings g-4" @blur="validateMood(true)" @input="validateMood(false)">
 
             <div>
@@ -49,8 +55,8 @@
         <textarea class="form-control" id="content" row="10" v-model="journalForm.content" ></textarea>
     </form>
     <div class="journal-form">
-        <button class="blue_button">Write Journal</button>
-        <button class="gray_button" @click="clearForm()">Clear</button>
+        <button type="submit" class="blue_button">Write Journal</button>
+        <button class="gray_button" @click="clearForm">Clear</button>
     </div>
 </template>
 

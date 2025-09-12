@@ -51,6 +51,13 @@ header {
 
 .bg {
   background-color: aquamarine;
+  position: relative;
+  z-index: -1;
+}
+
+header {
+  position: relative;
+  z-index: 0;
 }
 
 .logo {
@@ -61,6 +68,10 @@ header {
 main.view {
   min-width: 100vw;
   min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  width: auto;
+  height: auto;
 }
 
 h1 {

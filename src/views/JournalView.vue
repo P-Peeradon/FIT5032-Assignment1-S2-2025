@@ -1,48 +1,57 @@
 <script setup>
 import WriteJournalForm from '../forms/WriteJournalForm.vue';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { onMounted, ref } from 'vue';
 import db from '../firebase/init';
-import { addDoc, query, collection, getDoc, where, updateDoc, arrayUnion, doc } from 'firebase/firestore';
+import { addDoc, collection, getDoc, updateDoc, arrayUnion, doc } from 'firebase/firestore';
 
 const auth = getAuth();
-const currentUser = auth.currentUser;
+const uid = ref("")
 const user = ref(null);
 
-const fetchUserData = async () => {
+const fetchUserData = async (uid) => {
     try {
-        const userQuery = query(collection(db, 'users', where('email', '==', currentUser.email)));
-        const userQuerySnapshot = await getDoc(userQuery);
-        const myUser = { ...userQuerySnapshot.data() };
+        const userRef = doc(db, 'users', uid);
+        const userSnapshot = await getDoc(userRef);
+        const myUser =  userSnapshot.data() ;
 
         user.value = myUser;
     } catch (err) {
-        console.log('Error fetching user:', err)
+        console.error('Error fetching user:', err)
     }
-}
+};
 
-const recordJournal = async (journal) => {
-    const userJournal = { ...journal };
-    const userFK = doc(db, 'users', user.value.email);
+const recordJournal = async (newJournal) => {
+    const journal = { ...newJournal, username: user.value.username };
 
+    // Update user and add journal.
     try {
-        //Collect journal into user doc.
-        await updateDoc(userFK, {journal: arrayUnion(userJournal)});
 
-        //Add the journal to the db.
-        await addDoc(collection(db, 'journal', {
-            userJournal,
-            username: user.value.username
-        }));
+        const userRef = doc(db, 'users', uid);
+        const journalRef = await addDoc(collection(db, "journals"), journal);
+
+        await updateDoc(userRef, {journals: arrayUnion(journalRef)});
+
     } catch (err) {
-        console.log('Error in adding journal:', err);
+        console.error("Error in adding new journal:", err)
     }
+
+    alert("Write journal finished");
+    
 }
 
-onMounted(() =>
-    // Fetch user data.
-    fetchUserData()
-);
+onMounted(() => {
+    fetchUserData(uid.value);
+});
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+      uid.value = user.uid;
+      fetchUserData(uid.value);
+    } else {
+      uid.value = "";
+    }
+});
 
 </script>
 
@@ -101,15 +110,11 @@ onMounted(() =>
                 </p>
 
                 <br />
-                <div class="image-center mt-3">
-                    <router-link to="/profile/emotion" class="nav-link" active-class="active" aria-current="page">
-                        <button class="gray_button">Want to inspect your emotion? Go ahead and see your journal.</button>
-                    </router-link>
-                </div>
                 
             </div>
             <div class="mt-4 col-lg-8 mb-4">
-                <WriteJournalForm @jot-down="recordJournal(journalForm)" />
+                <WriteJournalForm @jot-down="recordJournal" />
+                <br />
                 <div class="image-center mt-3">
                     <router-link to="/journal/meditation" class="nav-link" active-class="active" aria-current="page">
                         <button class="gray_button">Want to be mindful? Do meditation.</button>

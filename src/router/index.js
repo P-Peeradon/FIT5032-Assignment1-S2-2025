@@ -3,6 +3,7 @@ import { getAuth } from 'firebase/auth'
 import HomeView from '../views/HomeView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import JournalView from '../views/JournalView.vue'
+import MyJournalView from '../views/MyJournalView.vue'
 import EducationView from '../views/EducationView.vue'
 import CommunityView from '../views/CommunityView.vue'
 import ArticleView from '../views/ArticleView.vue'
@@ -31,6 +32,13 @@ const routes = [
     path: '/journal',
     name: 'Journal',
     component: JournalView,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/journal/:name',
+    name: 'Journal',
+    component: MyJournalView,
+    props: true,
     meta: { requiresAuth: true }
   },
   {

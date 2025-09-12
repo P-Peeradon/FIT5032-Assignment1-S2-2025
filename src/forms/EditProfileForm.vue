@@ -24,6 +24,7 @@ const clearForm = () => {
         nickname: "",
         pronoun: "",
         career: "",
+        bio: ""
     };
 };
 
@@ -48,7 +49,7 @@ const validateName = (blur) => {
     if (newProfileData.value.username.length < usernameMinLength && newProfileData.value.username !== "") {
         if (blur) errors.username = 'Name must be at least 5 characters.';
     } else {
-        newProfileData.value.username = null;
+        errors.username = null;
     }
 }
 
@@ -151,7 +152,6 @@ form.container {
     top: 50vw;
     left: 30vh;
     background-color: bisque;
-    opacity: 70%;
 }
 .red_button {
     width: 40px;

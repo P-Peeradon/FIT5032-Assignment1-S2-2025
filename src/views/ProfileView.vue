@@ -11,7 +11,7 @@ const editForm = ref(false)
 const uid = ref("");
 const user = ref(null);
 
- const fetchUserData = async (uid) => {
+const fetchUserData = async (uid) => {
     try {
         const userRef = doc(db, 'users', uid);
         const userSnapshot = await getDoc(userRef);
