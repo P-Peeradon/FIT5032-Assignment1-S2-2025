@@ -17,7 +17,7 @@
 
         user.value = myUser;
     } catch (err) {
-        console.log('Error fetching user:', err)
+        console.error('Error fetching user:', err)
     }
 };
 
