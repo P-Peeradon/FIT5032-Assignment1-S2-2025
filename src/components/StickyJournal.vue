@@ -5,7 +5,7 @@
             <li>{{ mood }}</li>
         </ul>
         <p>{{ journal.content }}</p>
-        <q>{{ formatDate(new Date(journal.timestamp)) }}</q>
+        <q>{{ (journal.timestamp) }}</q>
     </div>
 </template>
 

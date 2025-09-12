@@ -2,7 +2,7 @@
     <div>
         <h1>{{ user.nickname }}'s Journals</h1>
         <aside>
-            <CalendarInput />
+            <CalendarInputForm />
         </aside>
         <main>
             <UserJournal :journals="user.journals" :startDate="new Date()" :endDate="Date()" />
@@ -12,7 +12,7 @@
 
 <script setup>
 import UserJournal from '../components/UserJournal.vue';
-import CalendarInput from '../forms/CalendarInputForm.vue';
+import CalendarInputForm from '../forms/CalendarInputForm.vue';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import db from '../firebase/init';
 import { getDoc, doc, } from 'firebase/firestore';
@@ -21,6 +21,7 @@ import { ref, onMounted } from 'vue';
 const auth = getAuth();
 const uid = ref("");
 const user = ref(null);
+const myJournals = ref([])
 
 const fetchUserData = async (uid) => {
     try {
@@ -33,6 +34,12 @@ const fetchUserData = async (uid) => {
         console.error('Error fetching user:', err);
     }
 };
+
+const fetchJournal = async () => {
+    let journals = []
+
+    user.value.journals
+}
 
 onMounted(() => {
     onAuthStateChanged(auth, (user) => {

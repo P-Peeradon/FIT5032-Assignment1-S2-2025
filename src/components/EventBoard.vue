@@ -1,9 +1,9 @@
 <script setup>
-import CalendarInput from '../forms/CalendarInput.vue';
 import { ref } from 'vue';
 import EventCard from './EventCard.vue';
 import HostEventForm from '../forms/HostEventForm.vue';
 import EventDescription from './EventDescription.vue';
+import CalendarInputForm from '../forms/CalendarInputForm.vue';
 
 const props = defineProps({
     club: {
@@ -37,7 +37,7 @@ const isSocialWorker = () => {
 <template>
     <div class="container flex-column flex-xl-row">
         <aside class="col-4 col-xl-3">
-            <CalendarInput />
+            <CalendarInputForm />
         </aside>
         <main class="col-8 col-xl-9">
             <!-- Display the community events dynamically-->
