@@ -92,7 +92,4 @@ const toggleMenu = () => {
         font-weight: bold;
         list-style: none;
     }
-    li:hover {
-        
-    }
 </style>
