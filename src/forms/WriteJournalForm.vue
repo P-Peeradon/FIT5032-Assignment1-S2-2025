@@ -49,15 +49,17 @@
                 <input type="checkbox" value="Disgust" v-model="journalForm.moods" />
                 <label class="form-check-label" for="Disgust">Disgust</label>
             </div>
+            <p class="text-danger">{{ errors.moods }}</p>
         </div>
 
         <label for="content" class="form-label"><span class="category">Your story</span></label>
         <textarea class="form-control" id="content" row="10" v-model="journalForm.content" ></textarea>
+    
+        <div class="journal-form">
+            <button type="submit" class="blue_button">Write Journal</button>
+            <button class="gray_button" @click="clearForm">Clear</button>
+        </div>
     </form>
-    <div class="journal-form">
-        <button type="submit" class="blue_button">Write Journal</button>
-        <button class="gray_button" @click="clearForm">Clear</button>
-    </div>
 </template>
 
 <script setup>

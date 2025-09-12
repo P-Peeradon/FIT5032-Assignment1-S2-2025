@@ -35,10 +35,9 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/journal/:name',
+    path: '/journal/myjournal',
     name: 'MyJournal',
     component: MyJournalView,
-    props: true,
     meta: { requiresAuth: true }
   },
   {

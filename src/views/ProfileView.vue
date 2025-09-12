@@ -64,13 +64,13 @@ onMounted(() => {
 });
 
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-      uid.value = user.uid;
-      fetchUserData(uid.value);
-    } else {
-      uid.value = "";
-    }
-});
+        if (user) {
+            uid.value = user.uid;
+            fetchUserData(uid.value);
+        } else {
+            uid.value = "";
+        }
+    });
 </script>
 
 <template>

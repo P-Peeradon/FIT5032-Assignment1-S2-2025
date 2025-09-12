@@ -51,7 +51,7 @@ header {
 
 .bg {
   background-color: aquamarine;
-  position: relative;
+  position: absolute;
   z-index: -1;
 }
 

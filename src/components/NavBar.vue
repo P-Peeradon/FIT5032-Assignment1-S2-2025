@@ -5,7 +5,7 @@
             <li class="col-3">
                 <router-link to="/profile" class="nav-link" active-class="active" aria-current="page">Profile</router-link>
             </li>
-            <li class="col-3">
+            <li class="col-3" @mouseover="() => journalSub.value = true" @mouseleave="() => journalSub.value = false">
                 <router-link to="/journal" class="nav-link" active-class="active" aria-current="page">Journal</router-link>
             </li>
             <li class="col-3">
@@ -37,13 +37,16 @@
             </ul>
         </div>
     </nav>
+    <JournalSubMenu v-if="journalSub" />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import JournalSubMenu from './components/JournalSubMenu.vue'
 
 const mobileMenu = ref(false);
+const journalSub = ref(false);
 
 const toggleMenu = () => {
     mobileMenu.value = !mobileMenu.value
@@ -56,6 +59,8 @@ const toggleMenu = () => {
         width: 100%;
         height: auto;
         background-color: blue;
+        position: relative;
+        z-index: 1;
     }
     .hamburger {
         justify-self: right;

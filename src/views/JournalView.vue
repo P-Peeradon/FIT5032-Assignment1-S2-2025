@@ -22,36 +22,52 @@ const fetchUserData = async (uid) => {
 };
 
 const recordJournal = async (newJournal) => {
-    const journal = { ...newJournal, username: user.value.username };
+    const journal = { ...newJournal };
 
     // Update user and add journal.
     try {
 
-        const userRef = doc(db, 'users', uid);
-        const journalRef = await addDoc(collection(db, "journals"), journal);
+        const userRef = doc(db, 'users', uid.value);
+        const journalRef = await addDoc(collection(db, "journals"), { 
+            ...journal, 
+            username: user.value.username
+        });
 
-        await updateDoc(userRef, {journals: arrayUnion(journalRef)});
+        try {
 
+            await updateDoc(userRef, {journals: arrayUnion(journalRef)});
+
+        } catch (err) {
+
+            console.error("Error in update user data:", err);
+
+        }
+        
     } catch (err) {
-        console.error("Error in adding new journal:", err)
+        console.error("Error in adding new journal:", err);
     }
+
+    
 
     alert("Write journal finished");
     
 }
 
 onMounted(() => {
+    onAuthStateChanged(auth, (user) => {
+        uid.value = user.uid;
+    })
     fetchUserData(uid.value);
 });
 
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-      uid.value = user.uid;
-      fetchUserData(uid.value);
-    } else {
-      uid.value = "";
-    }
-});
+        if (user) {
+        uid.value = user.uid;
+        fetchUserData(uid.value);
+        } else {
+            uid.value = "";
+        }
+    });
 
 </script>
 
