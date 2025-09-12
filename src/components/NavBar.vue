@@ -9,7 +9,7 @@
                 <router-link to="/journal" class="nav-link" active-class="active" aria-current="page">Journal</router-link></li>
                 <ul :class="{ display: false }">
                     <li class="submenu col-3">
-                        <router-link :to="{ name: 'Article', params: {title: article.title}}" class="nav-link" active-class="active" aria-current="page">My Journal</router-link>
+                        <router-link :to="{ name: 'MyJournal', params: {name: user.username}}" class="nav-link" active-class="active" aria-current="page">My Journal</router-link>
                     </li>
                 </ul>
             <li class="col-3">
@@ -45,13 +45,43 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onMounted, ref } from 'vue';
+import db from '../firebase/init';
+import { doc, getDoc } from 'firebase/firestore';
 
-const mobileMenu = ref(false)
+const mobileMenu = ref(false);
+
+const auth = getAuth();
+const uid = ref("")
+const user = ref(null);
 
 const toggleMenu = () => {
     mobileMenu.value = !mobileMenu.value
-}
+};
+
+const fetchUserData = async (uid) => {
+    try {
+        const userRef = doc(db, 'users', uid);
+        const userSnapshot = await getDoc(userRef);
+        const myUser =  userSnapshot.data() ;
+
+        user.value = myUser;
+    } catch (err) {
+        console.error('Error fetching user:', err)
+    }
+};
+
+onMounted(() => {
+    fetchUserData(uid.value);
+});
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        uid.value = user.uid;
+        fetchUserData(uid.value);
+    } 
+})
 
 </script>
 
