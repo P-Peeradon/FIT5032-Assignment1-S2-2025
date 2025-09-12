@@ -13,7 +13,7 @@
     try {
         const userRef = doc(db, 'users', uid);
         const userSnapshot = await getDoc(userRef);
-        const myUser =  userSnapshot.data() ;
+        const myUser =  userSnapshot.data();
 
         user.value = myUser;
     } catch (err) {

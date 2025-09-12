@@ -22,11 +22,9 @@ const user = ref(null);
     }
 };
 
-onMounted(() =>
-
-    fetchUserData(uid.value)
-
-);
+onMounted(() => {
+    fetchUserData(uid.value);
+});
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
