@@ -25,7 +25,7 @@
                 <li>
                     <router-link to="/profile" class="nav-link" active-class="active" aria-current="page">Profile</router-link>
                 </li>
-                <li >
+                <li @mouseover="showJournalSub()" @mouseleave="hideJournalSub()">
                     <router-link to="/journal" class="nav-link" active-class="active" aria-current="page">Journal</router-link>
                 </li>
                 <li>

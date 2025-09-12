@@ -1,8 +1,8 @@
 <template>
     <div class="container d-flex flex-column" >
         <h1 class="mt-2">User Profile</h1>
-        <div class="d-flex flex-row gx-5">
-            <div class="d-flex flex-column mt-4 col-md-4 col-12">
+        <div class="d-flex flex-column flex-lg-row gx-5">
+            <div class="d-flex flex-column mt-4 col-12 col-lg-4">
                 
                 <div class="identity">
                     <div>
@@ -25,7 +25,7 @@
                 <button class="gray_button" @click="toggleEditProfile">Edit Profile</button>
             </div>
 
-            <div class="d-flex flex-column mt-4 col-md-8 col-12">
+            <div class="d-flex flex-column mt-4 col-12 col-lg-8 ">
                 <h2>User Engage</h2>
                 <div class="statistics">
                     <ul class="mt-3">

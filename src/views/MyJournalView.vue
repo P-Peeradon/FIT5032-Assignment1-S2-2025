@@ -1,12 +1,18 @@
 <template>
-    <div>
-        <h1>{{ user.nickname }}'s Journals</h1>
-        <aside>
-            <CalendarInputForm />
-        </aside>
-        <main>
-            <UserJournal :journals="user.journals" :startDate="new Date()" :endDate="Date()" />
-        </main>
+    <div class="container">
+        <div class="row mt-4">
+            <h1>{{ user.nickname }}'s Journals</h1>
+        </div>
+        <div class="row d-flex flex-col d-lg-row mt-3">
+            <aside class="col-12 mt-2 col-lg-6">
+                <CalendarInputForm />
+            </aside>
+            <main class="col-12 col-lg-6 mt-5">
+                <UserJournal :journals="myJournals" :startDate="new Date()" :endDate="Date()" />
+            </main>
+            <br />
+        </div>
+        
     </div>
 </template>
 
@@ -27,19 +33,20 @@ const fetchUserData = async (uid) => {
     try {
         const userRef = doc(db, 'users', uid);
         const userSnapshot = await getDoc(userRef);
-        const myUser =  userSnapshot.data() ;
+        const myUser =  userSnapshot.data();
 
         user.value = myUser;
+        const myJournalsRef = myUser.journals;
+        const myJournalsSnap = await Promise.all(myJournalsRef.map(ref => getDoc(ref)));
+
+        myJournals.value = myJournalsSnap.map((journalSnap) => {
+            return journalSnap.data()
+        });
+        
     } catch (err) {
         console.error('Error fetching user:', err);
     }
 };
-
-const fetchJournal = async () => {
-    let journals = []
-
-    user.value.journals
-}
 
 onMounted(() => {
     onAuthStateChanged(auth, (user) => {

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div v-for="journal in journals" :key="journal.topic">
+    <div class="wall">
+        <div v-for="journal in journals" :key="journal.topic" class="pinboard">
             <StickyJournal :journal="journal" />
         </div>
     </div>
@@ -27,6 +27,15 @@ const props = defineProps({
 
 </script>
 
-<style>
+<style scoped>
+.wall {
+    display: flex;
+    justify-content: space-evenly;
+    row-gap: 30px;
+    overflow-y: scroll;
+}
+.pinboard {
+    
+}
 
 </style>

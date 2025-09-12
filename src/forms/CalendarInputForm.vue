@@ -29,8 +29,8 @@ const today = ref(new Date());
 
 const emit = defineEmits(['input-date']);
 
-const currentMonth = ref(today.value.getMonth());
-const currentYear = ref(today.value.getFullYear());
+const currentMonth = ref(today.value.getUTCMonth());
+const currentYear = ref(today.value.getUTCFullYear());
 
 // You'll also need a way to track the start and end of the range
 const startDate = ref(null);
@@ -57,7 +57,7 @@ const calendarDays = computed(() => {
     // Add days of the current month
     for (let i = 1; i <= daysInMonth.value; i++) {
 
-        days.push({ date: new Date(currentYear, currentMonth, i), day: i, isPlaceholder: false });
+        days.push({ date: new Date(currentYear.value, currentMonth.value, i), day: i, isPlaceholder: false });
 
     }
 
@@ -83,6 +83,7 @@ const prevMonth = () => {
 }
 
 const handleDayClick = (day) => {
+	
 
   	if (!(day instanceof Date)) {
 		console.error("Value should be date")
@@ -100,15 +101,14 @@ const handleDayClick = (day) => {
     // Optional: Ensure the dates are in the correct order
 	if (startDate.value > endDate.value) {
   		[startDate.value, endDate.value] = [endDate.value, startDate.value];
-	}
-    
+	}    
   }
 };
 
 const isInRange = (day) => {
   	if (!startDate.value || !endDate.value) return false;
   	// Check if the current day is between the start and end dates.
-	return day.getTime() >= startDate.value.getTime() && day.getTime() <= endDate.value.getTime()
+	return day.valueOf() >= startDate.value.valueOf() && day.valueOf() <= endDate.value.valueOf()
 };
 
 const isSelected = (day) => {

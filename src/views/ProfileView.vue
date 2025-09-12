@@ -78,6 +78,7 @@ onAuthStateChanged(auth, (user) => {
         <UserProfile :user="user"  @edit-form="toggleEditProfile"/>
     </div>
     <EditProfileForm v-if="editForm" @edit-profile="updateUserProfile" @close="closeForm" />
+    <br />
 </template>
 
 <style scoped>

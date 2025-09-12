@@ -1,11 +1,9 @@
 <template>
     <div class="note">
         <h2>{{ journal.topic }}</h2>
-        <ul v-for="mood in journal.moods" :key="mood">
-            <li>{{ mood }}</li>
-        </ul>
+        <p>{{ journal.moods }}</p>
         <p>{{ journal.content }}</p>
-        <q>{{ (journal.timestamp) }}</q>
+        <p>on</p>
     </div>
 </template>
 
@@ -35,9 +33,9 @@ const formatDate = (date) => {
 
 <style scoped>
 div.note {
-    width: 180px;
-    height: 180px;
-    background: url("../assets/sticky_note.png");
+    width: 250px;
+    height: 250px;
+    background-color: white;
 }
 
 </style>
