@@ -4,11 +4,11 @@
 
         <div>
             <label for="topic"><span class="category">Topic</span></label>
-            <input type="text" />
+            <input type="text" @blur="() => validateTopic(true)" @input="() => validateTopic(false)" v-model="journalForm.topic" />
         </div>
         
         <span class="category mt-1">Your Feeling</span>
-        <div class="feelings g-4" @blur="validateMood(true)" @input="validateMood(false)">
+        <div class="feelings g-4" @blur="() => validateMood(true)" @input="() => validateMood(false)">
 
             <div>
                 <input type="checkbox" value="Anger" v-model="journalForm.moods" />
@@ -67,18 +67,21 @@ import { defineEmits } from 'vue';
 const emit = defineEmits(['jot-down'])
 
 const journalForm = reactive({
+    topic: '',
     moods: [],
     content: '',
     timestamp: new Date()
 });
 
 const clearForm = () => {
+    journalForm.topic = '';
     journalForm.moods = [];
     journalForm.content = '';
     journalForm.timestamp = new Date();
 }
 
 const writeJournal = () => {
+    validateTopic(true);
     validateMood(true);
     validateContent(true);
 
@@ -90,9 +93,18 @@ const writeJournal = () => {
 }
 
 const errors = reactive({
+    topic: null,
     moods: null,
     content: null
 });
+
+const validateTopic = (blur) => {
+    if (journalForm.topic !== "") {
+        if (blur) errors.topic = 'Please specify the topic.';
+    } else {
+        errors.topic = null;
+    }
+}
 
 const validateMood = (blur) => {
     if (journalForm.moods.length == 0) {

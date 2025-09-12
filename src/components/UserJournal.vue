@@ -1,5 +1,5 @@
 <template>
-
+    <div></div>
 </template>
 
 <script setup>
@@ -18,7 +18,9 @@ const props = defineProps({
         type: Date,
         required: false,
     },
-})
+});
+
+
 </script>
 
 <style>
