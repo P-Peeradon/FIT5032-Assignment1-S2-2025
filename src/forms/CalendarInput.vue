@@ -9,8 +9,8 @@ const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
 
 // You'll also need a way to track the start and end of the range
-const startDate = ref(null);
-const endDate = ref(null);
+const startDate = ref(Date(1970, 1, 1));
+const endDate = ref(today);
 
 const daysInMonth = computed(() => {
 
@@ -78,7 +78,7 @@ const handleDayClick = (day) => {
     if (startDate.value > endDate.value) {
       [startDate.value, endDate.value] = [endDate.value, startDate.value];
     }
-    // Now you have a complete range
+    
   }
 };
 
@@ -120,7 +120,7 @@ watch(startDate, endDate, () => {
             @click="handleDayClick(day)">
             {{ day.day }}
         </div>
-  </div>
+      </div>
     </form>
 </template>
 

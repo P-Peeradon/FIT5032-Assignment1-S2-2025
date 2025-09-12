@@ -5,7 +5,7 @@
             <CalendarInput />
         </aside>
         <main>
-            <UserJournal :journals="user.journals" />
+            <UserJournal :journals="user.journals" :startDate="new Date()" :endDate="Date()" />
         </main>
     </div>
 </template>
@@ -37,11 +37,8 @@ const fetchUserData = async (uid) => {
 onMounted(() => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
-        uid.value = user.uid;
-        fetchUserData(uid.value);
-        } else {
-        uid.value = "";
-        }
+            uid.value = user.uid;
+        } 
     });
     fetchUserData(uid.value);
 });
