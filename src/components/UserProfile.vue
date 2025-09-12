@@ -1,5 +1,5 @@
 <template>
-    <div class="container d-flex flex-column" :class="{darken: editForm}">
+    <div class="container d-flex flex-column" >
         <h1 class="mt-2">User Profile</h1>
         <div class="d-flex flex-row gx-5">
             <div class="d-flex flex-column mt-4 col-md-4 col-12">
@@ -22,7 +22,7 @@
                     </li>
                 </ol>
 
-                <button class="gray_button" @click="toggleEditProfile()">Edit Profile</button>
+                <button class="gray_button" @click="toggleEditProfile">Edit Profile</button>
             </div>
 
             <div class="d-flex flex-column mt-4 col-md-8 col-12">
@@ -51,16 +51,14 @@
                 </div>
             </div>
         </div>
-        <div>
-            <EditProfileForm @close="closeForm" />
-        </div>
+        
     </div>
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 import BookmarkCard from './BookmarkCard.vue';
-import EditProfileForm from '../forms/EditProfileForm.vue';
+
 
 const props = defineProps({
     user: {
@@ -69,14 +67,10 @@ const props = defineProps({
     }
 });
 
-const editForm = ref(false);
+const emit = defineEmits(['edit-form'])
 
 const toggleEditProfile = () => {
-    editForm.value = true;
-}
-
-const closeForm = () => {
-    editForm.value = false;
+    emit('edit-form')
 }
 
 </script>
@@ -87,9 +81,6 @@ const closeForm = () => {
         height: 100vh;
         position: relative;
         z-index: 1;
-    }
-    .darken {
-        filter: brightness(50%);
     }
     .profile_image {
         width: 200px;

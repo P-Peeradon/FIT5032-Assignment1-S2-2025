@@ -10,6 +10,7 @@ const newProfileData = ref({
     nickname: "",
     pronoun: "",
     career: "",
+    bio: ""
 });
 
 const errors = reactive({
@@ -35,8 +36,9 @@ const requestEdit = () => {
     validatePronoun(true);
 
     if (!(errors.username || errors.pronoun)) {
-        emit('edit-profile', newProfileData.value)
+        emit('edit-profile', newProfileData.value);
         clearForm();
+        emit('close');
     }
 }   
 
@@ -62,63 +64,79 @@ const validatePronoun = (blur) => {
 
 <template>
     <form class="container" @submit.prevent="requestEdit">
-        <div class="row">
+        <div class="row mt-3">
             <h2>Edit Profile</h2>
         </div>
-        <div class="row close">
+        <div class="d-flex close">
             <button @click="close()" class="red_button">X</button>
         </div>
-        <div>
-            <label class="form-label"  for="username">Username</label>
-            <input 
-                class="form-control" 
-                id="username" 
-                type="text" 
-                @blur="() => validateName(true)"
-                @input="() => validateName(false)"
-                v-model="newProfileData.value.username" 
-            />
-        </div>
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label"  for="username">Username</label>
+                <input 
+                    class="form-control" 
+                    id="username" 
+                    type="text" 
+                    @blur="() => validateName(true)"
+                    @input="() => validateName(false)"
+                    v-model="newProfileData.username" 
+                />
+            </div>
 
-        <div>
-            <label class="form-label" for="nickname">Nickname</label>
-            <input 
-                class="form-control" 
-                id="nickname" 
-                type="text" 
-                v-model="newProfileData.value.nickname" 
-            />
+            <div class="col-6">
+                <label class="form-label" for="nickname">Nickname</label>
+                    <input 
+                    class="form-control" 
+                    id="nickname" 
+                    type="text" 
+                    v-model="newProfileData.nickname" 
+                    />
+            </div>
         </div>
-
-        <div>
-            <label for="pronoun">Pronoun</label>
-            <select
-                id="pronoun"
-                @blur="() => validatePronoun(true)"
-                @input="() => validatePronoun(false)"
-                class="form-select"
-                v-model="newProfileData.value.pronoun"
-            >
+        
+        <div class="row">
+            <div class="col-6">
+                <label for="pronoun">Pronoun</label>
+                <select
+                    id="pronoun"
+                    @blur="() => validatePronoun(true)"
+                    @input="() => validatePronoun(false)"
+                    class="form-select"
+                    v-model="newProfileData.pronoun"
+                >
                     <option selected>Your Pronoun...</option>
                     <option value="He/Him">He/Him</option>
                     <option value="She/Her">She/Her</option>
                     <option value="He/Them">He/Them</option>
                     <option value="She/Them">She/Them</option>
                     <option value="They/Them">They/Them</option>
-            </select>
+                </select>
+            </div>
+            <div class="col-6">
+                <label class="form-label" for="career">Career</label>
+                <input 
+                    class="form-control" 
+                    id="career" 
+                    type="text" 
+                    v-model="newProfileData.career" 
+                />
+            </div>
         </div>
 
-        <div>
-            <label class="form-label" for="career">Career</label>
-            <input 
-                class="form-control" 
-                id="career" 
-                type="text" 
-                v-model="newProfileData.value.career" 
-            />
+        <div class="row">
+            <div class="col-12">
+                <label class="form-label" for="bio">Bio</label>
+                <input 
+                    class="form-control" 
+                    id="bio" 
+                    type="text" 
+                    v-model="newProfileData.bio" 
+                />
+            </div>
         </div>
-        <div>
-            <button type="submit">Edit Profile</button>
+        
+        <div class="d-flex flex-row reg_menu mt-2 mb-3">
+            <button type="submit" class="blue_button">Edit Profile</button>
             <button class="gray_button" @click="clearForm">Clear</button>
         </div>
     </form>
@@ -126,7 +144,23 @@ const validatePronoun = (blur) => {
 
 <style scoped>
 form.container {
+    width: 55%;
+    height: auto;
     position: absolute;
     z-index: 2;
+    top: 50vw;
+    left: 30vh;
+    background-color: bisque;
+    opacity: 70%;
+}
+.red_button {
+    width: 40px;
+}
+.close {
+    justify-content: end;
+}
+.reg_menu {
+    justify-content: center;
+    gap: 15px;
 }
 </style>
