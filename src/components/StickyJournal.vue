@@ -1,9 +1,9 @@
 <template>
-    <div class="note">
+    <div class="note pt-4">
         <h2>{{ journal.topic }}</h2>
-        <p>{{ journal.moods }}</p>
-        <p>{{ journal.content }}</p>
-        <p>on {{ formatDate(journal.timestamp) }}</p>
+        <p class="mood">{{ journal.moods.join(', ') }}</p>
+        <p class="px-2">{{ journal.content }}</p>
+        <p>on <span class="time">{{ formatDate(journal.timestamp) }}</span></p>
     </div>
 </template>
 
@@ -35,7 +35,27 @@ const formatDate = (date) => {
 div.note {
     width: 250px;
     height: 250px;
-    background-color: white;
+    background: url('../assets/sticky_note.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h2 {
+  	font-size: 20px;
+    font-style: underline;
+}
+p.mood {
+	color: blue;
+}
+p {
+    font-size: 14px;
+}
+span.time {
+	color: #4CC417;
+	font-style: italic;
 }
 
 </style>
