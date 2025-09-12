@@ -17,12 +17,11 @@ const authoriseUser = async (credential) => {
         console.error('Error in log in:', err);
         return;
 
-    } finally {
+    } 
 
-        alert('Login Success');
-        router.push('/');
-        
-    }
+    alert('Login Success');
+    router.push('/');
+    console.log(auth.currentUser);
     
 }
 
