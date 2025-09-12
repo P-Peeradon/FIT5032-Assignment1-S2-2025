@@ -7,11 +7,11 @@
 
   const auth = getAuth();
   const user = ref(null);
-  const currentUser = auth.currentUser;
+  const uid = ref("");
 
-  const fetchUserData = async () => {
+  const fetchUserData = async (uid) => {
     try {
-        const userRef = doc(db, 'users', currentUser.uid);
+        const userRef = doc(db, 'users', uid);
         const userSnapshot = await getDoc(userRef);
         const myUser =  userSnapshot.data() ;
 
@@ -23,9 +23,10 @@
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      fetchUserData()
+      uid.value = user.uid;
+      fetchUserData(uid.value);
     } else {
-      user.value = null;
+      uid.value = "";
     }
   });
 
