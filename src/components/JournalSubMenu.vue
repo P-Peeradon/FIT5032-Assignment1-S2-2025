@@ -14,12 +14,14 @@
 
 <style scoped>
     .chillax-nav {
-        width: auto;
+        width: 25vw;
         height: auto;
         background-color: blue;
+        display: flex;
         position: absolute;
         z-index: 2;
-        display: none;
+        left: 25vw;
+        top: 0;
     }
     li {
         color: white;

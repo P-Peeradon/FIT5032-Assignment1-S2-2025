@@ -35,6 +35,14 @@ const fetchUserData = async (uid) => {
 };
 
 onMounted(() => {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+        uid.value = user.uid;
+        fetchUserData(uid.value);
+        } else {
+        uid.value = "";
+        }
+    });
     fetchUserData(uid.value);
 });
 

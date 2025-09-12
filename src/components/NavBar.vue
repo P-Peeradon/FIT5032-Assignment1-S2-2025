@@ -5,7 +5,7 @@
             <li class="col-3">
                 <router-link to="/profile" class="nav-link" active-class="active" aria-current="page">Profile</router-link>
             </li>
-            <li class="col-3" @mouseover="() => journalSub.value = true" @mouseleave="() => journalSub.value = false">
+            <li class="col-3" @mouseover="showJournalSub()" @mouseleave="hideJournalSub()">
                 <router-link to="/journal" class="nav-link" active-class="active" aria-current="page">Journal</router-link>
             </li>
             <li class="col-3">
@@ -43,14 +43,22 @@
 
 <script setup>
 import { ref } from 'vue';
-import JournalSubMenu from './components/JournalSubMenu.vue'
+import JournalSubMenu from './JournalSubMenu.vue';
 
 const mobileMenu = ref(false);
 const journalSub = ref(false);
 
 const toggleMenu = () => {
-    mobileMenu.value = !mobileMenu.value
+    mobileMenu.value = !mobileMenu.value;
 };
+
+const showJournalSub = () => {
+    journalSub.value = true;
+};
+
+const hideJournalSub = () => setTimeout(() => {
+    journalSub.value = false;
+}, 3000);
 
 </script>
 
