@@ -4,6 +4,8 @@ cover[URL] = URL of the cover image
 thumbnail[URL]* = URL of the thumbnail image
 content[String]* = Content in the article
 author[String]* = Name of the author who writes the article.
+createdAt[String] =
+lastEditAt[String] =
 
 Club:
 name[String]** = name of the club
