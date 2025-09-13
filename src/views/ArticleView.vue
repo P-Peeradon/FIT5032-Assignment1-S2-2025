@@ -1,9 +1,9 @@
 <template>
-    <div class="container">
-        <main class="d-flex col-lg-9">
+    <div v-if="currentArticle" class="container d-flex flex-column flex-lg-row">
+        <main class="d-flex col-12 col-lg-9">
             <ArticleDisplay :article="currentArticle"/>
         </main>
-        <aside class="d-flex flex-column col-lg-3">
+        <aside class="d-flex flex-column col-12 col-lg-3">
             <h2>Or, try to explore more articles.</h2>
                 <div class="featuring-article">
                     <div v-for="article in featuringArticles" :key="article">
@@ -12,18 +12,22 @@
                 </div>
         </aside>
     </div>
+    <div v-else>
+        <p>Loading Article...</p>
+    </div>
 </template>
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref, onMounted, watch } from 'vue';
 import db from '@/firebase/init';
 import { query, doc, getDoc, getDocs, collection } from 'firebase/firestore';
 import ArticleDisplay from '../components/ArticleDisplay.vue';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import ArticleCard2 from '../components/ArticleCard2.vue';
 
 const route = useRoute();
-const title = ref(route.params.title);
+const title = ref("");
 
 const today = ref(new Date());
 const fortnightAgo = ref(computed(() => new Date(today.value.getTime() - (14 * 24 * 60 * 60 * 1000))));
@@ -41,9 +45,7 @@ const user = ref(null);
 // Logic to fetch article by title.
 // No articles with the same title.
 
-const currentArticle = ref(computed(() =>
-    articles.value.find((article) => article.title === title.value)
-));
+const currentArticle = ref(null);
 
 const fetchUserData = async (uid) => {
     try {
@@ -65,14 +67,24 @@ const fetchArticles = async () => {
         const articleArray = [];
         articleQuerySnapshot.forEach((doc) => {
             articleArray.push({ id: doc.id, ...doc.data(), lastEditAt: doc.data().lastEditAt.toDate(), createdAt: doc.data().createdAt.toDate()});
-        }); // We convert Firestore timestamp into JavaScript Date() right after fetching, since Firestore timestamp data has the format which is hard to use in JS.
+        });
 
         articles.value = articleArray;
+        currentArticle.value = await articles.value.find((article) => {
+            return article.title == title.value;
+        });
 
     } catch (err) {
         console.error('Error fetching articles:', err);
     }
 }
+
+watch(decodeURIComponent(route.params.title), async (newTitle, oldTitle) => {
+    console.log("Now fetching article title ", newTitle);
+    currentArticle.value = await articles.value.find((article) => {
+        return article.title == newTitle;
+    });
+})
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -84,6 +96,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 onMounted(() => {
+    title.value = decodeURIComponent(route.params.title);
     fetchUserData(uid.value);
     fetchArticles();
 });

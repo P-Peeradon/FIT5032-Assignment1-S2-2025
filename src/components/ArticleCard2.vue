@@ -1,5 +1,9 @@
 <template>
-    <router-link :to="{ name: 'Article', params: {title: article.title}}" class="nav-link" active-class="active" aria-current="page">
+    <div v-if="!article">
+        <p>Loading article...</p>
+    </div>
+
+    <router-link v-else :to="{ name: 'Article', params: {title: article.title}}" class="nav-link" active-class="active" aria-current="page">
         <div class="d-flex flex-row">
             <div>
                 <img src="../assets/news-article.png" :alt="article.title"/>

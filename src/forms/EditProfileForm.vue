@@ -41,7 +41,7 @@ const requestEdit = () => {
         clearForm();
         emit('close');
     }
-}   
+}
 
 const validateName = (blur) => {
     const usernameMinLength = 5;
@@ -74,27 +74,27 @@ const validatePronoun = (blur) => {
         <div class="row">
             <div class="col-6">
                 <label class="form-label"  for="username">Username</label>
-                <input 
-                    class="form-control" 
-                    id="username" 
-                    type="text" 
+                <input
+                    class="form-control"
+                    id="username"
+                    type="text"
                     @blur="() => validateName(true)"
                     @input="() => validateName(false)"
-                    v-model="newProfileData.username" 
+                    v-model="newProfileData.username"
                 />
             </div>
 
             <div class="col-6">
                 <label class="form-label" for="nickname">Nickname</label>
-                    <input 
-                    class="form-control" 
-                    id="nickname" 
-                    type="text" 
-                    v-model="newProfileData.nickname" 
+                    <input
+                    class="form-control"
+                    id="nickname"
+                    type="text"
+                    v-model="newProfileData.nickname"
                     />
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-6">
                 <label for="pronoun">Pronoun</label>
@@ -115,11 +115,11 @@ const validatePronoun = (blur) => {
             </div>
             <div class="col-6">
                 <label class="form-label" for="career">Career</label>
-                <input 
-                    class="form-control" 
-                    id="career" 
-                    type="text" 
-                    v-model="newProfileData.career" 
+                <input
+                    class="form-control"
+                    id="career"
+                    type="text"
+                    v-model="newProfileData.career"
                 />
             </div>
         </div>
@@ -127,15 +127,15 @@ const validatePronoun = (blur) => {
         <div class="row">
             <div class="col-12">
                 <label class="form-label" for="bio">Bio</label>
-                <input 
-                    class="form-control" 
-                    id="bio" 
-                    type="text" 
-                    v-model="newProfileData.bio" 
+                <input
+                    class="form-control"
+                    id="bio"
+                    type="text"
+                    v-model="newProfileData.bio"
                 />
             </div>
         </div>
-        
+
         <div class="d-flex flex-row reg_menu mt-2 mb-3">
             <button type="submit" class="blue_button">Edit Profile</button>
             <button class="gray_button" @click="clearForm">Clear</button>
@@ -149,8 +149,8 @@ form.container {
     height: auto;
     position: absolute;
     z-index: 2;
-    top: 50vw;
-    left: 30vh;
+    top: 30vh;
+    left: 25vw;
     background-color: bisque;
 }
 .red_button {

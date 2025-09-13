@@ -12,7 +12,6 @@
             </main>
             <br />
         </div>
-
     </div>
 </template>
 
@@ -21,7 +20,7 @@ import UserJournal from '../components/UserJournal.vue';
 import CalendarInputForm from '../forms/CalendarInputForm.vue';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import db from '../firebase/init';
-import { getDoc, doc, Timestamp, } from 'firebase/firestore';
+import { getDoc, doc } from 'firebase/firestore';
 import { ref, onMounted } from 'vue';
 
 const auth = getAuth();
