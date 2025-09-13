@@ -93,7 +93,7 @@ const recordComment = async (comment) => {
             id: null
         });
 
-        await updateDoc(postRef, {comment: arrayUnion(commentRef)});
+        await updateDoc(postRef, {comments: arrayUnion(commentRef)});
 
     } catch (err) {
 
@@ -116,7 +116,7 @@ const recordPost = async (postLetter) => {
     try {
         const postRef = await addDoc(collection(db, "posts"), post);
 
-        await updateDoc(clubRef, arrayUnion(postRef));
+        await updateDoc(clubRef, { posts: arrayUnion(postRef) });
 
     } catch (err) {
 
