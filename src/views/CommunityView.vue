@@ -16,11 +16,11 @@
                     "Club is not only place for gathering. It is our sense of belonging, ambition and emotion."
                 </blockquote>
                 <p class="mt-3">
-                    Youth need clubs to gain a sense of belonging and purpose, 
-                    develop crucial social and emotional skills through positive 
-                    peer and adult relationships, and have a safe, supportive space for fun, 
-                    learning, and self-discovery away from pressures at home and school. 
-                    Clubs offer diverse experiences, foster self-confidence and resilience, 
+                    Youth need clubs to gain a sense of belonging and purpose,
+                    develop crucial social and emotional skills through positive
+                    peer and adult relationships, and have a safe, supportive space for fun,
+                    learning, and self-discovery away from pressures at home and school.
+                    Clubs offer diverse experiences, foster self-confidence and resilience,
                     and can provide a vital support system, particularly for vulnerable young people.
                     (Eriksen & Seland, 2020)
                 </p>
@@ -40,7 +40,7 @@ const clubs = ref([]);
 
 // Algorithm to fetch all clubs.
 const fetchClubs = async () => {
-    
+
     try {
 
         const clubQuery = query(collection(db, 'clubs'));
@@ -48,7 +48,7 @@ const fetchClubs = async () => {
         const clubsArray = [];
 
         clubQuerySnapshot.forEach((doc) => {
-            clubsArray.push({ ...doc.data() });
+            clubsArray.push({ id: doc.id, ...doc.data() });
         });
 
         clubs.value = clubsArray;
@@ -56,7 +56,7 @@ const fetchClubs = async () => {
     } catch (err) {
         console.error('Error fetching clubs:', err);
     }
-    
+
 };
 
 onMounted(() => {

@@ -10,15 +10,11 @@ const logoExist = () => {
     return props.club.logo && props.club.logo !== '';
 }
 
-const joinClub = () => {
-    //Wait for authorisation implemented.
-}
-
 </script>
 
 <template>
-    <div class="container mt-4 d-flex flex-column flex-md-row">
-        <main class="col-md-9 col-xl-8">
+    <div class="container mt-4">
+        <main class="d-flex flex-column">
             <h2>{{ props.club.name }}</h2>
             <q>{{ props.club.motto }}</q>
             <p>
@@ -30,14 +26,6 @@ const joinClub = () => {
                 <li v-for="aim in club.aims" :key="aim">{{ aim }}</li>
             </ol>
         </main>
-        <aside class="col-md-3 col-xl-4">
-            <img v-if="logoExist()" :src="props.club.logo" :alt="props.club.name" />
-            <img v-else src="../assets/community-logo.jpg" :alt="props.club.name" />
-            <button class="d-none" @click="joinClub()">Join Now</button>
-            <div class="card text-white bg-info mt-5 unauthorised-info">
-                <p>You need to log in before joining.</p>
-            </div>
-        </aside> 
     </div>
 </template>
 
