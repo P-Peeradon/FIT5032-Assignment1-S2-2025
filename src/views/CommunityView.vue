@@ -2,15 +2,15 @@
     <div class="container d-flex flex-column">
         <h1>Community</h1>
         <div class="d-flex flex-column flex-md-row gy-2">
-            <main class="col-md-9 col-xl-8">
+            <main class="col-md-9 col-xl-8 mt-2">
                 <h2>Select your preferred clubs.</h2>
-                <div class="club-catalog">
+                <div class="club-catalog mt-3">
                     <div v-for="club in clubs" :key="club.name" :value="club">
                         <ClubCard :club="club" />
                     </div>
                 </div>
             </main>
-            <aside class="col-md-3 col-xl-4">
+            <aside class="col-md-3 col-xl-4 mt-2">
                 <h2>Why youth need joining clubs?</h2>
                 <blockquote class="mt-2 mb-2">
                     "Club is not only place for gathering. It is our sense of belonging, ambition and emotion."
@@ -69,12 +69,13 @@ onMounted(() => {
     .club-catalog  {
         display: flex;
         flex-direction: column;
+        gap: 20px;
     }
 }
 
 @media screen and (min-width: 768px) {
     .club-catalog  {
-    display: grid;
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(3, 1fr);
         gap: 10px;

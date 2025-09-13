@@ -61,7 +61,7 @@ const fetchUserData = async (uid) => {
 
 const addNewBookmark = async (article) => {
 
-    const userRef = doc(db, 'users', uid);
+    const userRef = doc(db, 'users', uid.value);
     const articleRef = doc(db, 'articles', article.id);
 
     try {

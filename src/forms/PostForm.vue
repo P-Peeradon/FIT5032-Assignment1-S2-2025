@@ -23,7 +23,7 @@ const stopPost = () => {
 
 <template>
     <div class="row close">
-        <button @click="stopPost()" class="btn-danger">X</button>
+        <button @click="stopPost()" class="red_button">X</button>
     </div>
     <form @submit.prevent="handlePost()" class="container flex-column center">
         <label for="title">Title</label>
@@ -31,7 +31,7 @@ const stopPost = () => {
 
         <label for="title">Title</label>
         <input type="text" placeholder="Post" v-model="postData.content" />
-        
+
         <button type="submit">Post</button>
     </form>
 </template>

@@ -1,56 +1,66 @@
 <script setup>
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted } from 'vue';
 import DiscussionBoard from '../components/DiscussionBoard.vue';
 import EventBoard from '../components/EventBoard.vue';
 import { useRoute } from 'vue-router';
 import db from '../firebase/init';
-import { query, collection, where, getDoc, doc, updateDoc, arrayUnion, addDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { query, collection, where, getDocs, getDoc, doc, updateDoc, arrayUnion, addDoc } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const auth = getAuth();
-const currentUser = auth.currentUser;
 const route = useRoute();
-const name = ref(route.params.name);
-const club = reactive(null);
-const user = reactive(null)
+const user = ref(null);
+const uid = ref('');
 
-// Find club with the specific name.
-const fetchClubData = async () => {
+const name = ref("");
+const clubs = ref([]);
+const currentClub = ref(null);
+const render = ref('Forum');
 
+const fetchUserData = async (uid) => {
     try {
-
-        const clubQuery = query(collection(db, 'clubs'), where('name', '==', name));
-        const clubQuerySnapshot = await getDoc(clubQuery);
-
-        club.value = clubQuerySnapshot.data();
-
-    } catch (err) {
-
-        console.error('Error fetching clubs:', err);
-
-    }
-
-}
-
-const fetchUserData = async () => {
-    try {
-        const userQuery = query(collection(db, 'users', where('email', '==', currentUser.email)));
-        const userQuerySnapshot = await getDoc(userQuery);
-        const myUser = { ...userQuerySnapshot.data() };
+        const userRef = doc(db, 'users', uid);
+        const userSnapshot = await getDoc(userRef);
+        const myUser =  userSnapshot.data() ;
 
         user.value = myUser;
+        const myClubs = myUser.clubs;
+        const myClubsSnap = await Promise.all(myClubs.map(ref => getDoc(ref)));
+
+        user.value.clubs = myClubsSnap.map((clubSnap) => {
+            return { ...clubSnap.data()}
+        });
     } catch (err) {
-        console.log('Error fetching user:', err)
+        console.error('Error fetching user:', err)
     }
 }
 
-onMounted(() => {
-    fetchUserData()
-    fetchClubData()
-});
+const fetchClubs = async () => {
 
+    try {
 
-const render = ref('Forum');
+        const clubQuery = query(collection(db, 'clubs'));
+        const clubQuerySnapshot = await getDocs(clubQuery);
+        const clubsArray = [];
+
+        clubQuerySnapshot.forEach((doc) => {
+            clubsArray.push({ id: doc.id, ...doc.data() });
+        });
+
+        clubs.value = clubsArray;
+        findCurrentClub(name.value)
+
+    } catch (err) {
+        console.error('Error fetching clubs:', err);
+    }
+
+};
+
+const findCurrentClub = (name) => {
+    currentClub.value = clubs.value.find((club) => {
+        return club.name == name;
+    });
+}
 
 const toggleForum = () => {
     render.value = 'Forum';
@@ -63,7 +73,7 @@ const toggleEventsRoom = () => {
 const recordComment = async (comment) => {
     const commentOnPost = {
         ...comment,
-        username: user.username,
+        username: user.value.username,
         timestamp: new Date(),
     };
 
@@ -74,7 +84,7 @@ const recordComment = async (comment) => {
         await addDoc(db, 'comments', {
             ...commentOnPost
         });
-        
+
         await updateDoc(postFK, {comment: arrayUnion(
             {
                 username: commentOnPost.username,
@@ -95,39 +105,30 @@ const recordComment = async (comment) => {
 }
 
 const recordPost = async (postLetter) => {
-    const post = { 
-        ...postLetter, 
-        username: user.username,
+    const post = {
+        ...postLetter,
+        username: user.value.username,
         timestamp: new Date(),
         comments: []
     };
 
-    const clubFK = doc(db, 'clubs', club.value.name);
+    const clubRef = doc(db, "clubs", currentClub.value.id);
 
     try {
-
-        await updateDoc(clubFK, { posts: arrayUnion(post) });
-        await addDoc(collection(db, 'posts', {
-            ...post,
-            clubName: club.name
-        }));
-
+        await addDoc(collection(db, "posts"), {
+            ...post
+        });
     } catch (err) {
-
-        console.error('Error adding post:', err);
-
-    } finally {
-
-        console.log('Successfully post to the discussion board.');
-
+        console.error("Error in adding post: ", err)
     }
 
-} 
+
+}
 
 const recordEvent = async (eventData) => {
-    const newEvent = { 
-        ...eventData, 
-        username: user.username,
+    const newEvent = {
+        ...eventData,
+        username: user.value.username,
         timestamp: new Date()
     };
 
@@ -138,7 +139,7 @@ const recordEvent = async (eventData) => {
         await updateDoc(clubFK, { events: arrayUnion(newEvent) });
         await addDoc(collection(db, 'posts', {
             ...newEvent,
-            clubName: club.name
+            clubName: club.value.name
         }));
 
     } catch (err) {
@@ -152,9 +153,20 @@ const recordEvent = async (eventData) => {
     }
 }
 
-const isSocialWorker = () => {
-    return user.role === 'social worker';
-}
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        uid.value = user.uid;
+        fetchUserData(uid.value);
+    } else {
+        uid.value = "";
+    }
+});
+
+onMounted(() => {
+    name.value = decodeURIComponent(route.params.name);
+    fetchUserData(uid.value);
+    fetchClubs();
+});
 </script>
 
 <template>
@@ -170,8 +182,8 @@ const isSocialWorker = () => {
             </div>
         </header>
         <main>
-            <DiscussionBoard @post="recordPost(postLetter)" @comment="recordComment(comment)" v-if="render.value === 'Forum'" :club="club" />
-            <EventBoard v-if="render.value === 'Events'" :role="user.role" :club="club" @host-event="recordEvent(eventData)" />
+            <DiscussionBoard @post="recordPost(postLetter)" @comment="recordComment(comment)" v-if="render.value === 'Forum'" :club="currentClub" />
+            <EventBoard v-if="render.value === 'Events'" :role="user.role" :club="currentClub" @host-event="recordEvent(eventData)" />
         </main>
     </div>
 </template>

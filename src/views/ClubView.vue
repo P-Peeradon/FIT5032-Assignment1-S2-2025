@@ -98,7 +98,7 @@ const findCurrentClub = (name) => {
 
 const joinClub = async () => {
     try {
-        const userRef = await doc(db, 'users', uid);
+        const userRef = await doc(db, 'users', uid.value);
         const clubRef = await doc(db, 'clubs', currentClub.value.id)
 
         await updateDoc(userRef, {clubs: arrayUnion(clubRef)});
