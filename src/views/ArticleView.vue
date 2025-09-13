@@ -70,21 +70,25 @@ const fetchArticles = async () => {
         });
 
         articles.value = articleArray;
-        currentArticle.value = await articles.value.find((article) => {
-            return article.title == title.value;
-        });
+        currentArticle.value = await findCurrentArticle(title.value);
 
     } catch (err) {
         console.error('Error fetching articles:', err);
     }
 }
 
-watch(decodeURIComponent(route.params.title), async (newTitle, oldTitle) => {
-    console.log("Now fetching article title ", newTitle);
-    currentArticle.value = await articles.value.find((article) => {
-        return article.title == newTitle;
+const findCurrentArticle = (title) => {
+    currentArticle.value = articles.value.find((article) => {
+            return article.title == title;
     });
-})
+}
+
+watch(() => decodeURIComponent(route.params.title),
+    (newTitle) => {
+        findCurrentArticle(newTitle);
+    },
+    { immediate: true }
+);
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
