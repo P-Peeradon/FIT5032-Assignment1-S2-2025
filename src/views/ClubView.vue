@@ -1,22 +1,24 @@
 <template>
     <div class="container">
         <h1>Club and Society</h1>
-        <div v-if="currentClub" class="d-flex flex-row">
-            <main>
+        <div v-if="currentClub" class="d-flex flex-column flex-md-row gy-4">
+            <main class="col-12 col-md-9 col-xl-8">
                 <ClubDisplay :club="currentClub"/>
             </main>
-            <aside>
+            <aside class="col-12 col-md-3 col-xl-4 mt-4">
                 <!-- If joined, go to discussion view. -->
                 <!-- Else click to join club-->
                 <img src="../assets/community-logo.jpg" :alt="currentClub.name" />
-                <div v-if="currentClub in user.clubs">
-                    <router-link :to="{ name: 'Discussion', params: {name: currentClub.name}}" class="nav-link" active-class="active" aria-current="page">
-                        <button class="blue_button">To Discussion</button>
-                    </router-link>
-                    <button class="btn-danger">Left the club</button>
-                </div>
-                <div v-else>
-                    <button @click="joinClub()" class="blue_button">Join the club</button>
+                <div class="mt-3">
+                    <div v-if="checkMembership()">
+                        <router-link :to="{ name: 'Discussion', params: {name: currentClub.name}}" class="nav-link" active-class="active" aria-current="page">
+                            <button class="blue_button">To Discussion</button>
+                        </router-link>
+                        <button class="red_button mt-2">Left the club</button>
+                    </div>
+                    <div v-else class="selector">
+                        <button @click.prevent="joinClub()" class="blue_button">Join the club</button>
+                    </div>
                 </div>
             </aside>
         </div>
@@ -45,6 +47,10 @@ const name = ref("");
 const clubs = ref([]);
 const currentClub = ref(null); //Club as object.
 
+const checkMembership = () => {
+    return user.value.clubs.find((club) => club.name == currentClub.value.name) ;
+}
+
 const fetchUserData = async (uid) => {
     try {
         const userRef = doc(db, 'users', uid);
@@ -52,6 +58,12 @@ const fetchUserData = async (uid) => {
         const myUser =  userSnapshot.data() ;
 
         user.value = myUser;
+        const myClubs = myUser.clubs;
+        const myClubsSnap = await Promise.all(myClubs.map(ref => getDoc(ref)));
+
+        user.value.clubs = myClubsSnap.map((clubSnap) => {
+            return { ...clubSnap.data()}
+        });
     } catch (err) {
         console.error('Error fetching user:', err)
     }
@@ -66,7 +78,7 @@ const fetchClubs = async () => {
         const clubsArray = [];
 
         clubQuerySnapshot.forEach((doc) => {
-            clubsArray.push({ id: doc.id, ...doc.data() });
+            clubsArray.push({ ...doc.data() });
         });
 
         clubs.value = clubsArray;
@@ -85,10 +97,26 @@ const findCurrentClub = (name) => {
 }
 
 const joinClub = async () => {
-    const userRef = await doc(db, 'users', uid);
-    const clubRef = await doc(db, 'clubs', currentClub.value.id)
+    try {
+        const userRef = await doc(db, 'users', uid);
+        const clubRef = await doc(db, 'clubs', currentClub.value.id)
 
-    await updateDoc(userRef, {clubs: arrayUnion(clubRef)})
+        await updateDoc(userRef, {clubs: arrayUnion(clubRef)});
+
+        try {
+            const updatedUserDoc = await getDoc(userRef);
+            user.value = updatedUserDoc.data();
+        } catch (err) {
+            console.error("Error in update user data: ", err);
+        }
+    } catch (err) {
+        console.error("Error in joining club.", err)
+    }
+
+    alert("You are now a member of this club.");
+    console.log(user.value);
+    console.log(currentClub.value);
+
 }
 
 onAuthStateChanged(auth, (user) => {
@@ -109,5 +137,14 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+img {
+    width: 150px;
+    height: 150px;
+}
+aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
 </style>

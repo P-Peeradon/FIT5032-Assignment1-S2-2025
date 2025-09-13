@@ -18,6 +18,19 @@ const fetchUserData = async (uid) => {
         const myUser =  userSnapshot.data() ;
 
         user.value = myUser;
+        const myClubs = myUser.clubs;
+        const myClubsSnap = await Promise.all(myClubs.map(ref => getDoc(ref)));
+
+        user.value.clubs = myClubsSnap.map((clubSnap) => {
+            return { ...clubSnap.data()}
+        });
+
+        const myBookmarks = myUser.bookmarks;
+        const myBookmarksSnap = await Promise.all(myBookmarks.map(ref => getDoc(ref)));
+
+        user.value.bookmarks = myBookmarksSnap.map((article) => {
+            return { ...article.data()}
+        });
     } catch (err) {
         console.error('Error fetching user:', err)
     }
@@ -32,8 +45,8 @@ const toggleEditProfile = () => {
 }
 
 const updateUserProfile = async (newUserData) => {
-    const userData = Object.keys(newUserData).reduce((acc, key) => { 
-        
+    const userData = Object.keys(newUserData).reduce((acc, key) => {
+
         const value = newUserData[key];
 
         if (value !== "") {
@@ -42,7 +55,7 @@ const updateUserProfile = async (newUserData) => {
 
         return acc;
 
-    }, {});   
+    }, {});
 
     try {
 

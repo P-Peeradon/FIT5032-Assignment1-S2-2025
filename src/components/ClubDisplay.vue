@@ -30,10 +30,7 @@ const logoExist = () => {
 </template>
 
 <style scoped>
-img {
-    width: 150px;
-    height: 150px;
-}
+
 q {
     font-size: 14px;
 }

@@ -1,7 +1,7 @@
 <template>
     <div v-if="currentArticle" class="container d-flex flex-column flex-lg-row">
         <main class="d-flex col-12 col-lg-9">
-            <ArticleDisplay :article="currentArticle"/>
+            <ArticleDisplay :article="currentArticle" @bookmark="addNewBookmark(currentArticle)" />
         </main>
         <aside class="d-flex flex-column col-12 col-lg-3">
             <h2>Or, try to explore more articles.</h2>
@@ -21,7 +21,7 @@
 import { useRoute } from 'vue-router';
 import { computed, ref, onMounted, watch } from 'vue';
 import db from '@/firebase/init';
-import { query, doc, getDoc, getDocs, collection } from 'firebase/firestore';
+import { query, doc, getDoc, getDocs, collection, updateDoc, arrayUnion } from 'firebase/firestore';
 import ArticleDisplay from '../components/ArticleDisplay.vue';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import ArticleCard2 from '../components/ArticleCard2.vue';
@@ -58,6 +58,22 @@ const fetchUserData = async (uid) => {
         console.error('Error fetching user:', err)
     }
 };
+
+const addNewBookmark = async (article) => {
+
+    const userRef = doc(db, 'users', uid);
+    const articleRef = doc(db, 'articles', article.id);
+
+    try {
+
+        await updateDoc(userRef, { bookmarks: arrayUnion(articleRef) });
+
+    } catch (err) {
+        console.error("Error in adding bookmark: ", err);
+    }
+
+    alert("Successfully add new bookmark.")
+}
 
 const fetchArticles = async () => {
     try {

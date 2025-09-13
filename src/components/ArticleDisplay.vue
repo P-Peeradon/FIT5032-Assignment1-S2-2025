@@ -22,8 +22,10 @@ const props = defineProps({
     }
 });
 
+const emit = defineEmits(['bookmark'])
+
 const addToBookmark = () => {
-    // Pass, waiting for authorisation system.
+    emit('bookmark', props.article)
 }
 
 </script>
