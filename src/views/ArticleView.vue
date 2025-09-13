@@ -70,7 +70,7 @@ const fetchArticles = async () => {
         });
 
         articles.value = articleArray;
-        currentArticle.value = await findCurrentArticle(title.value);
+        findCurrentArticle(title.value);
 
     } catch (err) {
         console.error('Error fetching articles:', err);
@@ -79,7 +79,7 @@ const fetchArticles = async () => {
 
 const findCurrentArticle = (title) => {
     currentArticle.value = articles.value.find((article) => {
-            return article.title == title;
+        return article.title == title;
     });
 }
 
