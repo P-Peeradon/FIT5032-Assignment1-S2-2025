@@ -20,10 +20,6 @@ const props = defineProps({
     }
 });
 
-const coverExist = () => {
-    return props.article.cover !== '';
-}
-
 </script>
 
 <style scoped>
