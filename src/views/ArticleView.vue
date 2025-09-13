@@ -113,8 +113,8 @@ const recordReading = async () => {
 }
 
 
-watch(async () => decodeURIComponent(route.params.title),
-    (newTitle) => {
+watch(() => decodeURIComponent(route.params.title),
+    async (newTitle) => {
         await recordReading();
         findCurrentArticle(newTitle);
     },
