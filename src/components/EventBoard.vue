@@ -36,10 +36,10 @@ const isSocialWorker = () => {
 
 <template>
     <div class="container flex-column flex-xl-row">
-        <aside class="col-4 col-xl-3">
+        <aside class="col-6 col-xl-3">
             <CalendarInputForm />
         </aside>
-        <main class="col-8 col-xl-9">
+        <main class="col-6 col-xl-9">
             <!-- Display the community events dynamically-->
             <div v-for="event in club.events" :key="event.title">
                 <EventCard @click="toggleEventDesc()" :event="event" />

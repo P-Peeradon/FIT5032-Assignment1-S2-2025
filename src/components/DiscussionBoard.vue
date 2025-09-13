@@ -14,7 +14,7 @@ const emit = defineEmits(['comment', 'post']);
 const currentPost = ref(null);
 const showPostForm = ref(false);
 const searchQuery = ref("")
-const comment = ref("")
+const text = ref("")
 
 const togglePostForm = () => {
     showPostForm.value = !showPostForm.value;
@@ -30,16 +30,15 @@ const addPost = (postLetter) => {
     emit('post', postLetter);
 }
 
-const commentPost = (post) => {
+const addComment = (post) => {
+    const getPostid = post.id;
 
-    if (comment.value !== "") {
-        emit('comment',
-            {
-                id: post.id,
-                text: comment.value
-            }
-        );
-        comment.value = '';
+    if (text.value !== "") {
+        const postComment = {
+                  id: getPostid,
+                  text: text.value};
+        emit('comment', postComment);
+        text.value = '';
     }
 }
 
@@ -88,10 +87,10 @@ const formatDate = (date) => {
                         <p>{{ comment.text }}</p>
                     </div>
                     <div class="comment line">
-                        <input class="form-control" v-model="comment" type="text" placeholder="comment here" />
+                        <input class="form-control" v-model="text" type="text" placeholder="comment here" />
                         <br />
-
-                        <button class="blue_button" @click="commentPost(currentPost)">Comment</button>
+                        <p>{{ comment }}</p>
+                        <button class="blue_button" @click="addComment(currentPost)">Comment</button>
                     </div>
                 </div>
             </main>

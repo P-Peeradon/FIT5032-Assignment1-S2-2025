@@ -44,24 +44,37 @@ const fetchClubs = async () => {
         const clubsArray = [];
 
         clubQuerySnapshot.forEach((doc) => {
-            clubsArray.push({ id: doc.id, ...doc.data() });
+            clubsArray.push({ id: doc.id, ...doc.data()});
         });
 
         clubs.value = clubsArray;
         findCurrentClub(name.value);
 
-        const allPosts = currentClub.value.posts;
-        const allPostsSnap = await Promise.all(allPosts.map(ref => getDoc(ref)));
+    } catch (err) {
+        console.error("Error in fetching club data: ", err);
+    }
+}
 
-        currentClub.value.posts = allPostsSnap.map((clubSnap) => {
-            return { id: clubSnap.id, ...clubSnap.data(), timestamp: clubSnap.data().timestamp.toDate()}
+const fetchPosts = async () => {
+
+    try {
+
+        const postQuery = query(collection(db, 'clubs', currentClub.value.id, 'posts'));
+        const postQuerySnapshot = await getDocs(postQuery);
+        const postsArray = [];
+
+        postQuerySnapshot.forEach((doc) => {
+            postsArray.push({ id: doc.id, ...doc.data()});
         });
 
-    } catch (err) {
-        console.error('Error fetching clubs:', err);
-    }
+        currentClub.value.posts = postsArray;
 
-};
+    } catch (err) {
+        console.error("Error in fetching club data: ", err);
+    }
+}
+
+
 
 const findCurrentClub = (name) => {
     currentClub.value = clubs.value.find((club) => {
@@ -74,26 +87,22 @@ const toggleForum = () => {
 }
 
 const toggleEventsRoom = () => {
-    render.value = 'Events Room';
+    render.value = 'Events';
 }
 
 const recordComment = async (comment) => {
     const commentOnPost = {
         ...comment,
-        owner: user.value.username,
+        username: user.value.username,
         timestamp: new Date(),
     };
 
-    const postRef = doc(db, 'posts', commentOnPost.id);
-
     try {
 
-        const commentRef = await addDoc(db, 'comments', {
+        await addDoc(db, 'comments', {
             ...commentOnPost,
             id: null
         });
-
-        await updateDoc(postRef, {comments: arrayUnion(commentRef)});
 
     } catch (err) {
 
@@ -111,12 +120,8 @@ const recordPost = async (postLetter) => {
         comments: []
     };
 
-    const clubRef = doc(db, "clubs", currentClub.value.id);
-
     try {
-        const postRef = await addDoc(collection(db, "posts"), post);
-
-        await updateDoc(clubRef, { posts: arrayUnion(postRef) });
+        await addDoc(collection(db, "clubs", currentClub.value.id ,"posts"), post);
 
     } catch (err) {
 
@@ -150,11 +155,9 @@ const recordEvent = async (eventData) => {
 
         console.error('Error adding post:', err);
 
-    } finally {
-
-        console.log('Successfully post to the discussion board.');
-
     }
+
+    console.log('Successfully post to the discussion board.');
 }
 
 const isSocialWorker = () => {
@@ -174,6 +177,8 @@ onMounted(() => {
     name.value = decodeURIComponent(route.params.name);
     fetchUserData(uid.value);
     fetchClubs();
+
+    fetchPosts();
 });
 </script>
 
@@ -182,14 +187,14 @@ onMounted(() => {
         <h1>Discussion board</h1>
         <header class="row d-flex flex-row py-3">
             <div class="selector">
-                <button class="gray_button" @click="toggleForum()">Forum</button>
-                <button class="gray_button" @click="toggleEventsRoom()">Events</button>
+                <button class="gray_button" :class="{ active: render.value === 'Forum'}" @click="toggleForum()">Forum</button>
+                <button class="gray_button" :class="{ active: render.value === 'Events'}" @click="toggleEventsRoom()">Events</button>
                 <button class="gray_button" v-if="isSocialWorker()" @click="toggleCommitteeRoom()">For Committee</button>
             </div>
         </header>
         <main class="d-flex mt-4">
-            <DiscussionBoard v-if="render === 'Forum'" @post="recordPost" @comment="recordComment"  :club="currentClub" />
-            <EventBoard v-if="render === 'Event Room'" :role="user.role" :club="currentClub" @host-event="recordEvent(eventData)" />
+            <DiscussionBoard v-if="render === 'Forum'" @post="recordPost" @comment="recordComment" :club="currentClub" />
+            <EventBoard v-if="render === 'Events'" :role="user.role" :club="currentClub" @host-event="recordEvent(eventData)" />
         </main>
     </div>
     <div v-else>
@@ -204,5 +209,8 @@ onMounted(() => {
     padding-top: 5px;
     padding-bottom: 5px;
     gap: 15px;
+}
+.active {
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7),;
 }
 </style>
