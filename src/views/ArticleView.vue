@@ -19,7 +19,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { computed, ref, onMounted, watch } from 'vue';
+import { computed, ref, onMounted, watch, onBeforeUnmount } from 'vue';
 import db from '@/firebase/init';
 import { query, doc, getDoc, getDocs, collection, updateDoc, arrayUnion } from 'firebase/firestore';
 import ArticleDisplay from '../components/ArticleDisplay.vue';
@@ -99,8 +99,23 @@ const findCurrentArticle = (title) => {
     });
 }
 
-watch(() => decodeURIComponent(route.params.title),
+const recordReading = async () => {
+    const userRef = doc(db, 'users', uid);
+    const articleRef = doc(db, 'articles', currentArticle.value.id);
+
+    try {
+
+        await updateDoc(userRef, { readArticles: arrayUnion(articleRef) });
+
+    } catch (err) {
+        console.error("Error in adding bookmark: ", err);
+    }
+}
+
+
+watch(async () => decodeURIComponent(route.params.title),
     (newTitle) => {
+        await recordReading();
         findCurrentArticle(newTitle);
     },
     { immediate: true }
@@ -120,6 +135,10 @@ onMounted(() => {
     fetchUserData(uid.value);
     fetchArticles();
 });
+
+onBeforeUnmount(async () => {
+    await recordReading();
+})
 
 </script>
 
