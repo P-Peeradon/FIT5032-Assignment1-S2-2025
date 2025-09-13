@@ -1,9 +1,13 @@
 <template>
     <router-link :to="{ name: 'Article', params: {title: article.title}}" class="nav-link" active-class="active" aria-current="page">
-        <div>
-            <img src="../assets/news-article.png" :alt="article.title"/>
-            <h2 class="article-title">{{ article.title }}</h2>
-            <p class="author">by @{{ article.author }}</p>
+        <div class="d-flex flex-row">
+            <div>
+                <img src="../assets/news-article.png" :alt="article.title"/>
+            </div>
+            <div>
+                <h2 class="article-title">{{ article.title }}</h2>
+                <p class="author">by @{{ article.author }}</p>
+            </div>
         </div>
     </router-link>
 </template>
@@ -16,23 +20,18 @@ const props = defineProps({
     }
 });
 
-const coverExist = () => {
-    return props.article.cover !== '';
-}
-
 </script>
 
 <style scoped>
     div {
-        width: 250px;
-        height: 350px;
-        background-color: cornflowerblue;
-        border-radius: 0 0 40px 40px;
+        width: 400px;
+        height: 200px;
+        background-color: rgba(245,222,179,0.8);
         box-shadow: 0 10px 20px #909090;
     }
     div img {
-        width: 250px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
     }
     h2.article-title {
         color: tomato;
