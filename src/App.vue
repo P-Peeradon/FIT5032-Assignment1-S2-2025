@@ -41,12 +41,14 @@
       <RouterView />
     </main>
   </div>
- 
+
 </template>
 
 <style>
 header {
   line-height: 2;
+  position: relative;
+  z-index: 0;
 }
 
 .bg {
@@ -55,9 +57,10 @@ header {
   z-index: -1;
 }
 
-header {
-  position: relative;
-  z-index: 0;
+.container {
+    margin-left: 40px;
+    width: 100%;
+    padding: 0 0 0;
 }
 
 .logo {

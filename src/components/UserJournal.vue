@@ -13,7 +13,7 @@ const props = defineProps({
     journals: {
         type: Array,
         required: true,
-    }, 
+    },
     startDate: {
         type: Date,
         required: false,
@@ -35,7 +35,9 @@ const props = defineProps({
     overflow-y: scroll;
 }
 .pinboard {
-    
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 
 </style>

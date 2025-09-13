@@ -21,8 +21,8 @@ posts[Array[Post]] = All posts in that clubs
 events[Array[Event]] = All events in that clubs
 
 Post:
+topic[String] = topic of post
 username[String] = Username of people who posted that post
-topic[String] = topic of that post
 timestamp[DateTime] = record DateTime the post was posted
 content[String] = content in that post
 comments[Array[Comment]] = comment related to that post
