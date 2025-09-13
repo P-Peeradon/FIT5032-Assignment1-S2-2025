@@ -78,7 +78,7 @@ const fetchClubs = async () => {
         const clubsArray = [];
 
         clubQuerySnapshot.forEach((doc) => {
-            clubsArray.push({ ...doc.data() });
+            clubsArray.push({ id: doc.id, ...doc.data() });
         });
 
         clubs.value = clubsArray;
@@ -102,20 +102,11 @@ const joinClub = async () => {
         const clubRef = await doc(db, 'clubs', currentClub.value.id)
 
         await updateDoc(userRef, {clubs: arrayUnion(clubRef)});
-
-        try {
-            const updatedUserDoc = await getDoc(userRef);
-            user.value = updatedUserDoc.data();
-        } catch (err) {
-            console.error("Error in update user data: ", err);
-        }
     } catch (err) {
         console.error("Error in joining club.", err)
     }
 
     alert("You are now a member of this club.");
-    console.log(user.value);
-    console.log(currentClub.value);
 
 }
 

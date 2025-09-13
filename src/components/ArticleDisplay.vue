@@ -4,7 +4,7 @@
         <article>
             <div class="head">
                 <h2 class="mt-4">{{ article.title }}</h2>
-                <img src="../assets/bookmark-icon.png" alt="add to bookmark" @click="addToBookmark(props.article)"/>
+                <img src="../assets/bookmark-icon.png" alt="add to bookmark" @click="addToBookmark()"/>
             </div>
 
             <section>
@@ -22,10 +22,11 @@ const props = defineProps({
     }
 });
 
-const emit = defineEmits(['bookmark'])
+const emit = defineEmits(['bookmark']);
 
 const addToBookmark = () => {
-    emit('bookmark', props.article)
+  console.log(props.article);
+    emit('bookmark', props.article);
 }
 
 </script>
@@ -47,6 +48,8 @@ const addToBookmark = () => {
 .head img {
     width: 30px;
     height: 30px;
+} .head img:hover {
+    cursor: pointer;
 }
 
 </style>
